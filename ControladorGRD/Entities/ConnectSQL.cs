@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using MySql.Data.MySqlClient;
+using ControladorGRD.Forms;
 
 namespace ControladorGRD.Entities
 {
@@ -23,15 +24,14 @@ namespace ControladorGRD.Entities
             cmd.Connection = conexao;
         }
 
-        public static void Insert(string txtNumero, string txtRev, string comboOS, string comboTipo, string txtObs, string user)
+        public static void Insert(string txtNumero, string txtRev, string comboOS, string txtObs, string user)
         {
-            cmd.CommandText = "INSERT INTO documento (numero, rev, os, tipo, obs, dataRegistro, usuario)" +
-                                " VALUES (@numero, @rev, @os, @tipo, @obs, @dataRegistro, @usuario)";
+            cmd.CommandText = "INSERT INTO documento (numero, rev, os, obs, dataRegistro, usuario)" +
+                                " VALUES (@numero, @rev, @os, @obs, @dataRegistro, @usuario)";
 
             cmd.Parameters.AddWithValue("@numero", txtNumero);
             cmd.Parameters.AddWithValue("@rev", txtRev);
             cmd.Parameters.AddWithValue("@os", comboOS);
-            cmd.Parameters.AddWithValue("@tipo", comboTipo);
             cmd.Parameters.AddWithValue("@obs", txtObs);
             cmd.Parameters.AddWithValue("@dataRegistro", Convert.ToString(DateTime.Now.ToString("yyyy-MM-dd")));
             cmd.Parameters.AddWithValue("@usuario", user);
@@ -39,26 +39,26 @@ namespace ControladorGRD.Entities
             cmd.Prepare();
             cmd.ExecuteNonQuery();
         }
-        public static void Update(string txtNumero, string txtRev, string comboOS, string comboTipo, string txtObs, string user)
+        public static void Update(int id, string txtNumero, string txtRev, string comboOS, string txtObs, string user)
         {
             cmd.CommandText = "UPDATE documento " +
-                              "SET numero=numero, rev=@rev, os=@os, tipo=@tipo, obs=@obs, dataRegistro=@dataRegistro, usuario=@usuario" +
+                              "SET numero=numero, rev=@rev, os=@os, obs=@obs, usuario=@usuario" +
                                " WHERE id=@id";
 
             cmd.Parameters.AddWithValue("@numero", txtNumero);
             cmd.Parameters.AddWithValue("@rev", txtRev);
             cmd.Parameters.AddWithValue("@os", comboOS);
-            cmd.Parameters.AddWithValue("@tipo", comboTipo);
             cmd.Parameters.AddWithValue("@obs", txtObs);
-            cmd.Parameters.AddWithValue("@dataRegistro", Convert.ToString(DateTime.Now.ToString("yyyy-MM-dd")));
+          //cmd.Parameters.AddWithValue("@dataRegistro", Convert.ToString(DateTime.Now.ToString("yyyy-MM-dd")));
             cmd.Parameters.AddWithValue("@usuario", user);
+            cmd.Parameters.AddWithValue("@id", id);
 
             cmd.Prepare();
             cmd.ExecuteNonQuery();
         }
         public static void Delete(int? id)
         {
-            cmd.CommandText = $"DELETE * FROM documento WHERE id='{id}'";
+            cmd.CommandText = $"DELETE FROM documento WHERE id='{id}'";
 
             cmd.Prepare();
             cmd.ExecuteNonQuery();
@@ -69,15 +69,16 @@ namespace ControladorGRD.Entities
 
             cmd.Prepare();
             MySqlDataReader dr = ConnectSQL.cmd.ExecuteReader();
+            
             dr.Read();
             int? id = Convert.ToInt32(dr.GetValue(0));
             dr.Close();
             return id;
         }
 
-        public static void Values(int? id)// como acessar as variaveis desse metodo?
+        public static string[] Values(int id)// como acessar as variaveis desse metodo?
         {
-            string numero, rev, os, tipo, obs;
+            string[] dados = new string[5];
 
             ConnectSQL.cmd.CommandText = $"SELECT * FROM documento WHERE id='{id}'";
 
@@ -86,20 +87,21 @@ namespace ControladorGRD.Entities
             while (reader.Read())
             {
 
-                numero = reader.GetValue(1).ToString();
+                dados[0] = reader.GetValue(1).ToString();
 
-                rev = reader.GetValue(2).ToString();
+                dados[1] = reader.GetValue(2).ToString();
 
-                os = reader.GetValue(3).ToString();
+                dados[2] = reader.GetValue(3).ToString();
 
-                tipo = reader.GetValue(4).ToString();
+                dados[3] = reader.GetValue(4).ToString();
 
-                obs = reader.GetValue(5).ToString();
+                dados[4] = reader.GetValue(5).ToString();
             }
+
             ConnectSQL.cmd.Prepare();
-            ConnectSQL.cmd.ExecuteNonQuery();
             reader.Close();
 
+            return dados;
         }
 
     }

@@ -31,7 +31,7 @@ namespace ControladorGRD.Forms
         {
             this.labelProcurar = new System.Windows.Forms.Label();
             this.txtProcurar = new System.Windows.Forms.TextBox();
-            this.btnProcurar = new System.Windows.Forms.Button();
+            this.btnOK = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // labelProcurar
@@ -50,22 +50,22 @@ namespace ControladorGRD.Forms
             this.txtProcurar.Size = new System.Drawing.Size(268, 20);
             this.txtProcurar.TabIndex = 1;
             // 
-            // btnProcurar
+            // btnOK
             // 
-            this.btnProcurar.Location = new System.Drawing.Point(104, 132);
-            this.btnProcurar.Name = "btnProcurar";
-            this.btnProcurar.Size = new System.Drawing.Size(85, 28);
-            this.btnProcurar.TabIndex = 2;
-            this.btnProcurar.Text = "OK";
-            this.btnProcurar.UseVisualStyleBackColor = true;
-            this.btnProcurar.Click += new System.EventHandler(this.btnProcurar_Click);
+            this.btnOK.Location = new System.Drawing.Point(104, 132);
+            this.btnOK.Name = "btnOK";
+            this.btnOK.Size = new System.Drawing.Size(85, 28);
+            this.btnOK.TabIndex = 2;
+            this.btnOK.Text = "OK";
+            this.btnOK.UseVisualStyleBackColor = true;
+            this.btnOK.Click += new System.EventHandler(this.btnOK_Click);
             // 
             // FormProcurar
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(304, 210);
-            this.Controls.Add(this.btnProcurar);
+            this.Controls.Add(this.btnOK);
             this.Controls.Add(this.txtProcurar);
             this.Controls.Add(this.labelProcurar);
             this.MaximizeBox = false;
@@ -82,6 +82,6 @@ namespace ControladorGRD.Forms
 
         private System.Windows.Forms.Label labelProcurar;
         private System.Windows.Forms.TextBox txtProcurar;
-        private System.Windows.Forms.Button btnProcurar;
+        private System.Windows.Forms.Button btnOK;
     }
 }

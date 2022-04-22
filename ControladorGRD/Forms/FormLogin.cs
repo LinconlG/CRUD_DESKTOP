@@ -46,7 +46,7 @@ namespace ControladorGRD.Forms
                 if (dt.Rows.Count > 0)
                 {
                     pass = true;
-                    this.Close();
+
                 }
                 else
                 {
@@ -62,6 +62,7 @@ namespace ControladorGRD.Forms
             finally
             {
                 conexao.Close();
+                this.Close();
             }
 
         }

@@ -35,17 +35,15 @@ namespace ControladorGRD.Forms
             this.labelNumero = new System.Windows.Forms.Label();
             this.labelRev = new System.Windows.Forms.Label();
             this.labelOS = new System.Windows.Forms.Label();
-            this.labelTipo = new System.Windows.Forms.Label();
             this.labelObservacao = new System.Windows.Forms.Label();
             this.labelData = new System.Windows.Forms.Label();
             this.txtObs = new System.Windows.Forms.RichTextBox();
             this.txtCod = new System.Windows.Forms.TextBox();
             this.labelCod = new System.Windows.Forms.Label();
-            this.comboTipo = new System.Windows.Forms.ComboBox();
             this.comboOS = new System.Windows.Forms.ComboBox();
             this.btnSalvar = new System.Windows.Forms.Button();
             this.btnNovo = new System.Windows.Forms.Button();
-            this.btnEditar = new System.Windows.Forms.Button();
+            this.btnProcurar = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.labelMultiplo = new System.Windows.Forms.Label();
             this.checkRev = new System.Windows.Forms.CheckBox();
@@ -101,15 +99,6 @@ namespace ControladorGRD.Forms
             this.labelOS.TabIndex = 8;
             this.labelOS.Text = "OS:";
             // 
-            // labelTipo
-            // 
-            this.labelTipo.AutoSize = true;
-            this.labelTipo.Location = new System.Drawing.Point(160, 123);
-            this.labelTipo.Name = "labelTipo";
-            this.labelTipo.Size = new System.Drawing.Size(91, 13);
-            this.labelTipo.TabIndex = 9;
-            this.labelTipo.Text = "Tipo de Estrutura:";
-            // 
             // labelObservacao
             // 
             this.labelObservacao.AutoSize = true;
@@ -153,17 +142,13 @@ namespace ControladorGRD.Forms
             this.labelCod.TabIndex = 14;
             this.labelCod.Text = "Cod:";
             // 
-            // comboTipo
-            // 
-            this.comboTipo.FormattingEnabled = true;
-            this.comboTipo.Location = new System.Drawing.Point(163, 142);
-            this.comboTipo.Name = "comboTipo";
-            this.comboTipo.Size = new System.Drawing.Size(121, 21);
-            this.comboTipo.TabIndex = 3;
-            // 
             // comboOS
             // 
             this.comboOS.FormattingEnabled = true;
+            this.comboOS.Items.AddRange(new object[] {
+            "0545.03.001",
+            "0604.04.006",
+            "0527.03.001"});
             this.comboOS.Location = new System.Drawing.Point(16, 141);
             this.comboOS.Name = "comboOS";
             this.comboOS.Size = new System.Drawing.Size(121, 21);
@@ -187,16 +172,17 @@ namespace ControladorGRD.Forms
             this.btnNovo.TabIndex = 16;
             this.btnNovo.Text = "Limpar";
             this.btnNovo.UseVisualStyleBackColor = true;
+            this.btnNovo.Click += new System.EventHandler(this.btnNovo_Click);
             // 
-            // btnEditar
+            // btnProcurar
             // 
-            this.btnEditar.Location = new System.Drawing.Point(233, 46);
-            this.btnEditar.Name = "btnEditar";
-            this.btnEditar.Size = new System.Drawing.Size(75, 23);
-            this.btnEditar.TabIndex = 17;
-            this.btnEditar.Text = "Procurar";
-            this.btnEditar.UseVisualStyleBackColor = true;
-            this.btnEditar.Click += new System.EventHandler(this.btnEditar_Click);
+            this.btnProcurar.Location = new System.Drawing.Point(233, 46);
+            this.btnProcurar.Name = "btnProcurar";
+            this.btnProcurar.Size = new System.Drawing.Size(75, 23);
+            this.btnProcurar.TabIndex = 17;
+            this.btnProcurar.Text = "Procurar";
+            this.btnProcurar.UseVisualStyleBackColor = true;
+            this.btnProcurar.Click += new System.EventHandler(this.btnProcurar_Click);
             // 
             // button1
             // 
@@ -248,17 +234,15 @@ namespace ControladorGRD.Forms
             this.Controls.Add(this.checkRev);
             this.Controls.Add(this.labelMultiplo);
             this.Controls.Add(this.button1);
-            this.Controls.Add(this.btnEditar);
+            this.Controls.Add(this.btnProcurar);
             this.Controls.Add(this.btnNovo);
             this.Controls.Add(this.btnSalvar);
             this.Controls.Add(this.comboOS);
-            this.Controls.Add(this.comboTipo);
             this.Controls.Add(this.labelCod);
             this.Controls.Add(this.txtCod);
             this.Controls.Add(this.txtObs);
             this.Controls.Add(this.labelData);
             this.Controls.Add(this.labelObservacao);
-            this.Controls.Add(this.labelTipo);
             this.Controls.Add(this.labelOS);
             this.Controls.Add(this.labelRev);
             this.Controls.Add(this.labelNumero);
@@ -282,17 +266,15 @@ namespace ControladorGRD.Forms
         private System.Windows.Forms.Label labelNumero;
         private System.Windows.Forms.Label labelRev;
         private System.Windows.Forms.Label labelOS;
-        private System.Windows.Forms.Label labelTipo;
         private System.Windows.Forms.Label labelObservacao;
         private System.Windows.Forms.Label labelData;
         private System.Windows.Forms.RichTextBox txtObs;
         private System.Windows.Forms.TextBox txtCod;
         private System.Windows.Forms.Label labelCod;
-        private System.Windows.Forms.ComboBox comboTipo;
         private System.Windows.Forms.ComboBox comboOS;
         private System.Windows.Forms.Button btnSalvar;
         private System.Windows.Forms.Button btnNovo;
-        private System.Windows.Forms.Button btnEditar;
+        private System.Windows.Forms.Button btnProcurar;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Label labelMultiplo;
         private System.Windows.Forms.CheckBox checkRev;

@@ -2,6 +2,7 @@
 using MySql.Data.MySqlClient;
 using System.Windows.Forms;
 using ControladorGRD.Entities;
+using System.Globalization;
 
 namespace ControladorGRD.Forms
 {
@@ -13,7 +14,6 @@ namespace ControladorGRD.Forms
         private bool revisao = false;
         public string user;
 
-
         public FormCadastroDoc(string user)
         {
             InitializeComponent();
@@ -21,53 +21,59 @@ namespace ControladorGRD.Forms
             this.user = user;
         }
 
+        public FormCadastroDoc()
+        {
+            InitializeComponent();
+            txtData.Text = Convert.ToString(DateTime.Now.ToString("dd/MM/yyyy"));
+        }
+
         private void btnSalvar_Click(object sender, EventArgs e)
         {
             try
             {
-
-                ConnectSQL.Connect();
-
-                if (!multiplos)
+                if (txtNumero.Text == "" || txtRev.Text == "" || comboOS.Text == "")
                 {
-                    if (id_contatoSelecionado != null)
-                    {
-                        ConnectSQL.Update(txtNumero.Text, txtRev.Text, comboOS.Text, comboTipo.Text, txtObs.Text, user);
-
-                        MessageBox.Show("Atualizado!");
-
-                    }
-                    else
-                    {
-                        ConnectSQL.Insert(txtNumero.Text, txtRev.Text, comboOS.Text, comboTipo.Text, txtObs.Text, user);
-
-                        MessageBox.Show("Salvo!");
-                    }
+                    MessageBox.Show("Campo vazio");
                 }
                 else
                 {
+                    ConnectSQL.Connect();
 
-                    MessageBox.Show("aqui abriria a janela!");
-                    //trabalhar com a planilha excel
-                    /*if (revisao)
+                    if (!multiplos)
                     {
+                        if (id_contatoSelecionado != null)
+                        {
+                            ConnectSQL.Update((int)id_contatoSelecionado, txtNumero.Text, txtRev.Text, comboOS.Text, txtObs.Text, user);
 
+                            MessageBox.Show("Atualizado!");
+
+                        }
+                        else
+                        {
+                            ConnectSQL.Insert(txtNumero.Text, txtRev.Text, comboOS.Text, txtObs.Text, user);
+
+                            MessageBox.Show("Salvo!");
+                        }
                     }
                     else
                     {
 
-                    }*/
+                        MessageBox.Show("aqui abriria a janela!");
+                        //trabalhar com a planilha excel
+                        /*if (revisao)
+                        {
 
+                        }
+                        else
+                        {
+
+                        }*/
+
+                    }
+
+
+                    limpar();
                 }
-
-
-                id_contatoSelecionado = null;
-                txtNumero.Text = String.Empty;
-                txtRev.Text = String.Empty;
-                txtObs.Text = String.Empty;
-                comboOS.Text = String.Empty;
-                comboTipo.Text = String.Empty;
-
             }
             catch (Exception ex)
             {
@@ -98,16 +104,12 @@ namespace ControladorGRD.Forms
                     DialogResult result = MessageBox.Show("Tem certeza que quer excluir?", "Exclusão", MessageBoxButtons.YesNo);
                     if (result == DialogResult.Yes)
                     {
+                        ConnectSQL.Connect();
                         ConnectSQL.Delete(id_contatoSelecionado);
 
                         MessageBox.Show("Deletado!");
 
-                        id_contatoSelecionado = null;
-                        txtNumero.Text = String.Empty;
-                        txtRev.Text = String.Empty;
-                        txtObs.Text = String.Empty;
-                        comboOS.Text = String.Empty;
-                        comboTipo.Text = String.Empty;
+                        limpar();
                     }
                 }
             }
@@ -121,16 +123,39 @@ namespace ControladorGRD.Forms
             }
         }
 
-        private void btnEditar_Click(object sender, EventArgs e)
+        private void btnProcurar_Click(object sender, EventArgs e)
         {
-            FormProcurar procurar = new FormProcurar();
-            procurar.Show();
-            txtNumero.Text = procurar.numero;
-            txtRev.Text = procurar.rev;
-            comboOS.Text = procurar.os;
-            comboTipo.Text = procurar.tipo;
-            txtObs.Text = procurar.obs;
+            FormProcurar procurar = new FormProcurar(this);
+            procurar.Show();    
+        }
 
+        public void Preencher(int? id, string numero, string rev, string os, string obs, string data)
+        {
+
+            txtCod.Text = id.ToString();
+            id_contatoSelecionado = id;
+            txtNumero.Text = numero;
+            txtRev.Text = rev;
+            comboOS.Text = os;
+            txtObs.Text = obs;
+            DateTime d = DateTime.Parse(data);
+            txtData.Text = $"{d.Day}/{d.Month}/{d.Year}";
+        }
+
+        private void btnNovo_Click(object sender, EventArgs e)
+        {
+            limpar();
+        }
+
+        private void limpar()
+        {
+            id_contatoSelecionado = null;
+            txtNumero.Text = String.Empty;
+            txtRev.Text = String.Empty;
+            txtObs.Text = String.Empty;
+            comboOS.Text = String.Empty;
+            txtCod.Text = String.Empty;
+            txtData.Text = String.Empty;
         }
     }
 }
