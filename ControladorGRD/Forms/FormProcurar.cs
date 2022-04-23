@@ -41,6 +41,7 @@ namespace ControladorGRD.Forms
                     FormCadastroDoc.Preencher(id_contatoSelecionado, numero, rev, os, obs, data);
 
                     //se o id for encontrado, colocar os valores nas caixas de textos
+                    this.Close();
                 }
                 else
                 {
@@ -55,7 +56,7 @@ namespace ControladorGRD.Forms
             finally
             {
                 ConnectSQL.conexao.Close();
-                this.Close();
+                
             }
 
 

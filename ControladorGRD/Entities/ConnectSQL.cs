@@ -29,6 +29,7 @@ namespace ControladorGRD.Entities
             cmd.CommandText = "INSERT INTO documento (numero, rev, os, obs, dataRegistro, usuario)" +
                                 " VALUES (@numero, @rev, @os, @obs, @dataRegistro, @usuario)";
 
+            cmd.Parameters.Clear();
             cmd.Parameters.AddWithValue("@numero", txtNumero);
             cmd.Parameters.AddWithValue("@rev", txtRev);
             cmd.Parameters.AddWithValue("@os", comboOS);
@@ -39,17 +40,18 @@ namespace ControladorGRD.Entities
             cmd.Prepare();
             cmd.ExecuteNonQuery();
         }
+
         public static void Update(int id, string txtNumero, string txtRev, string comboOS, string txtObs, string user)
         {
             cmd.CommandText = "UPDATE documento " +
                               "SET numero=numero, rev=@rev, os=@os, obs=@obs, usuario=@usuario" +
                                " WHERE id=@id";
 
+            cmd.Parameters.Clear();
             cmd.Parameters.AddWithValue("@numero", txtNumero);
             cmd.Parameters.AddWithValue("@rev", txtRev);
             cmd.Parameters.AddWithValue("@os", comboOS);
             cmd.Parameters.AddWithValue("@obs", txtObs);
-          //cmd.Parameters.AddWithValue("@dataRegistro", Convert.ToString(DateTime.Now.ToString("yyyy-MM-dd")));
             cmd.Parameters.AddWithValue("@usuario", user);
             cmd.Parameters.AddWithValue("@id", id);
 
@@ -69,11 +71,18 @@ namespace ControladorGRD.Entities
 
             cmd.Prepare();
             MySqlDataReader dr = ConnectSQL.cmd.ExecuteReader();
-            
             dr.Read();
-            int? id = Convert.ToInt32(dr.GetValue(0));
-            dr.Close();
-            return id;
+            if (dr.HasRows)
+            {
+                int? id = Convert.ToInt32(dr.GetValue(0));
+                dr.Close();
+                return id;
+            }
+            else
+            {
+                return null;
+            }
+
         }
 
         public static string[] Values(int id)// como acessar as variaveis desse metodo?

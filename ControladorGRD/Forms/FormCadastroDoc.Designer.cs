@@ -44,7 +44,7 @@ namespace ControladorGRD.Forms
             this.btnSalvar = new System.Windows.Forms.Button();
             this.btnNovo = new System.Windows.Forms.Button();
             this.btnProcurar = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
+            this.btnMultiplos = new System.Windows.Forms.Button();
             this.labelMultiplo = new System.Windows.Forms.Label();
             this.checkRev = new System.Windows.Forms.CheckBox();
             this.btnExcluir = new System.Windows.Forms.Button();
@@ -104,9 +104,9 @@ namespace ControladorGRD.Forms
             this.labelObservacao.AutoSize = true;
             this.labelObservacao.Location = new System.Drawing.Point(16, 194);
             this.labelObservacao.Name = "labelObservacao";
-            this.labelObservacao.Size = new System.Drawing.Size(65, 13);
+            this.labelObservacao.Size = new System.Drawing.Size(112, 13);
             this.labelObservacao.TabIndex = 10;
-            this.labelObservacao.Text = "Observação";
+            this.labelObservacao.Text = "Observação/Legenda";
             // 
             // labelData
             // 
@@ -184,15 +184,15 @@ namespace ControladorGRD.Forms
             this.btnProcurar.UseVisualStyleBackColor = true;
             this.btnProcurar.Click += new System.EventHandler(this.btnProcurar_Click);
             // 
-            // button1
+            // btnMultiplos
             // 
-            this.button1.Location = new System.Drawing.Point(16, 377);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(110, 30);
-            this.button1.TabIndex = 18;
-            this.button1.Text = "Multiplos";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.btnMultiplos.Location = new System.Drawing.Point(16, 377);
+            this.btnMultiplos.Name = "btnMultiplos";
+            this.btnMultiplos.Size = new System.Drawing.Size(110, 30);
+            this.btnMultiplos.TabIndex = 18;
+            this.btnMultiplos.Text = "Multiplos";
+            this.btnMultiplos.UseVisualStyleBackColor = true;
+            this.btnMultiplos.Click += new System.EventHandler(this.btnMultiplos_Click);
             // 
             // labelMultiplo
             // 
@@ -212,7 +212,6 @@ namespace ControladorGRD.Forms
             this.checkRev.TabIndex = 20;
             this.checkRev.Text = "Revisões";
             this.checkRev.UseVisualStyleBackColor = true;
-            this.checkRev.CheckedChanged += new System.EventHandler(this.checkRev_CheckedChanged);
             // 
             // btnExcluir
             // 
@@ -233,7 +232,7 @@ namespace ControladorGRD.Forms
             this.Controls.Add(this.btnExcluir);
             this.Controls.Add(this.checkRev);
             this.Controls.Add(this.labelMultiplo);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.btnMultiplos);
             this.Controls.Add(this.btnProcurar);
             this.Controls.Add(this.btnNovo);
             this.Controls.Add(this.btnSalvar);
@@ -275,7 +274,7 @@ namespace ControladorGRD.Forms
         private System.Windows.Forms.Button btnSalvar;
         private System.Windows.Forms.Button btnNovo;
         private System.Windows.Forms.Button btnProcurar;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btnMultiplos;
         private System.Windows.Forms.Label labelMultiplo;
         private System.Windows.Forms.CheckBox checkRev;
         private System.Windows.Forms.Button btnExcluir;
