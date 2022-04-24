@@ -31,16 +31,16 @@ namespace ControladorGRD
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.panelMenu = new System.Windows.Forms.Panel();
-            this.panelLogo = new System.Windows.Forms.Panel();
-            this.panelTitulo = new System.Windows.Forms.Panel();
-            this.labelTitulo = new System.Windows.Forms.Label();
-            this.panelDesktop = new System.Windows.Forms.Panel();
             this.btnResp = new System.Windows.Forms.Button();
             this.btnEmitir = new System.Windows.Forms.Button();
             this.btnReceber = new System.Windows.Forms.Button();
             this.btnBuscar = new System.Windows.Forms.Button();
             this.btnDoc = new System.Windows.Forms.Button();
+            this.panelLogo = new System.Windows.Forms.Panel();
             this.Logo = new System.Windows.Forms.Button();
+            this.panelTitulo = new System.Windows.Forms.Panel();
+            this.labelTitulo = new System.Windows.Forms.Label();
+            this.panelDesktop = new System.Windows.Forms.Panel();
             this.panelMenu.SuspendLayout();
             this.panelLogo.SuspendLayout();
             this.panelTitulo.SuspendLayout();
@@ -62,46 +62,6 @@ namespace ControladorGRD
             this.panelMenu.Size = new System.Drawing.Size(220, 728);
             this.panelMenu.TabIndex = 0;
             // 
-            // panelLogo
-            // 
-            this.panelLogo.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(167)))), ((int)(((byte)(169)))), ((int)(((byte)(172)))));
-            this.panelLogo.Controls.Add(this.Logo);
-            this.panelLogo.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panelLogo.Location = new System.Drawing.Point(0, 0);
-            this.panelLogo.Name = "panelLogo";
-            this.panelLogo.Size = new System.Drawing.Size(220, 90);
-            this.panelLogo.TabIndex = 0;
-            // 
-            // panelTitulo
-            // 
-            this.panelTitulo.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(211)))), ((int)(((byte)(214)))), ((int)(((byte)(219)))));
-            this.panelTitulo.Controls.Add(this.labelTitulo);
-            this.panelTitulo.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panelTitulo.Location = new System.Drawing.Point(220, 0);
-            this.panelTitulo.Name = "panelTitulo";
-            this.panelTitulo.Size = new System.Drawing.Size(1048, 90);
-            this.panelTitulo.TabIndex = 1;
-            // 
-            // labelTitulo
-            // 
-            this.labelTitulo.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.labelTitulo.AutoSize = true;
-            this.labelTitulo.Font = new System.Drawing.Font("PF Square Sans Pro", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelTitulo.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(92)))), ((int)(((byte)(99)))), ((int)(((byte)(104)))));
-            this.labelTitulo.Location = new System.Drawing.Point(334, 35);
-            this.labelTitulo.Name = "labelTitulo";
-            this.labelTitulo.Size = new System.Drawing.Size(343, 25);
-            this.labelTitulo.TabIndex = 0;
-            this.labelTitulo.Text = "PESSOAS QUE FAZEM A DIFERENÇA";
-            // 
-            // panelDesktop
-            // 
-            this.panelDesktop.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelDesktop.Location = new System.Drawing.Point(220, 90);
-            this.panelDesktop.Name = "panelDesktop";
-            this.panelDesktop.Size = new System.Drawing.Size(1048, 638);
-            this.panelDesktop.TabIndex = 2;
-            // 
             // btnResp
             // 
             this.btnResp.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(120)))), ((int)(((byte)(40)))));
@@ -116,7 +76,7 @@ namespace ControladorGRD
             this.btnResp.Padding = new System.Windows.Forms.Padding(12, 0, 0, 0);
             this.btnResp.Size = new System.Drawing.Size(215, 60);
             this.btnResp.TabIndex = 5;
-            this.btnResp.Text = "Cadastrar OS/Responsável";
+            this.btnResp.Text = "Cadastrar Responsável";
             this.btnResp.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnResp.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnResp.UseVisualStyleBackColor = false;
@@ -156,7 +116,7 @@ namespace ControladorGRD
             this.btnReceber.Padding = new System.Windows.Forms.Padding(12, 0, 0, 0);
             this.btnReceber.Size = new System.Drawing.Size(215, 60);
             this.btnReceber.TabIndex = 3;
-            this.btnReceber.Text = "Receber GRD";
+            this.btnReceber.Text = "Receber/Cancelar GRD";
             this.btnReceber.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnReceber.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnReceber.UseVisualStyleBackColor = false;
@@ -202,6 +162,16 @@ namespace ControladorGRD
             this.btnDoc.UseVisualStyleBackColor = false;
             this.btnDoc.Click += new System.EventHandler(this.btnDoc_Click);
             // 
+            // panelLogo
+            // 
+            this.panelLogo.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(167)))), ((int)(((byte)(169)))), ((int)(((byte)(172)))));
+            this.panelLogo.Controls.Add(this.Logo);
+            this.panelLogo.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panelLogo.Location = new System.Drawing.Point(0, 0);
+            this.panelLogo.Name = "panelLogo";
+            this.panelLogo.Size = new System.Drawing.Size(220, 90);
+            this.panelLogo.TabIndex = 0;
+            // 
             // Logo
             // 
             this.Logo.FlatAppearance.BorderSize = 0;
@@ -213,6 +183,36 @@ namespace ControladorGRD
             this.Logo.TabIndex = 0;
             this.Logo.UseVisualStyleBackColor = true;
             this.Logo.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // panelTitulo
+            // 
+            this.panelTitulo.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(211)))), ((int)(((byte)(214)))), ((int)(((byte)(219)))));
+            this.panelTitulo.Controls.Add(this.labelTitulo);
+            this.panelTitulo.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panelTitulo.Location = new System.Drawing.Point(220, 0);
+            this.panelTitulo.Name = "panelTitulo";
+            this.panelTitulo.Size = new System.Drawing.Size(1048, 90);
+            this.panelTitulo.TabIndex = 1;
+            // 
+            // labelTitulo
+            // 
+            this.labelTitulo.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.labelTitulo.AutoSize = true;
+            this.labelTitulo.Font = new System.Drawing.Font("PF Square Sans Pro", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelTitulo.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(92)))), ((int)(((byte)(99)))), ((int)(((byte)(104)))));
+            this.labelTitulo.Location = new System.Drawing.Point(334, 35);
+            this.labelTitulo.Name = "labelTitulo";
+            this.labelTitulo.Size = new System.Drawing.Size(343, 25);
+            this.labelTitulo.TabIndex = 0;
+            this.labelTitulo.Text = "PESSOAS QUE FAZEM A DIFERENÇA";
+            // 
+            // panelDesktop
+            // 
+            this.panelDesktop.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panelDesktop.Location = new System.Drawing.Point(220, 90);
+            this.panelDesktop.Name = "panelDesktop";
+            this.panelDesktop.Size = new System.Drawing.Size(1048, 638);
+            this.panelDesktop.TabIndex = 2;
             // 
             // Form1
             // 

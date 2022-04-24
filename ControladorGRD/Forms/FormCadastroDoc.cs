@@ -5,6 +5,7 @@ using ControladorGRD.Entities;
 using System.Globalization;
 using System.IO;
 using Excel = Microsoft.Office.Interop.Excel;
+using System.Reflection;
 
 namespace ControladorGRD.Forms
 {
@@ -17,18 +18,25 @@ namespace ControladorGRD.Forms
         object[,] dados;
         string[] numeros, revisoes, oss, obss;
         int qtdlinhas;
+        string ownPath, filePath;
 
         public FormCadastroDoc(string user)
         {
             InitializeComponent();
             txtData.Text = Convert.ToString(DateTime.Now.ToString("dd/MM/yyyy"));
             this.user = user;
+            ownPath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+            filePath = $@"{ownPath}\listaOS.txt";
+            carregarOS(filePath);
         }
 
         public FormCadastroDoc()
         {
             InitializeComponent();
             txtData.Text = Convert.ToString(DateTime.Now.ToString("dd/MM/yyyy"));
+            ownPath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+            filePath = $@"{ownPath}\listaOS.txt";
+            carregarOS(filePath);
         }
 
         private void btnSalvar_Click(object sender, EventArgs e)
@@ -73,7 +81,7 @@ namespace ControladorGRD.Forms
                         {
                             for (int i = 0; i < qtdlinhas; i++)
                             {
-                                ConnectSQL.Update((int)ConnectSQL.SearchID(numeros[i]),numeros[i], revisoes[i], oss[i], obss[i], user);
+                                ConnectSQL.Update((int)ConnectSQL.SearchID(numeros[i]), numeros[i], revisoes[i], oss[i], obss[i], user);
                             }
                             MessageBox.Show("Atualizado!");
                         }
@@ -213,6 +221,30 @@ namespace ControladorGRD.Forms
             limpar();
         }
 
+        private void btnRegistrarOS_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (txtNovaOS.Text == "")
+                {
+                    MessageBox.Show("Campo vazio");
+                }
+                else
+                {
+                    File.AppendAllText(filePath, txtNovaOS.Text + Environment.NewLine);
+                    comboOS.Items.Clear();
+                    carregarOS(filePath);
+                    MessageBox.Show("OS Registrada");
+                    txtNovaOS.Text = String.Empty;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+
+        }
+
         private void limpar()
         {
             id_contatoSelecionado = null;
@@ -232,7 +264,7 @@ namespace ControladorGRD.Forms
 
             for (int l = 0; l <= linhas; l++)
             {
-                cell = ws.Cells[l+1, 1].Value;
+                cell = ws.Cells[l + 1, 1].Value;
 
                 if (cell == null)
                 {
@@ -242,6 +274,22 @@ namespace ControladorGRD.Forms
                 {
                     linhas++;
                 }
+            }
+        }
+
+        private void carregarOS(string path)
+        {
+            if (File.Exists($@"{path}"))
+            {
+                string[] lines = File.ReadAllLines(path);
+                foreach (string line in lines)
+                {
+                    comboOS.Items.Add(line);
+                }
+            }
+            else
+            {
+                File.Create($@"{path}");
             }
         }
     }

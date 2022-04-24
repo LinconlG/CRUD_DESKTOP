@@ -113,5 +113,24 @@ namespace ControladorGRD.Entities
             return dados;
         }
 
+        public static void InsertResp(string responsavel)
+        {
+            cmd.CommandText = "INSERT INTO responsavel (nome)" +
+                    " VALUES (@nome)";
+
+            cmd.Parameters.Clear();
+            cmd.Parameters.AddWithValue("@nome", responsavel);
+
+            cmd.Prepare();
+            cmd.ExecuteNonQuery();
+        }
+
+        public static MySqlDataReader ExbirResp()
+        {
+            cmd.CommandText = "SELECT * FROM responsavel ORDER BY idresp";
+
+            cmd.Prepare();
+            return cmd.ExecuteReader();
+        }
     }
 }

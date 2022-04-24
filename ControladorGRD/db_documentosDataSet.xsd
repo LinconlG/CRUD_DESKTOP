@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="db_documentosDataSet" targetNamespace="http://tempuri.org/db_documentosDataSet.xsd" xmlns:mstns="http://tempuri.org/db_documentosDataSet.xsd" xmlns="http://tempuri.org/db_documentosDataSet.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections>
+          <Connection AppSettingsObjectName="Settings" AppSettingsPropertyName="db_documentosConnectionString" ConnectionStringObject="" IsAppSettingsProperty="true" Modifier="Assembly" Name="db_documentosConnectionString (Settings)" ParameterPrefix="@" PropertyReference="ApplicationSettings.ControladorGRD.Properties.Settings.GlobalReference.Default.db_documentosConnectionString" Provider="MySql.Data.MySqlClient" />
+        </Connections>
+        <Tables>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="osTableAdapter" GeneratorDataComponentClassName="osTableAdapter" Name="os" UserDataComponentName="osTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="db_documentosConnectionString (Settings)" DbObjectName="db_documentos.os" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>SELECT `numOS` FROM `os`</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings />
+            <Sources />
+          </TableAdapter>
+        </Tables>
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="db_documentosDataSet" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="True" msprop:Generator_DataSetName="db_documentosDataSet" msprop:Generator_UserDSName="db_documentosDataSet">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="os" msprop:Generator_TableClassName="osDataTable" msprop:Generator_TableVarName="tableos" msprop:Generator_TablePropName="os" msprop:Generator_RowDeletingName="osRowDeleting" msprop:Generator_RowChangingName="osRowChanging" msprop:Generator_RowEvHandlerName="osRowChangeEventHandler" msprop:Generator_RowDeletedName="osRowDeleted" msprop:Generator_UserTableName="os" msprop:Generator_RowChangedName="osRowChanged" msprop:Generator_RowEvArgName="osRowChangeEvent" msprop:Generator_RowClassName="osRow">
+          <xs:complexType>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

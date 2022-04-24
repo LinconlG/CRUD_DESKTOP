@@ -29,6 +29,7 @@ namespace ControladorGRD.Forms
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.txtNumero = new System.Windows.Forms.TextBox();
             this.txtRev = new System.Windows.Forms.TextBox();
             this.txtData = new System.Windows.Forms.TextBox();
@@ -48,6 +49,14 @@ namespace ControladorGRD.Forms
             this.labelMultiplo = new System.Windows.Forms.Label();
             this.checkRev = new System.Windows.Forms.CheckBox();
             this.btnExcluir = new System.Windows.Forms.Button();
+            this.db_documentosDataSet = new ControladorGRD.db_documentosDataSet();
+            this.osBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.osTableAdapter = new ControladorGRD.db_documentosDataSetTableAdapters.osTableAdapter();
+            this.txtNovaOS = new System.Windows.Forms.TextBox();
+            this.labelOS2 = new System.Windows.Forms.Label();
+            this.btnRegistrarOS = new System.Windows.Forms.Button();
+            ((System.ComponentModel.ISupportInitialize)(this.db_documentosDataSet)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.osBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // txtNumero
@@ -145,10 +154,6 @@ namespace ControladorGRD.Forms
             // comboOS
             // 
             this.comboOS.FormattingEnabled = true;
-            this.comboOS.Items.AddRange(new object[] {
-            "0545.03.001",
-            "0604.04.006",
-            "0527.03.001"});
             this.comboOS.Location = new System.Drawing.Point(16, 141);
             this.comboOS.Name = "comboOS";
             this.comboOS.Size = new System.Drawing.Size(121, 21);
@@ -223,12 +228,55 @@ namespace ControladorGRD.Forms
             this.btnExcluir.UseVisualStyleBackColor = true;
             this.btnExcluir.Click += new System.EventHandler(this.btnExcluir_Click);
             // 
+            // db_documentosDataSet
+            // 
+            this.db_documentosDataSet.DataSetName = "db_documentosDataSet";
+            this.db_documentosDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            // 
+            // osBindingSource
+            // 
+            this.osBindingSource.DataMember = "os";
+            this.osBindingSource.DataSource = this.db_documentosDataSet;
+            // 
+            // osTableAdapter
+            // 
+            this.osTableAdapter.ClearBeforeFill = true;
+            // 
+            // txtNovaOS
+            // 
+            this.txtNovaOS.Location = new System.Drawing.Point(13, 501);
+            this.txtNovaOS.Name = "txtNovaOS";
+            this.txtNovaOS.Size = new System.Drawing.Size(116, 20);
+            this.txtNovaOS.TabIndex = 22;
+            // 
+            // labelOS2
+            // 
+            this.labelOS2.AutoSize = true;
+            this.labelOS2.Location = new System.Drawing.Point(13, 482);
+            this.labelOS2.Name = "labelOS2";
+            this.labelOS2.Size = new System.Drawing.Size(97, 13);
+            this.labelOS2.TabIndex = 23;
+            this.labelOS2.Text = "Registrar nova OS:";
+            // 
+            // btnRegistrarOS
+            // 
+            this.btnRegistrarOS.Location = new System.Drawing.Point(135, 499);
+            this.btnRegistrarOS.Name = "btnRegistrarOS";
+            this.btnRegistrarOS.Size = new System.Drawing.Size(75, 23);
+            this.btnRegistrarOS.TabIndex = 24;
+            this.btnRegistrarOS.Text = "Registrar";
+            this.btnRegistrarOS.UseVisualStyleBackColor = true;
+            this.btnRegistrarOS.Click += new System.EventHandler(this.btnRegistrarOS_Click);
+            // 
             // FormCadastroDoc
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
             this.ClientSize = new System.Drawing.Size(569, 629);
+            this.Controls.Add(this.btnRegistrarOS);
+            this.Controls.Add(this.labelOS2);
+            this.Controls.Add(this.txtNovaOS);
             this.Controls.Add(this.btnExcluir);
             this.Controls.Add(this.checkRev);
             this.Controls.Add(this.labelMultiplo);
@@ -252,6 +300,8 @@ namespace ControladorGRD.Forms
             this.MinimizeBox = false;
             this.Name = "FormCadastroDoc";
             this.Text = "FormCadastroDoc";
+            ((System.ComponentModel.ISupportInitialize)(this.db_documentosDataSet)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.osBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -278,5 +328,11 @@ namespace ControladorGRD.Forms
         private System.Windows.Forms.Label labelMultiplo;
         private System.Windows.Forms.CheckBox checkRev;
         private System.Windows.Forms.Button btnExcluir;
+        private db_documentosDataSet db_documentosDataSet;
+        private System.Windows.Forms.BindingSource osBindingSource;
+        private db_documentosDataSetTableAdapters.osTableAdapter osTableAdapter;
+        private System.Windows.Forms.TextBox txtNovaOS;
+        private System.Windows.Forms.Label labelOS2;
+        private System.Windows.Forms.Button btnRegistrarOS;
     }
 }

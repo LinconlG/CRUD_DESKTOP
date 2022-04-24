@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using ControladorGRD.Forms;
+using ControladorGRD.Entities;
 
 namespace ControladorGRD
 {
@@ -16,6 +17,7 @@ namespace ControladorGRD
         private Button currentButton;
         private Form activeForm;
         string activeuser;
+
         public Form1(FormLogin active)
         {
             InitializeComponent();
@@ -96,7 +98,7 @@ namespace ControladorGRD
 
         private void btnResp_Click(object sender, EventArgs e)
         {
-            OpenChildForm(new FormResp(), sender);
+            OpenChildForm(new FormCadGeral(), sender);
         }
 
         private void button1_Click(object sender, EventArgs e)
