@@ -23,7 +23,6 @@ namespace ControladorGRD.Forms
             listViewResp.FullRowSelect = true;
             listViewResp.AllowColumnReorder = true;
 
-            listViewResp.Columns.Add("ID", 30, HorizontalAlignment.Left);
             listViewResp.Columns.Add("Nome", 250, HorizontalAlignment.Left);
 
             carregarResp();
@@ -76,8 +75,7 @@ namespace ControladorGRD.Forms
                 {
                     string[] row = {
 
-                        reader.GetString(0),//exibe o ID
-                        reader.GetString(1),//exibe o nome
+                        reader.GetString(0),//exibe o nome
                     };
 
                     var linha_listview = new ListViewItem(row);
@@ -113,8 +111,7 @@ namespace ControladorGRD.Forms
                 {
                     string[] row = {
 
-                        reader.GetString(0),//exibe o ID
-                        reader.GetString(1),//exibe o nome
+                        reader.GetString(0),//exibe o nome
                     };
 
                     var linha_listview = new ListViewItem(row);

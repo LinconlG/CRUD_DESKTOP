@@ -127,10 +127,22 @@ namespace ControladorGRD.Entities
 
         public static MySqlDataReader ExbirResp()
         {
-            cmd.CommandText = "SELECT * FROM responsavel ORDER BY idresp";
+            cmd.CommandText = "SELECT * FROM responsavel ORDER BY nome";
 
             cmd.Prepare();
             return cmd.ExecuteReader();
         }
+
+        public static MySqlDataReader ExibirGRD()
+        {
+            cmd.CommandText = "select dataEmissao, grd_dados.grd, documento.numero , emissaogrd.revDoc, grd_dados.resps " +
+                "from documento join grd_dados join emissaogrd " +
+                "on emissaogrd.idGrd = grd_dados.grd AND emissaogrd.idDoc = documento.id" +
+                " ORDER BY grd_dados.grd DESC, documento.numero";
+
+            cmd.Prepare();
+            return cmd.ExecuteReader();
+        }
+
     }
 }
