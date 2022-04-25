@@ -64,7 +64,7 @@ namespace ControladorGRD.Forms
             this.txtResp.Name = "txtResp";
             this.txtResp.Size = new System.Drawing.Size(208, 20);
             this.txtResp.TabIndex = 3;
-            this.txtResp.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtResp_KeyDown);
+            this.txtResp.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtResp_KeyPress);
             // 
             // btnOsResp
             // 
@@ -79,7 +79,7 @@ namespace ControladorGRD.Forms
             // listViewResp
             // 
             this.listViewResp.HideSelection = false;
-            this.listViewResp.Location = new System.Drawing.Point(12, 286);
+            this.listViewResp.Location = new System.Drawing.Point(61, 276);
             this.listViewResp.Name = "listViewResp";
             this.listViewResp.Size = new System.Drawing.Size(318, 264);
             this.listViewResp.TabIndex = 5;
@@ -88,7 +88,7 @@ namespace ControladorGRD.Forms
             // labelListaResp
             // 
             this.labelListaResp.AutoSize = true;
-            this.labelListaResp.Location = new System.Drawing.Point(12, 239);
+            this.labelListaResp.Location = new System.Drawing.Point(61, 229);
             this.labelListaResp.Name = "labelListaResp";
             this.labelListaResp.Size = new System.Drawing.Size(135, 13);
             this.labelListaResp.TabIndex = 6;
@@ -96,15 +96,15 @@ namespace ControladorGRD.Forms
             // 
             // txtPesquisarResp
             // 
-            this.txtPesquisarResp.Location = new System.Drawing.Point(15, 260);
+            this.txtPesquisarResp.Location = new System.Drawing.Point(64, 250);
             this.txtPesquisarResp.Name = "txtPesquisarResp";
             this.txtPesquisarResp.Size = new System.Drawing.Size(157, 20);
             this.txtPesquisarResp.TabIndex = 7;
-            this.txtPesquisarResp.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtPesquisarResp_KeyDown);
+            this.txtPesquisarResp.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtPesquisarResp_KeyPress);
             // 
             // btnPesquisar
             // 
-            this.btnPesquisar.Location = new System.Drawing.Point(179, 257);
+            this.btnPesquisar.Location = new System.Drawing.Point(228, 247);
             this.btnPesquisar.Name = "btnPesquisar";
             this.btnPesquisar.Size = new System.Drawing.Size(75, 23);
             this.btnPesquisar.TabIndex = 8;

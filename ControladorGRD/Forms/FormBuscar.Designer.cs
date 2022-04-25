@@ -33,6 +33,7 @@ namespace ControladorGRD.Forms
             this.txtBuscarDocGrd = new System.Windows.Forms.TextBox();
             this.btnBuscarDocGrd = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
+            this.comboBox = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // listaGRD
@@ -72,11 +73,24 @@ namespace ControladorGRD.Forms
             this.label1.TabIndex = 3;
             this.label1.Text = "Buscar documento/GRD";
             // 
+            // comboBox
+            // 
+            this.comboBox.FormattingEnabled = true;
+            this.comboBox.Items.AddRange(new object[] {
+            "GRD",
+            "Documentos"});
+            this.comboBox.Location = new System.Drawing.Point(440, 125);
+            this.comboBox.Name = "comboBox";
+            this.comboBox.Size = new System.Drawing.Size(121, 21);
+            this.comboBox.TabIndex = 4;
+            this.comboBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.comboBox_KeyDown);
+            // 
             // FormBuscar
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(723, 629);
+            this.Controls.Add(this.comboBox);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.btnBuscarDocGrd);
             this.Controls.Add(this.txtBuscarDocGrd);
@@ -94,5 +108,6 @@ namespace ControladorGRD.Forms
         private System.Windows.Forms.TextBox txtBuscarDocGrd;
         private System.Windows.Forms.Button btnBuscarDocGrd;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.ComboBox comboBox;
     }
 }

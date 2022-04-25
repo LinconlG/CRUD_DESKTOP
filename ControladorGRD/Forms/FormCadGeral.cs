@@ -129,19 +129,19 @@ namespace ControladorGRD.Forms
             }
         }
 
-        private void txtPesquisarResp_KeyDown(object sender, KeyEventArgs e)
+        private void txtResp_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (e.KeyCode == Keys.Enter)
-            {
-                btnPesquisar_Click(this, e);
-            }
-        }
-
-        private void txtResp_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Enter)
+            if (e.KeyChar == ((char)Keys.Enter))
             {
                 btnOsResp_Click(this, e);
+            }   
+        }
+
+        private void txtPesquisarResp_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == ((char)Keys.Enter))
+            {
+                btnPesquisar_Click(this, e);
             }
         }
     }

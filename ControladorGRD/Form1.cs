@@ -22,6 +22,7 @@ namespace ControladorGRD
         {
             InitializeComponent();
             activeuser = active.User();
+            labelUser.Text = activeuser;
         }
 
         private Color SelectThemeColor()
@@ -60,19 +61,53 @@ namespace ControladorGRD
 
         private void OpenChildForm(Form childForm, object btnSender)
         {
+
             if (activeForm != null)
             {
-                activeForm.Close();
+                if (activeForm is FormEmitir)
+                {
+                    DialogResult result = MessageBox.Show("Tem certeza que deseja cancelar a emissão?", "GRD", MessageBoxButtons.YesNo);
+                    if (result == DialogResult.Yes)
+                    {
+                        activeForm.Close();
+                        ActivateButton(btnSender);
+                        activeForm = childForm;
+                        childForm.TopLevel = false;
+                        childForm.FormBorderStyle = FormBorderStyle.None;
+                        childForm.Dock = DockStyle.Fill;
+                        this.panelDesktop.Controls.Add(childForm);
+                        this.panelDesktop.Tag = childForm;
+                        childForm.BringToFront();
+                        childForm.Show();
+                    }
+                }
+                else
+                {
+                    activeForm.Close();
+
+                    ActivateButton(btnSender);
+                    activeForm = childForm;
+                    childForm.TopLevel = false;
+                    childForm.FormBorderStyle = FormBorderStyle.None;
+                    childForm.Dock = DockStyle.Fill;
+                    this.panelDesktop.Controls.Add(childForm);
+                    this.panelDesktop.Tag = childForm;
+                    childForm.BringToFront();
+                    childForm.Show();
+                }
             }
-            ActivateButton(btnSender);
-            activeForm = childForm;
-            childForm.TopLevel = false;
-            childForm.FormBorderStyle = FormBorderStyle.None;
-            childForm.Dock = DockStyle.Fill;
-            this.panelDesktop.Controls.Add(childForm);
-            this.panelDesktop.Tag = childForm;
-            childForm.BringToFront();
-            childForm.Show();
+            else
+            {
+                ActivateButton(btnSender);
+                activeForm = childForm;
+                childForm.TopLevel = false;
+                childForm.FormBorderStyle = FormBorderStyle.None;
+                childForm.Dock = DockStyle.Fill;
+                this.panelDesktop.Controls.Add(childForm);
+                this.panelDesktop.Tag = childForm;
+                childForm.BringToFront();
+                childForm.Show();
+            }
         }
 
         private void btnDoc_Click(object sender, EventArgs e)
@@ -83,7 +118,7 @@ namespace ControladorGRD
 
         private void btnEmitir_Click(object sender, EventArgs e)
         {
-            OpenChildForm(new FormEmitir(), sender);
+            OpenChildForm(new FormEmitir(activeuser), sender);
         }
 
         private void btnReceber_Click(object sender, EventArgs e)
@@ -108,6 +143,11 @@ namespace ControladorGRD
                 activeForm.Close();
             }
             DisableButton();
+        }
+
+        private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            Application.Restart(); 
         }
     }
 }

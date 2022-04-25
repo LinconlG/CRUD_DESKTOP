@@ -23,7 +23,7 @@ namespace ControladorGRD.Forms
         public FormCadastroDoc(string user)
         {
             InitializeComponent();
-            txtData.Text = Convert.ToString(DateTime.Now.ToString("dd/MM/yyyy"));
+            txtData.Text = DateTime.Now.ToString("dd/MM/yyyy");
             this.user = user;
             ownPath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
             filePath = $@"{ownPath}\listaOS.txt";
@@ -33,7 +33,7 @@ namespace ControladorGRD.Forms
         public FormCadastroDoc()
         {
             InitializeComponent();
-            txtData.Text = Convert.ToString(DateTime.Now.ToString("dd/MM/yyyy"));
+            txtData.Text = DateTime.Now.ToString("dd/MM/yyyy");
             ownPath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
             filePath = $@"{ownPath}\listaOS.txt";
             carregarOS(filePath);
@@ -71,11 +71,13 @@ namespace ControladorGRD.Forms
                     {
                         if (!checkRev.Checked)
                         {
+
                             for (int i = 0; i < qtdlinhas; i++)
                             {
                                 ConnectSQL.Insert(numeros[i], revisoes[i], oss[i], obss[i], user);
                             }
                             MessageBox.Show("Salvo!");
+
                         }
                         else
                         {
@@ -256,6 +258,7 @@ namespace ControladorGRD.Forms
             txtData.Text = String.Empty;
             multiplos = false;
             labelMultiplo.Text = "Nenhum arquivo selecionado";
+            checkRev.Checked = false;
         }
 
         private void checarCelulas(ref int linhas, dynamic ws)
@@ -290,6 +293,7 @@ namespace ControladorGRD.Forms
             else
             {
                 File.Create($@"{path}");
+                carregarOS(path);
             }
         }
     }

@@ -31,6 +31,9 @@ namespace ControladorGRD
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.panelMenu = new System.Windows.Forms.Panel();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.labelUser = new System.Windows.Forms.Label();
+            this.linkLabel1 = new System.Windows.Forms.LinkLabel();
             this.btnResp = new System.Windows.Forms.Button();
             this.btnEmitir = new System.Windows.Forms.Button();
             this.btnReceber = new System.Windows.Forms.Button();
@@ -42,6 +45,7 @@ namespace ControladorGRD
             this.labelTitulo = new System.Windows.Forms.Label();
             this.panelDesktop = new System.Windows.Forms.Panel();
             this.panelMenu.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panelLogo.SuspendLayout();
             this.panelTitulo.SuspendLayout();
             this.SuspendLayout();
@@ -50,6 +54,9 @@ namespace ControladorGRD
             // 
             this.panelMenu.AutoScroll = true;
             this.panelMenu.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(120)))), ((int)(((byte)(40)))));
+            this.panelMenu.Controls.Add(this.pictureBox1);
+            this.panelMenu.Controls.Add(this.labelUser);
+            this.panelMenu.Controls.Add(this.linkLabel1);
             this.panelMenu.Controls.Add(this.btnResp);
             this.panelMenu.Controls.Add(this.btnEmitir);
             this.panelMenu.Controls.Add(this.btnReceber);
@@ -61,6 +68,38 @@ namespace ControladorGRD
             this.panelMenu.Name = "panelMenu";
             this.panelMenu.Size = new System.Drawing.Size(220, 728);
             this.panelMenu.TabIndex = 0;
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.pictureBox1.Image = global::ControladorGRD.Properties.Resources.pngwinguser;
+            this.pictureBox1.Location = new System.Drawing.Point(65, 555);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(89, 88);
+            this.pictureBox1.TabIndex = 6;
+            this.pictureBox1.TabStop = false;
+            // 
+            // labelUser
+            // 
+            this.labelUser.AutoSize = true;
+            this.labelUser.Font = new System.Drawing.Font("PF Square Sans Pro", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelUser.Location = new System.Drawing.Point(65, 650);
+            this.labelUser.Name = "labelUser";
+            this.labelUser.Size = new System.Drawing.Size(37, 18);
+            this.labelUser.TabIndex = 9;
+            this.labelUser.Text = "User";
+            // 
+            // linkLabel1
+            // 
+            this.linkLabel1.AutoSize = true;
+            this.linkLabel1.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.linkLabel1.Location = new System.Drawing.Point(82, 675);
+            this.linkLabel1.Name = "linkLabel1";
+            this.linkLabel1.Size = new System.Drawing.Size(54, 18);
+            this.linkLabel1.TabIndex = 8;
+            this.linkLabel1.TabStop = true;
+            this.linkLabel1.Text = "Logout";
+            this.linkLabel1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel1_LinkClicked);
             // 
             // btnResp
             // 
@@ -191,7 +230,7 @@ namespace ControladorGRD
             this.panelTitulo.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelTitulo.Location = new System.Drawing.Point(220, 0);
             this.panelTitulo.Name = "panelTitulo";
-            this.panelTitulo.Size = new System.Drawing.Size(1048, 90);
+            this.panelTitulo.Size = new System.Drawing.Size(763, 90);
             this.panelTitulo.TabIndex = 1;
             // 
             // labelTitulo
@@ -200,7 +239,7 @@ namespace ControladorGRD
             this.labelTitulo.AutoSize = true;
             this.labelTitulo.Font = new System.Drawing.Font("PF Square Sans Pro", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelTitulo.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(92)))), ((int)(((byte)(99)))), ((int)(((byte)(104)))));
-            this.labelTitulo.Location = new System.Drawing.Point(334, 35);
+            this.labelTitulo.Location = new System.Drawing.Point(191, 35);
             this.labelTitulo.Name = "labelTitulo";
             this.labelTitulo.Size = new System.Drawing.Size(343, 25);
             this.labelTitulo.TabIndex = 0;
@@ -211,14 +250,14 @@ namespace ControladorGRD
             this.panelDesktop.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelDesktop.Location = new System.Drawing.Point(220, 90);
             this.panelDesktop.Name = "panelDesktop";
-            this.panelDesktop.Size = new System.Drawing.Size(1048, 638);
+            this.panelDesktop.Size = new System.Drawing.Size(763, 638);
             this.panelDesktop.TabIndex = 2;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
-            this.ClientSize = new System.Drawing.Size(1268, 728);
+            this.ClientSize = new System.Drawing.Size(983, 728);
             this.Controls.Add(this.panelDesktop);
             this.Controls.Add(this.panelTitulo);
             this.Controls.Add(this.panelMenu);
@@ -227,6 +266,8 @@ namespace ControladorGRD
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Controlador de GRD";
             this.panelMenu.ResumeLayout(false);
+            this.panelMenu.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.panelLogo.ResumeLayout(false);
             this.panelTitulo.ResumeLayout(false);
             this.panelTitulo.PerformLayout();
@@ -247,6 +288,9 @@ namespace ControladorGRD
         private System.Windows.Forms.Label labelTitulo;
         private System.Windows.Forms.Panel panelDesktop;
         private System.Windows.Forms.Button Logo;
+        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.LinkLabel linkLabel1;
+        private System.Windows.Forms.Label labelUser;
     }
 }
 

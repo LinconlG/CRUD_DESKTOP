@@ -243,6 +243,16 @@ namespace ControladorGRD.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap pngwinguser {
+            get {
+                object obj = ResourceManager.GetObject("pngwinguser", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap varios_docs {
             get {
                 object obj = ResourceManager.GetObject("varios docs", resourceCulture);

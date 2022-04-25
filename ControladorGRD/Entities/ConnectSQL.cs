@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using MySql.Data.MySqlClient;
 using ControladorGRD.Forms;
+using System.Windows.Forms;
 
 namespace ControladorGRD.Entities
 {
@@ -41,6 +42,93 @@ namespace ControladorGRD.Entities
             cmd.ExecuteNonQuery();
         }
 
+        public static void InsertGRD(ListView listaDoc, ListView listaResp, string user)
+        {
+            cmd.CommandText = "INSERT INTO grd_dados (datagrd, docs, resps, usuariogrd)" +
+                                " VALUES (@data, @docs, @resps, @usuario)";
+
+            cmd.Parameters.Clear();
+            cmd.Parameters.AddWithValue("@data", DateTime.Now.ToString("yyyy-MM-dd"));
+
+            //--------------------------------------------------------
+            string docs = "[\"";
+            int k = 0;
+            foreach (ListViewItem item in listaDoc.Items)
+            {
+                if (k == 0)
+                {
+                    docs += item.Text;
+                }
+                else
+                {
+                    docs += "\", \"" + item.Text;
+                }
+                k++;
+            }
+            docs += "\"]";
+
+            cmd.Parameters.AddWithValue("@docs", docs);
+
+
+            //--------------------------------------------------------
+
+            k = 0;
+            string resps = "[\"";
+            foreach (ListViewItem item in listaResp.Items)
+            {
+                if (k == 0)
+                {
+                    resps += item.Text + "\", ";
+                }
+                else if (k == 1)
+                {
+                    resps += "\"" + item.Text;
+                }
+                else
+                {
+                    resps += "\", \"" + item.Text;
+                }
+                k++;
+            }
+            resps += "\"]";
+
+            cmd.Parameters.AddWithValue("@resps", resps);
+            //-------------------------------------------------------
+
+            cmd.Parameters.AddWithValue("@usuario", user);
+
+            cmd.Prepare();
+            cmd.ExecuteNonQuery();
+        }
+
+        public static void InsertEmissao(ListView listaDocs)
+        {
+            cmd.CommandText = "SELECT grd from grd_dados ORDER BY grd desc limit 1";
+            MySqlDataReader reader = cmd.ExecuteReader();
+            reader.Read();
+            string id = id = reader.GetString(0);
+            reader.Close();
+
+            foreach (ListViewItem item in listaDocs.Items)
+            {
+                cmd.CommandText = $"SELECT id, rev from documento WHERE numero='{item.Text}'";
+
+                reader = cmd.ExecuteReader();
+                reader.Read();
+                cmd.CommandText = "INSERT INTO emissaogrd (dataEmissao, idDoc, revDoc, idgrd) " +
+                    $"VALUES(@data, @idDoc, @docRev, @grd)";
+
+                cmd.Parameters.Clear();
+                cmd.Parameters.AddWithValue("@data", DateTime.Now.ToString("yyyy-MM-dd"));
+                cmd.Parameters.AddWithValue("@idDoc", reader.GetString(0));
+                cmd.Parameters.AddWithValue("@docRev", reader.GetString(1));
+                cmd.Parameters.AddWithValue("@grd", id);
+                reader.Close();
+                cmd.Prepare();
+                cmd.ExecuteNonQuery();
+            }
+
+        }
         public static void Update(int id, string txtNumero, string txtRev, string comboOS, string txtObs, string user)
         {
             cmd.CommandText = "UPDATE documento " +
@@ -144,5 +232,33 @@ namespace ControladorGRD.Entities
             return cmd.ExecuteReader();
         }
 
+        public static MySqlDataReader ExibirDoc()
+        {
+            ConnectSQL.cmd.CommandText = "SELECT dataRegistro, numero, rev, os, obs, usuario " +
+                        "from documento";
+
+            cmd.Prepare();
+            return cmd.ExecuteReader();
+        }
+
+        public static MySqlDataReader AddDoc(string numero)
+        {
+            ConnectSQL.cmd.CommandText = $"SELECT numero, rev, os, obs" +
+            $" FROM documento WHERE numero='{numero}'";
+
+            cmd.Prepare();
+            return cmd.ExecuteReader();
+
+        }
+
+        public static MySqlDataReader AddResp(string nome)
+        {
+            ConnectSQL.cmd.CommandText = $"SELECT nome" +
+            $" FROM responsavel WHERE nome='{nome}'";
+
+            cmd.Prepare();
+            return cmd.ExecuteReader();
+
+        }
     }
 }
