@@ -34,6 +34,9 @@ namespace ControladorGRD.Forms
             this.btnBuscarDocGrd = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.comboBox = new System.Windows.Forms.ComboBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.checkBox = new System.Windows.Forms.CheckBox();
+            this.button1 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // listaGRD
@@ -44,6 +47,7 @@ namespace ControladorGRD.Forms
             this.listaGRD.Size = new System.Drawing.Size(699, 329);
             this.listaGRD.TabIndex = 0;
             this.listaGRD.UseCompatibleStateImageBehavior = false;
+            this.listaGRD.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.listaGRD_MouseDoubleClick);
             // 
             // txtBuscarDocGrd
             // 
@@ -83,13 +87,45 @@ namespace ControladorGRD.Forms
             this.comboBox.Name = "comboBox";
             this.comboBox.Size = new System.Drawing.Size(121, 21);
             this.comboBox.TabIndex = 4;
-            this.comboBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.comboBox_KeyDown);
+            this.comboBox.SelectedIndexChanged += new System.EventHandler(this.comboBox_SelectedIndexChanged);
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(440, 106);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(47, 13);
+            this.label2.TabIndex = 5;
+            this.label2.Text = "Exibição";
+            // 
+            // checkBox
+            // 
+            this.checkBox.AutoSize = true;
+            this.checkBox.Location = new System.Drawing.Point(13, 149);
+            this.checkBox.Name = "checkBox";
+            this.checkBox.Size = new System.Drawing.Size(115, 17);
+            this.checkBox.TabIndex = 6;
+            this.checkBox.Text = "Buscar por número";
+            this.checkBox.UseVisualStyleBackColor = true;
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(595, 160);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 7;
+            this.button1.Text = "Atualizar";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // FormBuscar
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(723, 629);
+            this.Controls.Add(this.button1);
+            this.Controls.Add(this.checkBox);
+            this.Controls.Add(this.label2);
             this.Controls.Add(this.comboBox);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.btnBuscarDocGrd);
@@ -109,5 +145,8 @@ namespace ControladorGRD.Forms
         private System.Windows.Forms.Button btnBuscarDocGrd;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ComboBox comboBox;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.CheckBox checkBox;
+        private System.Windows.Forms.Button button1;
     }
 }

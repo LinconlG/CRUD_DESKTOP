@@ -155,7 +155,7 @@ namespace ControladorGRD
             this.btnReceber.Padding = new System.Windows.Forms.Padding(12, 0, 0, 0);
             this.btnReceber.Size = new System.Drawing.Size(215, 60);
             this.btnReceber.TabIndex = 3;
-            this.btnReceber.Text = "Receber/Cancelar GRD";
+            this.btnReceber.Text = "Receber/Alterar GRD";
             this.btnReceber.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnReceber.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnReceber.UseVisualStyleBackColor = false;

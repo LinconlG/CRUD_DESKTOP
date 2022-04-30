@@ -16,13 +16,19 @@ namespace ControladorGRD
     {
         private Button currentButton;
         private Form activeForm;
-        string activeuser;
+
+        FormCadastroDoc cadastroDoc;
+        FormEmitir emitir;
+        FormBuscar buscar = new FormBuscar();
+        FormCadGeral cadGeral = new FormCadGeral();
+        FormAlterar receber = new FormAlterar();
 
         public Form1(FormLogin active)
         {
             InitializeComponent();
-            activeuser = active.User();
-            labelUser.Text = activeuser;
+            labelUser.Text = active.User();
+            emitir = new FormEmitir(active.User());
+            cadastroDoc = new FormCadastroDoc(active.User());
         }
 
         private Color SelectThemeColor()
@@ -64,37 +70,18 @@ namespace ControladorGRD
 
             if (activeForm != null)
             {
-                if (activeForm is FormEmitir)
-                {
-                    DialogResult result = MessageBox.Show("Tem certeza que deseja cancelar a emissão?", "GRD", MessageBoxButtons.YesNo);
-                    if (result == DialogResult.Yes)
-                    {
-                        activeForm.Close();
-                        ActivateButton(btnSender);
-                        activeForm = childForm;
-                        childForm.TopLevel = false;
-                        childForm.FormBorderStyle = FormBorderStyle.None;
-                        childForm.Dock = DockStyle.Fill;
-                        this.panelDesktop.Controls.Add(childForm);
-                        this.panelDesktop.Tag = childForm;
-                        childForm.BringToFront();
-                        childForm.Show();
-                    }
-                }
-                else
-                {
-                    activeForm.Close();
 
-                    ActivateButton(btnSender);
-                    activeForm = childForm;
-                    childForm.TopLevel = false;
-                    childForm.FormBorderStyle = FormBorderStyle.None;
-                    childForm.Dock = DockStyle.Fill;
-                    this.panelDesktop.Controls.Add(childForm);
-                    this.panelDesktop.Tag = childForm;
-                    childForm.BringToFront();
-                    childForm.Show();
-                }
+                activeForm.Hide();
+                ActivateButton(btnSender);
+                activeForm = childForm;
+                childForm.TopLevel = false;
+                childForm.FormBorderStyle = FormBorderStyle.None;
+                childForm.Dock = DockStyle.Fill;
+                this.panelDesktop.Controls.Add(childForm);
+                this.panelDesktop.Tag = childForm;
+                childForm.BringToFront();
+                childForm.Show();
+
             }
             else
             {
@@ -112,42 +99,42 @@ namespace ControladorGRD
 
         private void btnDoc_Click(object sender, EventArgs e)
         {
-            OpenChildForm(new FormCadastroDoc(activeuser), sender);
+            OpenChildForm(cadastroDoc, sender);
 
         }
 
         private void btnEmitir_Click(object sender, EventArgs e)
         {
-            OpenChildForm(new FormEmitir(activeuser), sender);
+            OpenChildForm(emitir, sender);
         }
 
         private void btnReceber_Click(object sender, EventArgs e)
         {
-            OpenChildForm(new FormReceber(), sender);
+            OpenChildForm(receber, sender);
         }
 
         private void btnBuscar_Click(object sender, EventArgs e)
         {
-            OpenChildForm(new FormBuscar(), sender);
+            OpenChildForm(buscar, sender);
         }
 
         private void btnResp_Click(object sender, EventArgs e)
         {
-            OpenChildForm(new FormCadGeral(), sender);
+            OpenChildForm(cadGeral, sender);
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
             if (activeForm != null)
             {
-                activeForm.Close();
+                activeForm.Hide();
             }
             DisableButton();
         }
 
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            Application.Restart(); 
+            Application.Restart();
         }
     }
 }

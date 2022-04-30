@@ -78,11 +78,7 @@ namespace ControladorGRD.Entities
             {
                 if (k == 0)
                 {
-                    resps += item.Text + "\", ";
-                }
-                else if (k == 1)
-                {
-                    resps += "\"" + item.Text;
+                    resps += item.Text;
                 }
                 else
                 {
@@ -129,6 +125,28 @@ namespace ControladorGRD.Entities
             }
 
         }
+
+        public static void InsertRec(ListView listaResp)
+        {
+            cmd.CommandText = "SELECT grd from grd_dados ORDER BY grd desc limit 1";
+            MySqlDataReader reader = cmd.ExecuteReader();
+            reader.Read();
+            string id = id = reader.GetString(0);
+            reader.Close();
+
+            foreach (ListViewItem item in listaResp.Items)
+            {
+                cmd.CommandText = "INSERT INTO recebimento (grdId, nome) " +
+                    $"VALUES(@grd, @nome)";
+
+                cmd.Parameters.Clear();
+                cmd.Parameters.AddWithValue("@grd", id);
+                cmd.Parameters.AddWithValue("@nome", item.Text);
+
+                cmd.Prepare();
+                cmd.ExecuteNonQuery();
+            }
+        }
         public static void Update(int id, string txtNumero, string txtRev, string comboOS, string txtObs, string user)
         {
             cmd.CommandText = "UPDATE documento " +
@@ -173,7 +191,7 @@ namespace ControladorGRD.Entities
 
         }
 
-        public static string[] Values(int id)// como acessar as variaveis desse metodo?
+        public static string[] Values(int id) 
         {
             string[] dados = new string[5];
 
@@ -223,7 +241,7 @@ namespace ControladorGRD.Entities
 
         public static MySqlDataReader ExibirGRD()
         {
-            cmd.CommandText = "select dataEmissao, grd_dados.grd, documento.numero , emissaogrd.revDoc, grd_dados.resps " +
+            cmd.CommandText = "select dataEmissao, grd_dados.grd, documento.numero , emissaogrd.revDoc, grd_dados.resps, grd_dados.usuariogrd " +
                 "from documento join grd_dados join emissaogrd " +
                 "on emissaogrd.idGrd = grd_dados.grd AND emissaogrd.idDoc = documento.id" +
                 " ORDER BY grd_dados.grd DESC, documento.numero";
@@ -260,5 +278,15 @@ namespace ControladorGRD.Entities
             return cmd.ExecuteReader();
 
         }
+
+        public static MySqlDataReader ExibirRecebimentoDocs(string grd)
+        {
+            cmd.CommandText = $"SELECT docs, resps, datagrd from grd_dados WHERE grd_dados.grd='{grd}'";
+
+            cmd.Prepare();
+
+            return cmd.ExecuteReader();
+        }
+
     }
 }

@@ -1,7 +1,7 @@
 ﻿
 namespace ControladorGRD.Forms
 {
-    partial class FormReceber
+    partial class FormResps
     {
         /// <summary>
         /// Required designer variable.
@@ -29,32 +29,36 @@ namespace ControladorGRD.Forms
         /// </summary>
         private void InitializeComponent()
         {
-            this.listView1 = new System.Windows.Forms.ListView();
+            this.listResp = new System.Windows.Forms.ListView();
             this.SuspendLayout();
             // 
-            // listView1
+            // listResp
             // 
-            this.listView1.HideSelection = false;
-            this.listView1.Location = new System.Drawing.Point(325, 179);
-            this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(121, 97);
-            this.listView1.TabIndex = 0;
-            this.listView1.UseCompatibleStateImageBehavior = false;
+            this.listResp.HideSelection = false;
+            this.listResp.Location = new System.Drawing.Point(12, 12);
+            this.listResp.Name = "listResp";
+            this.listResp.Size = new System.Drawing.Size(294, 175);
+            this.listResp.TabIndex = 0;
+            this.listResp.UseCompatibleStateImageBehavior = false;
+            this.listResp.SelectedIndexChanged += new System.EventHandler(this.listResp_SelectedIndexChanged);
             // 
-            // FormReceber
+            // FormResps
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(569, 629);
-            this.Controls.Add(this.listView1);
-            this.Name = "FormReceber";
-            this.Text = "FormReceber";
+            this.ClientSize = new System.Drawing.Size(318, 200);
+            this.Controls.Add(this.listResp);
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
+            this.Name = "FormResps";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "FormResps";
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.ListView listView1;
+        private System.Windows.Forms.ListView listResp;
     }
 }

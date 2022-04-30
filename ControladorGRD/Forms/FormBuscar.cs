@@ -17,7 +17,7 @@ namespace ControladorGRD.Forms
         public FormBuscar()
         {
             InitializeComponent();
-
+            listaGRD.MultiSelect = false;
             comboBox.Text = "GRD";
             carregarGRD();
         }
@@ -29,9 +29,20 @@ namespace ControladorGRD.Forms
                 if (comboBox.Text == "GRD")
                 {
                     ConnectSQL.Connect();
-                    ConnectSQL.cmd.CommandText = $"select emissaogrd.dataEmissao, grd_dados.grd, documento.numero , emissaogrd.revDoc, grd_dados.resps " +
+
+                    if (checkBox.Checked)
+                    {
+                        ConnectSQL.cmd.CommandText = $"select emissaogrd.dataEmissao, grd_dados.grd, documento.numero , emissaogrd.revDoc, grd_dados.resps, grd_dados.usuariogrd " +
                         $"from documento join grd_dados join emissaogrd on emissaogrd.idGrd = grd_dados.grd AND emissaogrd.idDoc = documento.id " +
-                        $"WHERE grd_dados.grd LIKE @g OR documento.numero LIKE @g ORDER BY grd_dados.grd DESC";
+                        $"WHERE documento.numero LIKE @g ORDER BY grd_dados.grd DESC";
+                    }
+                    else
+                    {
+                        ConnectSQL.cmd.CommandText = $"select emissaogrd.dataEmissao, grd_dados.grd, documento.numero , emissaogrd.revDoc, grd_dados.resps, grd_dados.usuariogrd " +
+                        $"from documento join grd_dados join emissaogrd on emissaogrd.idGrd = grd_dados.grd AND emissaogrd.idDoc = documento.id " +
+                        $"WHERE grd_dados.grd LIKE @g ORDER BY grd_dados.grd DESC";
+                    }
+                    
                     ConnectSQL.cmd.Parameters.Clear();
                     ConnectSQL.cmd.Parameters.AddWithValue("@g", $"%{txtBuscarDocGrd.Text}%");
 
@@ -50,7 +61,8 @@ namespace ControladorGRD.Forms
                             reader.GetString(1),
                             reader.GetString(2),
                             reader.GetString(3),
-                            reader.GetString(4).Replace("[", "").Replace("]", "").Replace("\"", "")
+                            reader.GetString(4).Replace("[", "").Replace("]", "").Replace("\"", ""),
+                            reader.GetString(5)
                     };
 
                         var linha_listview = new ListViewItem(row);
@@ -109,11 +121,12 @@ namespace ControladorGRD.Forms
                 listaGRD.GridLines = true;
                 listaGRD.FullRowSelect = true;
 
-                listaGRD.Columns.Add("Data", 90, HorizontalAlignment.Left);
+                listaGRD.Columns.Add("Data", 70, HorizontalAlignment.Left);
                 listaGRD.Columns.Add("GRD", 60, HorizontalAlignment.Left);
                 listaGRD.Columns.Add("Numero", 200, HorizontalAlignment.Left);
                 listaGRD.Columns.Add("Revisão", 60, HorizontalAlignment.Left);
-                listaGRD.Columns.Add("Responsável", 280, HorizontalAlignment.Left);
+                listaGRD.Columns.Add("Responsável", 200, HorizontalAlignment.Left);
+                listaGRD.Columns.Add("Usuário", 100, HorizontalAlignment.Left);
 
                 ConnectSQL.Connect();
 
@@ -130,7 +143,8 @@ namespace ControladorGRD.Forms
                         reader.GetString(1),
                         reader.GetString(2),
                         reader.GetString(3),
-                        reader.GetString(4).Replace("[", "").Replace("]", "").Replace("\"", "")
+                        reader.GetString(4).Replace("[", "").Replace("]", "").Replace("\"", ""),
+                        reader.GetString(5)
                     };
 
                     var linha_listview = new ListViewItem(row);
@@ -196,24 +210,41 @@ namespace ControladorGRD.Forms
             }
         }
 
-        private void comboBox_KeyDown(object sender, KeyEventArgs e)
+        private void comboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-
-            if (e.KeyCode == Keys.Enter)
+            if (comboBox.Text == "Documentos")
             {
-
-                if (comboBox.Text == "Documentos")
-                {
-                    carregarDoc();
-                }
-                else
-                {
-                    carregarGRD();
-                }
-
+                carregarDoc();
+                checkBox.Hide();
             }
+            else
+            {
+                carregarGRD();
+                checkBox.Show();
+            }
+        }
 
+        private void button1_Click(object sender, EventArgs e)
+        {
+            if (comboBox.Text == "Documentos")
+            {
+                carregarDoc();
+                checkBox.Hide();
+            }
+            else
+            {
+                carregarGRD();
+                checkBox.Show();
+            }
+        }
 
+        private void listaGRD_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            if (comboBox.Text == "GRD")
+            {
+                ListView.SelectedListViewItemCollection item_selecionado = listaGRD.SelectedItems;
+                new FormResps(item_selecionado[0].SubItems[1].Text).Show();
+            }
         }
     }
 }

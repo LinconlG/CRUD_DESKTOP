@@ -30,14 +30,14 @@ namespace ControladorGRD.Forms
             carregarOS(filePath);
         }
 
-        public FormCadastroDoc()
+        /*public FormCadastroDoc()
         {
             InitializeComponent();
             txtData.Text = DateTime.Now.ToString("dd/MM/yyyy");
             ownPath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
             filePath = $@"{ownPath}\listaOS.txt";
             carregarOS(filePath);
-        }
+        }*/
 
         private void btnSalvar_Click(object sender, EventArgs e)
         {
@@ -112,7 +112,7 @@ namespace ControladorGRD.Forms
                 {
                     arquivoDialogo.InitialDirectory = "Downloads";
                     arquivoDialogo.Filter = "xlsx files (*.xlsx)|*.xlsx|All files (*.*)|*.*";
-                    arquivoDialogo.FilterIndex = 2;
+                    arquivoDialogo.FilterIndex = 1;
                     arquivoDialogo.RestoreDirectory = true;
 
                     if (arquivoDialogo.ShowDialog() == DialogResult.OK)

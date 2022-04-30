@@ -86,6 +86,7 @@ namespace ControladorGRD.Forms
                     ConnectSQL.Connect();
                     ConnectSQL.InsertGRD(listDoc, listResp, user);
                     ConnectSQL.InsertEmissao(listDoc);
+                    ConnectSQL.InsertRec(listResp);
                     MessageBox.Show("Emitido");
                     listDoc.Items.Clear();
                     listResp.Items.Clear();
