@@ -41,6 +41,7 @@ namespace ControladorGRD.Forms
             // 
             // listaGRD
             // 
+            this.listaGRD.Cursor = System.Windows.Forms.Cursors.Arrow;
             this.listaGRD.HideSelection = false;
             this.listaGRD.Location = new System.Drawing.Point(12, 189);
             this.listaGRD.Name = "listaGRD";

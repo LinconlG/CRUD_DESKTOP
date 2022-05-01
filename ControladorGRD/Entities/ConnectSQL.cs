@@ -95,9 +95,11 @@ namespace ControladorGRD.Entities
 
             cmd.Prepare();
             cmd.ExecuteNonQuery();
+
+
         }
 
-        public static void InsertEmissao(ListView listaDocs)
+        public static string InsertEmissao(ListView listaDocs)
         {
             cmd.CommandText = "SELECT grd from grd_dados ORDER BY grd desc limit 1";
             MySqlDataReader reader = cmd.ExecuteReader();
@@ -124,6 +126,7 @@ namespace ControladorGRD.Entities
                 cmd.ExecuteNonQuery();
             }
 
+            return id;
         }
 
         public static void InsertRec(ListView listaResp)
@@ -253,7 +256,7 @@ namespace ControladorGRD.Entities
         public static MySqlDataReader ExibirDoc()
         {
             ConnectSQL.cmd.CommandText = "SELECT dataRegistro, numero, rev, os, obs, usuario " +
-                        "from documento";
+                        "from documento ORDER BY id DESC";
 
             cmd.Prepare();
             return cmd.ExecuteReader();

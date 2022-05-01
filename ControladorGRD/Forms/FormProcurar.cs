@@ -26,7 +26,7 @@ namespace ControladorGRD.Forms
             {
                 ConnectSQL.Connect();
 
-                id_contatoSelecionado = ConnectSQL.SearchID(txtProcurar.Text);
+                id_contatoSelecionado = ConnectSQL.SearchID(txtProcurar.Text.ToUpper());
 
 
                 if (id_contatoSelecionado != null)

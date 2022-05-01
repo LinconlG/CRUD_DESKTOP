@@ -21,6 +21,7 @@ namespace ControladorGRD.Forms
             InitializeComponent();
             txtData.Enabled = false;
             listResp.MultiSelect = false;
+            listDoc.MultiSelect = false;
         }
 
         private void txtGRD_KeyDown(object sender, KeyEventArgs e)
@@ -30,44 +31,8 @@ namespace ControladorGRD.Forms
             {
                 try
                 {
-                    grd = Convert.ToInt32(txtGRD.Text);
-                    listDoc.Clear();
-                    listResp.Clear();
-                    ConnectSQL.Connect();
-                    string[] documentos;
-                    string[] responsaveis;
 
-                    MySqlDataReader reader = ConnectSQL.ExibirRecebimentoDocs(txtGRD.Text);
-                    string[] row = new string[3];
-
-                    while (reader.Read())
-                    {
-                        row[0] = reader.GetString(0);
-                        row[1] = reader.GetString(1);
-                        row[2] = reader.GetString(2);
-                    }
-                    reader.Close();
-
-                    txtData.Text = row[2].Substring(0, 10);
-
-                    if (row[0] != null)
-                    {
-                        row[0] = row[0].Substring(2, row[0].Length - 3).Replace("\"", "").Replace(",", "").Replace(" ", "/");
-                        row[1] = row[1].Substring(2, row[1].Length - 3).Replace("\"", "").Replace(",", "").Replace(" ", "/");
-                    }
-
-                    documentos = row[0].Split('/');
-                    responsaveis = row[1].Split('/');
-
-                    for (int i = 0; i < documentos.Length; i++)
-                    {
-                        carregarListas(documentos[i]);
-                    }
-
-                    carregarResps(grd);
-
-
-
+                    carregarGeral();
                 }
                 catch (Exception ex)
                 {
@@ -189,6 +154,240 @@ namespace ControladorGRD.Forms
             ListView.SelectedListViewItemCollection resp_selecionado = listResp.SelectedItems;
             FormRecebimento receb = new FormRecebimento(resp_selecionado[0].SubItems[0].Text, grd, this);
             receb.Show();
+        }
+
+        private void carregarGeral()
+        {
+            grd = Convert.ToInt32(txtGRD.Text);
+            listDoc.Clear();
+            listResp.Clear();
+            ConnectSQL.Connect();
+            string[] documentos;
+            string[] responsaveis;
+
+            MySqlDataReader reader = ConnectSQL.ExibirRecebimentoDocs(txtGRD.Text);
+            string[] row = new string[3];
+
+            while (reader.Read())
+            {
+                row[0] = reader.GetString(0);
+                row[1] = reader.GetString(1);
+                row[2] = reader.GetString(2);
+            }
+            reader.Close();
+
+            txtData.Text = row[2].Substring(0, 10);
+
+            if (row[0] != null)
+            {
+                row[0] = row[0].Substring(2, row[0].Length - 3).Replace("\"", "").Replace(",", "").Replace(" ", "/");
+                row[1] = row[1].Substring(2, row[1].Length - 3).Replace("\"", "").Replace(",", "").Replace(" ", "/");
+            }
+
+            documentos = row[0].Split('/');
+            responsaveis = row[1].Split('/');
+
+            for (int i = 0; i < documentos.Length; i++)
+            {
+                carregarListas(documentos[i]);
+            }
+
+            carregarResps(grd);
+        }
+
+        private void removerDocumentoDaGRDToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                DialogResult result = MessageBox.Show("Tem certeza que deseja remover este documento?", "Remoção", MessageBoxButtons.YesNo);
+
+                if (result == DialogResult.Yes)
+                {
+                    ListView.SelectedListViewItemCollection doc_selecionado = listDoc.SelectedItems;
+
+                    ConnectSQL.Connect();
+
+                    ConnectSQL.cmd.CommandText = $"SELECT docs FROM grd_dados WHERE grd='{grd}'";
+
+                    ConnectSQL.cmd.Prepare();
+                    MySqlDataReader reader = ConnectSQL.cmd.ExecuteReader();
+                    reader.Read();
+                    string linha = reader.GetString(0).Substring(2, reader.GetString(0).Length - 3).Replace("\"", "").Replace(",", "").Replace(" ", "/");
+                    reader.Close();
+                    string[] numeros = linha.Split('/');
+                    int i;
+                    for (i = 0; i < numeros.Length; i++)
+                    {
+                        if (numeros[i] == doc_selecionado[0].SubItems[0].Text)
+                        {
+                            numeros = numeros.Where(val => val != $"{numeros[i]}").ToArray();
+                            break;
+                        }
+                    }
+                    if (numeros.Length == 0)
+                    {
+                        ConnectSQL.cmd.CommandText = $"DELETE FROM grd_dados WHERE grd='{grd}'";
+                        ConnectSQL.cmd.Prepare();
+                        ConnectSQL.cmd.ExecuteNonQuery();
+
+                        ConnectSQL.cmd.CommandText = $"DELETE FROM emissaogrd WHERE idgrd='{grd}'";
+                        ConnectSQL.cmd.Prepare();
+                        ConnectSQL.cmd.ExecuteNonQuery();
+
+                        ConnectSQL.cmd.CommandText = $"DELETE FROM recebimento WHERE grdId='{grd}'";
+                        ConnectSQL.cmd.Prepare();
+                        ConnectSQL.cmd.ExecuteNonQuery();
+
+                        MessageBox.Show("Documento removido, GRD cancelada!");
+                        limpar();
+
+                    }
+                    else
+                    {
+                        ConnectSQL.cmd.CommandText = $"UPDATE grd_dados SET docs=@docs WHERE grd='{grd}'";
+                        ConnectSQL.cmd.Parameters.Clear();
+
+                        string docs = "[\"";
+                        int k = 0;
+                        foreach (var item in numeros)
+                        {
+                            if (k == 0)
+                            {
+                                docs += item;
+                            }
+                            else
+                            {
+                                docs += "\", \"" + item;
+                            }
+                            k++;
+                        }
+                        docs += "\"]";
+
+                        ConnectSQL.cmd.Parameters.AddWithValue("@docs", docs);
+                        ConnectSQL.cmd.Prepare();
+                        ConnectSQL.cmd.ExecuteNonQuery();
+
+                        ConnectSQL.cmd.CommandText = $"SELECT id FROM documento WHERE numero='{doc_selecionado[0].SubItems[0].Text}'";
+                        ConnectSQL.cmd.Prepare();
+                        MySqlDataReader id = ConnectSQL.cmd.ExecuteReader();
+                        id.Read();
+                        ConnectSQL.cmd.CommandText = $"DELETE FROM emissaogrd WHERE idgrd='{grd}' AND idDoc='{id.GetString(0)}'";
+                        id.Close();
+                        ConnectSQL.cmd.Prepare();
+                        ConnectSQL.cmd.ExecuteNonQuery();
+
+                        MessageBox.Show("Documento removido com sucesso!");
+
+                        carregarGeral();
+
+                    }
+                }
+
+                
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+
+            }
+            finally
+            {
+                ConnectSQL.conexao.Close();
+            }
+        }
+
+        private void removerResponsavelDaGRDToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                DialogResult result = MessageBox.Show("Tem certeza que deseja remover este responsavel?", "Remoção", MessageBoxButtons.YesNo);
+
+                if (result == DialogResult.Yes)
+                {
+                    ListView.SelectedListViewItemCollection res_selecionado = listResp.SelectedItems;
+
+                    ConnectSQL.Connect();
+
+                    ConnectSQL.cmd.CommandText = $"SELECT resps FROM grd_dados WHERE grd='{grd}'";
+
+                    ConnectSQL.cmd.Prepare();
+                    MySqlDataReader reader = ConnectSQL.cmd.ExecuteReader();
+                    reader.Read();
+                    string linha = reader.GetString(0).Substring(2, reader.GetString(0).Length - 3).Replace("\"", "").Replace(",", "").Replace(" ", "/");
+                    reader.Close();
+                    string[] resps = linha.Split('/');
+                    int i;
+                    for (i = 0; i < resps.Length; i++)
+                    {
+                        if (resps[i] == res_selecionado[0].SubItems[0].Text)
+                        {
+                            resps = resps.Where(val => val != $"{resps[i]}").ToArray();
+                            break;
+                        }
+                    }
+                    if (resps.Length == 0)
+                    {
+                        ConnectSQL.cmd.CommandText = $"DELETE FROM grd_dados WHERE grd='{grd}'";
+                        ConnectSQL.cmd.Prepare();
+                        ConnectSQL.cmd.ExecuteNonQuery();
+
+                        ConnectSQL.cmd.CommandText = $"DELETE FROM emissaogrd WHERE idgrd='{grd}'";
+                        ConnectSQL.cmd.Prepare();
+                        ConnectSQL.cmd.ExecuteNonQuery();
+
+                        ConnectSQL.cmd.CommandText = $"DELETE FROM recebimento WHERE grdId='{grd}'";
+                        ConnectSQL.cmd.Prepare();
+                        ConnectSQL.cmd.ExecuteNonQuery();
+
+                        MessageBox.Show("Responsável removido, GRD cancelada!");
+                        limpar();
+
+                    }
+                    else
+                    {
+                        ConnectSQL.cmd.CommandText = $"UPDATE grd_dados SET resps=@resps WHERE grd='{grd}'";
+                        ConnectSQL.cmd.Parameters.Clear();
+
+                        string respos = "[\"";
+                        int k = 0;
+                        foreach (var item in resps)
+                        {
+                            if (k == 0)
+                            {
+                                respos += item;
+                            }
+                            else
+                            {
+                                respos += "\", \"" + item;
+                            }
+                            k++;
+                        }
+                        respos += "\"]";
+
+                        ConnectSQL.cmd.Parameters.AddWithValue("@resps", respos);
+                        ConnectSQL.cmd.Prepare();
+                        ConnectSQL.cmd.ExecuteNonQuery();
+
+                        ConnectSQL.cmd.CommandText = $"DELETE FROM recebimento WHERE grdId='{grd}' AND nome='{res_selecionado[0].SubItems[0].Text}'";
+                        ConnectSQL.cmd.Prepare();
+                        ConnectSQL.cmd.ExecuteNonQuery();
+
+                        MessageBox.Show("Responsável removido com sucesso!");
+
+                        carregarGeral();
+                    }
+                }
+            }
+
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+
+            }
+            finally
+            {
+                ConnectSQL.conexao.Close();
+            }
         }
     }
 }

@@ -2,12 +2,18 @@
 using System.Windows.Forms;
 using ControladorGRD.Entities;
 using MySql.Data.MySqlClient;
+using System.IO;
+using System.Reflection;
+using System.Printing;
 
 namespace ControladorGRD.Forms
 {
     public partial class FormEmitir : Form
     {
         string user;
+        string planilhaPath;
+        string grdEmitida;
+
         public FormEmitir(string user)
         {
             InitializeComponent();
@@ -16,6 +22,7 @@ namespace ControladorGRD.Forms
             carregarResp();
             carregarCombo(comboResp);
             this.user = user;
+            planilhaPath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + "\\GRD.xlsx";
         }
 
         private void btnAdicionar_Click(object sender, EventArgs e)
@@ -77,7 +84,7 @@ namespace ControladorGRD.Forms
                 {
                     MessageBox.Show("Lista de documentos está vazia");
                 }
-                else if(listResp.Items.Count == 0)
+                else if (listResp.Items.Count == 0)
                 {
                     MessageBox.Show("Lista de responsaveis está vazia");
                 }
@@ -85,8 +92,11 @@ namespace ControladorGRD.Forms
                 {
                     ConnectSQL.Connect();
                     ConnectSQL.InsertGRD(listDoc, listResp, user);
-                    ConnectSQL.InsertEmissao(listDoc);
+                    grdEmitida = ConnectSQL.InsertEmissao(listDoc);
                     ConnectSQL.InsertRec(listResp);
+
+                    ImprimirGRD();
+
                     MessageBox.Show("Emitido");
                     listDoc.Items.Clear();
                     listResp.Items.Clear();
@@ -108,6 +118,7 @@ namespace ControladorGRD.Forms
 
             listDoc.View = View.Details;
             listDoc.GridLines = true;
+            
             listDoc.Columns.Add("Numero", 120, HorizontalAlignment.Left);
             listDoc.Columns.Add("Revisão", 60, HorizontalAlignment.Left);
             listDoc.Columns.Add("OS", 90, HorizontalAlignment.Left);
@@ -169,7 +180,7 @@ namespace ControladorGRD.Forms
                     ConnectSQL.conexao.Close();
                 }
             }
-            
+
         }
 
         private void txtNumero_KeyPress(object sender, KeyPressEventArgs e)
@@ -226,5 +237,58 @@ namespace ControladorGRD.Forms
             }
         }
 
+        private void ImprimirGRD()
+        {
+            string pathtxt = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)+"\\Localgrd.txt";
+            string local = File.ReadAllText($@"{pathtxt}");
+            var planilha = new Microsoft.Office.Interop.Excel.Application();
+            var pastaTrabalho = planilha.Workbooks.Open($@"{planilhaPath}", ReadOnly: true);
+            planilha.DisplayAlerts = false;
+            var aba = pastaTrabalho.Worksheets[1];
+            int qtd = listResp.Items.Count;
+            int count = 0;
+
+            foreach (ListViewItem resp in listResp.Items)
+            {
+
+                aba.Cells[4, 3] = grdEmitida;
+                aba.Cells[5, 3] = resp.Text;
+                aba.Cells[5, 10] = DateTime.Now.ToString("dd/MM/yyyy");
+                int i = 9;
+                foreach (ListViewItem doc in listDoc.Items)
+                {
+
+                    aba.Cells[i, 1] = doc.SubItems[0].Text;
+                    aba.Cells[i, 5] = doc.SubItems[1].Text;
+                    aba.Cells[i, 6] = doc.SubItems[3].Text;
+                    aba.Cells[i, 11] = doc.SubItems[2].Text ;
+                    i++;
+                }
+                count++;
+                if (count < qtd)
+                {
+                    aba.Copy(pastaTrabalho.Sheets[planilha.Sheets.Count]);
+                    aba = pastaTrabalho.Sheets[1];
+                }
+            }
+            using (SaveFileDialog janela = new SaveFileDialog() { Filter = "PDF file|*.pdf", ValidateNames = true })
+            {
+                janela.InitialDirectory = $@"{local}";
+                janela.RestoreDirectory = true;
+                aba = pastaTrabalho.Worksheets[1];
+
+                if (janela.ShowDialog() == DialogResult.OK)
+                {
+                    aba.PageSetup.Orientation = PageOrientation.Landscape;
+                    pastaTrabalho.ExportAsFixedFormat(Microsoft.Office.Interop.Excel.XlFixedFormatType.xlTypePDF, $@"{janela.FileName}");
+
+                }
+
+            }
+
+
+            pastaTrabalho.Close();
+            planilha.Quit();
+        }
     }
 }

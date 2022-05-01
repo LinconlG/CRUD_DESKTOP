@@ -55,16 +55,16 @@ namespace ControladorGRD.Forms
                     {
                         if (id_contatoSelecionado != null)
                         {
-                            ConnectSQL.Update((int)id_contatoSelecionado, txtNumero.Text, txtRev.Text, comboOS.Text, txtObs.Text, user);
+                            ConnectSQL.Update((int)id_contatoSelecionado, txtNumero.Text.ToUpper(), txtRev.Text, comboOS.Text, txtObs.Text.ToUpper(), user);
 
                             MessageBox.Show("Atualizado!");
 
                         }
                         else
                         {
-                            ConnectSQL.Insert(txtNumero.Text, txtRev.Text, comboOS.Text, txtObs.Text, user);
+                            ConnectSQL.Insert(txtNumero.Text.ToUpper(), txtRev.Text, comboOS.Text, txtObs.Text.ToUpper(), user);
 
-                            MessageBox.Show("Salvo!");
+                            MessageBox.Show("Documento cadastrado!");
                         }
                     }
                     else
@@ -76,7 +76,7 @@ namespace ControladorGRD.Forms
                             {
                                 ConnectSQL.Insert(numeros[i], revisoes[i], oss[i], obss[i], user);
                             }
-                            MessageBox.Show("Salvo!");
+                            MessageBox.Show("Documentos cadastrados!");
 
                         }
                         else

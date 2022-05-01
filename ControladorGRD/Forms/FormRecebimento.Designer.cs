@@ -39,7 +39,7 @@ namespace ControladorGRD.Forms
             // 
             // txtData
             // 
-            this.txtData.Location = new System.Drawing.Point(195, 103);
+            this.txtData.Location = new System.Drawing.Point(12, 119);
             this.txtData.Name = "txtData";
             this.txtData.ReadOnly = true;
             this.txtData.Size = new System.Drawing.Size(123, 20);
@@ -48,10 +48,10 @@ namespace ControladorGRD.Forms
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(12, 82);
+            this.label1.Font = new System.Drawing.Font("PF Square Sans Pro", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(12, 81);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(26, 18);
+            this.label1.Size = new System.Drawing.Size(24, 18);
             this.label1.TabIndex = 1;
             this.label1.Text = "AA";
             // 
@@ -88,7 +88,7 @@ namespace ControladorGRD.Forms
             // checkBox
             // 
             this.checkBox.AutoSize = true;
-            this.checkBox.Location = new System.Drawing.Point(195, 130);
+            this.checkBox.Location = new System.Drawing.Point(12, 146);
             this.checkBox.Name = "checkBox";
             this.checkBox.Size = new System.Drawing.Size(115, 17);
             this.checkBox.TabIndex = 5;

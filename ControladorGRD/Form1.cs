@@ -70,7 +70,6 @@ namespace ControladorGRD
 
             if (activeForm != null)
             {
-
                 activeForm.Hide();
                 ActivateButton(btnSender);
                 activeForm = childForm;

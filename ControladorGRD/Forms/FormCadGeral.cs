@@ -40,7 +40,7 @@ namespace ControladorGRD.Forms
                 {
                     ConnectSQL.Connect();
 
-                    ConnectSQL.InsertResp(txtResp.Text);
+                    ConnectSQL.InsertResp(txtResp.Text.ToUpper());
 
                     MessageBox.Show("Responsavel cadastrado");
 
@@ -144,5 +144,6 @@ namespace ControladorGRD.Forms
                 btnPesquisar_Click(this, e);
             }
         }
+
     }
 }
