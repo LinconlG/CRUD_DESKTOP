@@ -1,11 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using MySql.Data.MySqlClient;
 using ControladorGRD.Entities;
@@ -224,26 +217,12 @@ namespace ControladorGRD.Forms
             }
         }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-            if (comboBox.Text == "Documentos")
-            {
-                carregarDoc();
-                checkBox.Hide();
-            }
-            else
-            {
-                carregarGRD();
-                checkBox.Show();
-            }
-        }
-
         private void listaGRD_MouseDoubleClick(object sender, MouseEventArgs e)
         {
             if (comboBox.Text == "GRD")
             {
                 ListView.SelectedListViewItemCollection item_selecionado = listaGRD.SelectedItems;
-                new FormResps(item_selecionado[0].SubItems[1].Text).Show();
+                new FormResps(item_selecionado[0].SubItems[1].Text).ShowDialog();
             }
         }
     }

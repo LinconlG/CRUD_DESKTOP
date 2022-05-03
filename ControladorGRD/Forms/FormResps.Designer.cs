@@ -52,7 +52,7 @@ namespace ControladorGRD.Forms
             this.MinimizeBox = false;
             this.Name = "FormResps";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "FormResps";
+            this.Text = "Recebimento";
             this.ResumeLayout(false);
 
         }

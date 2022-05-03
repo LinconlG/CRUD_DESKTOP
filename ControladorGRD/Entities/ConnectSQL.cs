@@ -129,16 +129,29 @@ namespace ControladorGRD.Entities
             return id;
         }
 
-        public static void InsertRec(ListView listaResp)
+        public static void InsertRec(ListView listaResp, ListView listadoc)
         {
             cmd.CommandText = "SELECT grd from grd_dados ORDER BY grd desc limit 1";
             MySqlDataReader reader = cmd.ExecuteReader();
             reader.Read();
             string id = id = reader.GetString(0);
             reader.Close();
-
+            int pend;
             foreach (ListViewItem item in listaResp.Items)
             {
+                foreach (ListViewItem doc in listadoc.Items)
+                {
+                    cmd.CommandText = $"SELECT pend FROM documentO WHERE numero='{doc.SubItems[0].Text}'";
+                    reader = cmd.ExecuteReader();
+                    reader.Read();
+                    pend = Int32.Parse(reader.GetString(0));
+                    reader.Close();
+                    cmd.CommandText = "UPDATE documento " +
+                              $"SET pend='{pend+1}' WHERE numero='{doc.SubItems[0].Text}'";
+                    cmd.Prepare();
+                    cmd.ExecuteNonQuery();
+                }
+
                 cmd.CommandText = "INSERT INTO recebimento (grdId, nome) " +
                     $"VALUES(@grd, @nome)";
 
@@ -153,7 +166,7 @@ namespace ControladorGRD.Entities
         public static void Update(int id, string txtNumero, string txtRev, string comboOS, string txtObs, string user)
         {
             cmd.CommandText = "UPDATE documento " +
-                              "SET numero=numero, rev=@rev, os=@os, obs=@obs, usuario=@usuario" +
+                              "SET numero=@numero, rev=@rev, os=@os, obs=@obs, usuario=@usuario" +
                                " WHERE id=@id";
 
             cmd.Parameters.Clear();

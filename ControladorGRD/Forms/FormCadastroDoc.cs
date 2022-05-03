@@ -29,15 +29,7 @@ namespace ControladorGRD.Forms
             filePath = $@"{ownPath}\listaOS.txt";
             carregarOS(filePath);
         }
-
-        /*public FormCadastroDoc()
-        {
-            InitializeComponent();
-            txtData.Text = DateTime.Now.ToString("dd/MM/yyyy");
-            ownPath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
-            filePath = $@"{ownPath}\listaOS.txt";
-            carregarOS(filePath);
-        }*/
+        
 
         private void btnSalvar_Click(object sender, EventArgs e)
         {
@@ -62,6 +54,7 @@ namespace ControladorGRD.Forms
                         }
                         else
                         {
+
                             ConnectSQL.Insert(txtNumero.Text.ToUpper(), txtRev.Text, comboOS.Text, txtObs.Text.ToUpper(), user);
 
                             MessageBox.Show("Documento cadastrado!");
@@ -72,9 +65,36 @@ namespace ControladorGRD.Forms
                         if (!checkRev.Checked)
                         {
 
+                            MySqlDataReader reader;
+                            int pend;
+                            foreach (string numero in numeros)
+                            {
+                                ConnectSQL.cmd.CommandText = $"SELECT pend FROM documento WHERE numero='{numero}'";
+                                reader = ConnectSQL.cmd.ExecuteReader();
+                                reader.Read();
+                                pend = Int32.Parse(reader.GetString(0));
+                                reader.Close();
+                                if (pend != 0)
+                                {
+                                    MessageBox.Show("Atenção, há documento(s) pendentes na planilha");
+                                    btnSalvar.Enabled = false;
+                                    break;
+                                }
+                            }
+
                             for (int i = 0; i < qtdlinhas; i++)
                             {
-                                ConnectSQL.Insert(numeros[i], revisoes[i], oss[i], obss[i], user);
+                                ConnectSQL.cmd.CommandText = $"SELECT numero FROM documento WHERE numero='{numeros[i]}'";
+                                reader = ConnectSQL.cmd.ExecuteReader();
+                                reader.Read();
+                                if (!reader.HasRows)
+                                {
+                                    MessageBox.Show($"Documento da linha{i + 2} já cadastrado");
+                                }
+                                else
+                                {
+                                    ConnectSQL.Insert(numeros[i], revisoes[i], oss[i], obss[i], user);
+                                }
                             }
                             MessageBox.Show("Documentos cadastrados!");
 
@@ -161,6 +181,8 @@ namespace ControladorGRD.Forms
                             }
                         }
                         labelMultiplo.Text = arquivoDialogo.FileName;
+
+
                     }
 
                 }
@@ -201,8 +223,8 @@ namespace ControladorGRD.Forms
 
         private void btnProcurar_Click(object sender, EventArgs e)
         {
-            FormProcurar procurar = new FormProcurar(this);
-            procurar.Show();
+            FormProcurar procurar = new FormProcurar(this, txtRev);
+            procurar.ShowDialog();
         }
 
         public void Preencher(int? id, string numero, string rev, string os, string obs, string data)
@@ -230,6 +252,7 @@ namespace ControladorGRD.Forms
                 if (txtNovaOS.Text == "")
                 {
                     MessageBox.Show("Campo vazio");
+                    
                 }
                 else
                 {
@@ -259,6 +282,8 @@ namespace ControladorGRD.Forms
             multiplos = false;
             labelMultiplo.Text = "Nenhum arquivo selecionado";
             checkRev.Checked = false;
+            txtRev.Enabled = true;
+            btnSalvar.Enabled = true;
         }
 
         private void checarCelulas(ref int linhas, dynamic ws)

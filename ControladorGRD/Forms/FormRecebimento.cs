@@ -15,15 +15,18 @@ namespace ControladorGRD.Forms
     public partial class FormRecebimento : Form
     {
         int grd;
+        ListView listdoc = new ListView();
         FormAlterar alterar;
-        public FormRecebimento(string resp, int grd, FormAlterar alterar)
+        public FormRecebimento(string resp, int grd, FormAlterar alterar, ListView listdoc)
         {
             InitializeComponent();
             txtData.Text = DateTime.Now.ToString("dd/MM/yyyy");
             label1.Text = resp;
             this.grd = grd;
             this.alterar = alterar;
+            this.listdoc = listdoc;
         }
+
 
         private void BtnSim_Click(object sender, EventArgs e)
         {
@@ -35,15 +38,28 @@ namespace ControladorGRD.Forms
                 ConnectSQL.cmd.Parameters.Clear();
                 if (checkBox.Checked)
                 {
-                    ConnectSQL.cmd.Parameters.AddWithValue("@data", "0000-00-00");
+                    ConnectSQL.cmd.Parameters.AddWithValue("@data", "1111-11-11");
                 }
                 else
                 {
                     ConnectSQL.cmd.Parameters.AddWithValue("@data", DateTime.Now.ToString("yyyy-MM-dd"));
                 }
-
                 ConnectSQL.cmd.Prepare();
                 ConnectSQL.cmd.ExecuteNonQuery();
+
+                int pend;
+                MySqlDataReader reader;
+
+                foreach (ListViewItem doc in listdoc.Items)
+                {
+                    ConnectSQL.cmd.CommandText = $"SELECT pend FROM documento WHERE numero='{doc.SubItems[0].Text}'";
+                    reader = ConnectSQL.cmd.ExecuteReader();
+                    reader.Read();
+                    pend = Int32.Parse(reader.GetString(0));
+                    reader.Close();
+                    ConnectSQL.cmd.CommandText = $"UPDATE documento SET pend='{pend - 1}' WHERE numero='{doc.SubItems[0].Text}'";
+                    
+                }
 
             }
             catch (Exception ex)

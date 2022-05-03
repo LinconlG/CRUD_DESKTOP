@@ -5,6 +5,7 @@ using MySql.Data.MySqlClient;
 using System.IO;
 using System.Reflection;
 using System.Printing;
+using System.Globalization;
 
 namespace ControladorGRD.Forms
 {
@@ -14,7 +15,7 @@ namespace ControladorGRD.Forms
         string planilhaPath;
         string grdEmitida;
 
-        public FormEmitir(string user)
+        public FormEmitir(string user, FormCadastroDoc cadastroDoc)
         {
             InitializeComponent();
             txtData.Text = DateTime.Now.ToString("dd/MM/yyyy");
@@ -23,46 +24,57 @@ namespace ControladorGRD.Forms
             carregarCombo(comboResp);
             this.user = user;
             planilhaPath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + "\\GRD.xlsx";
+            labelqtd.Text = "0 documento(s) na lista";
         }
 
         private void btnAdicionar_Click(object sender, EventArgs e)
         {
             try
             {
-                ConnectSQL.Connect();
-                ListViewItem linha_listview = new ListViewItem();
-
-                MySqlDataReader reader = ConnectSQL.AddDoc(txtNumero.Text);
-                if (reader.HasRows == false)
+                if (listDoc.Items.Count < 22)
                 {
-                    MessageBox.Show("Documento não cadastrado");
-                }
-                else
-                {
-                    while (reader.Read())
+                    ConnectSQL.Connect();
+                    ListViewItem linha_listview = new ListViewItem();
+
+                    MySqlDataReader reader = ConnectSQL.AddDoc(txtNumero.Text);
+                    if (reader.HasRows == false)
                     {
-                        string[] row = {
-
-                        reader.GetString(0),
-                        reader.GetString(1),
-                        reader.GetString(2),
-                        reader.GetString(3)
-                    };
-
-                        linha_listview = new ListViewItem(row);
-
-                    }
-
-                    if (listDoc.FindItemWithText(txtNumero.Text) != null)
-                    {
-                        MessageBox.Show("Documento já foi adicionado");
+                        MessageBox.Show("Documento não cadastrado");
                     }
                     else
                     {
-                        listDoc.Items.Add(linha_listview);
+                        while (reader.Read())
+                        {
+                            string[] row = {
+
+                                reader.GetString(0),
+                                reader.GetString(1),
+                                reader.GetString(2),
+                                reader.GetString(3)
+                            };
+
+                            linha_listview = new ListViewItem(row);
+
+                        }
+
+                        if (listDoc.FindItemWithText(txtNumero.Text) != null)
+                        {
+                            MessageBox.Show("Documento já foi adicionado");
+                        }
+                        else
+                        {
+                            listDoc.Items.Add(linha_listview);
+                            labelqtd.Text = $"{listDoc.Items.Count} documento(s) na lista";
+                        }
                     }
+                    txtNumero.Text = String.Empty;
                 }
-                txtNumero.Text = String.Empty;
+                else
+                {
+                    MessageBox.Show("A lista de emissão atingiu a cota maxima de 22 documentos");
+                }
+                
+
             }
             catch (Exception ex)
             {
@@ -93,7 +105,7 @@ namespace ControladorGRD.Forms
                     ConnectSQL.Connect();
                     ConnectSQL.InsertGRD(listDoc, listResp, user);
                     grdEmitida = ConnectSQL.InsertEmissao(listDoc);
-                    ConnectSQL.InsertRec(listResp);
+                    ConnectSQL.InsertRec(listResp, listDoc);
 
                     ImprimirGRD();
 
@@ -226,6 +238,7 @@ namespace ControladorGRD.Forms
             foreach (ListViewItem item in listDoc.SelectedItems)
             {
                 listDoc.Items.Remove(item);
+                labelqtd.Text = $"{listDoc.Items.Count} documento(s) na lista";
             }
         }
 
@@ -239,6 +252,7 @@ namespace ControladorGRD.Forms
 
         private void ImprimirGRD()
         {
+            Cursor.Current = Cursors.WaitCursor;
             string pathtxt = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)+"\\Localgrd.txt";
             string local = File.ReadAllText($@"{pathtxt}");
             var planilha = new Microsoft.Office.Interop.Excel.Application();
@@ -253,17 +267,18 @@ namespace ControladorGRD.Forms
 
                 aba.Cells[4, 3] = grdEmitida;
                 aba.Cells[5, 3] = resp.Text;
-                aba.Cells[5, 10] = DateTime.Now.ToString("dd/MM/yyyy");
+                aba.Cells[5, 10] = $"{DateTime.Now.Day}/{DateTime.Now.Month}/{DateTime.Now.Year}";
+                aba.Cells[4, 12] = $"Pag {count + 1}/{qtd}";
                 int i = 9;
                 foreach (ListViewItem doc in listDoc.Items)
                 {
-
                     aba.Cells[i, 1] = doc.SubItems[0].Text;
                     aba.Cells[i, 5] = doc.SubItems[1].Text;
                     aba.Cells[i, 6] = doc.SubItems[3].Text;
                     aba.Cells[i, 11] = doc.SubItems[2].Text ;
                     i++;
                 }
+                aba.Cells[32, 3] = txtObs.Text;
                 count++;
                 if (count < qtd)
                 {
@@ -271,6 +286,7 @@ namespace ControladorGRD.Forms
                     aba = pastaTrabalho.Sheets[1];
                 }
             }
+            Cursor.Current = Cursors.Default;
             using (SaveFileDialog janela = new SaveFileDialog() { Filter = "PDF file|*.pdf", ValidateNames = true })
             {
                 janela.InitialDirectory = $@"{local}";

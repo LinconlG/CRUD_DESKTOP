@@ -36,7 +36,6 @@ namespace ControladorGRD.Forms
             this.comboBox = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
             this.checkBox = new System.Windows.Forms.CheckBox();
-            this.button1 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // listaGRD
@@ -109,22 +108,11 @@ namespace ControladorGRD.Forms
             this.checkBox.Text = "Buscar por número";
             this.checkBox.UseVisualStyleBackColor = true;
             // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(595, 160);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 7;
-            this.button1.Text = "Atualizar";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
             // FormBuscar
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(723, 629);
-            this.Controls.Add(this.button1);
             this.Controls.Add(this.checkBox);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.comboBox);
@@ -148,6 +136,5 @@ namespace ControladorGRD.Forms
         private System.Windows.Forms.ComboBox comboBox;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.CheckBox checkBox;
-        private System.Windows.Forms.Button button1;
     }
 }

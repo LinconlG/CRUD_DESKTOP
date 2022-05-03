@@ -36,14 +36,17 @@ namespace ControladorGRD.Forms
             this.labelNumero = new System.Windows.Forms.Label();
             this.btnAdicionar = new System.Windows.Forms.Button();
             this.listDoc = new System.Windows.Forms.ListView();
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.removerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.btnEmitir = new System.Windows.Forms.Button();
             this.comboResp = new System.Windows.Forms.ComboBox();
             this.listResp = new System.Windows.Forms.ListView();
-            this.labelResp = new System.Windows.Forms.Label();
-            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.removerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.contextMenuStrip2 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.removerToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.labelResp = new System.Windows.Forms.Label();
+            this.txtObs = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.labelqtd = new System.Windows.Forms.Label();
             this.contextMenuStrip1.SuspendLayout();
             this.contextMenuStrip2.SuspendLayout();
             this.SuspendLayout();
@@ -102,6 +105,20 @@ namespace ControladorGRD.Forms
             this.listDoc.TabIndex = 7;
             this.listDoc.UseCompatibleStateImageBehavior = false;
             // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.removerToolStripMenuItem});
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(122, 26);
+            // 
+            // removerToolStripMenuItem
+            // 
+            this.removerToolStripMenuItem.Name = "removerToolStripMenuItem";
+            this.removerToolStripMenuItem.Size = new System.Drawing.Size(121, 22);
+            this.removerToolStripMenuItem.Text = "Remover";
+            this.removerToolStripMenuItem.Click += new System.EventHandler(this.removerToolStripMenuItem_Click);
+            // 
             // btnEmitir
             // 
             this.btnEmitir.Location = new System.Drawing.Point(297, 456);
@@ -131,6 +148,20 @@ namespace ControladorGRD.Forms
             this.listResp.TabIndex = 10;
             this.listResp.UseCompatibleStateImageBehavior = false;
             // 
+            // contextMenuStrip2
+            // 
+            this.contextMenuStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.removerToolStripMenuItem1});
+            this.contextMenuStrip2.Name = "contextMenuStrip2";
+            this.contextMenuStrip2.Size = new System.Drawing.Size(122, 26);
+            // 
+            // removerToolStripMenuItem1
+            // 
+            this.removerToolStripMenuItem1.Name = "removerToolStripMenuItem1";
+            this.removerToolStripMenuItem1.Size = new System.Drawing.Size(121, 22);
+            this.removerToolStripMenuItem1.Text = "Remover";
+            this.removerToolStripMenuItem1.Click += new System.EventHandler(this.removerToolStripMenuItem1_Click);
+            // 
             // labelResp
             // 
             this.labelResp.AutoSize = true;
@@ -140,33 +171,31 @@ namespace ControladorGRD.Forms
             this.labelResp.TabIndex = 11;
             this.labelResp.Text = "Responsáveis";
             // 
-            // contextMenuStrip1
+            // txtObs
             // 
-            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.removerToolStripMenuItem});
-            this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(122, 26);
+            this.txtObs.Location = new System.Drawing.Point(95, 462);
+            this.txtObs.Name = "txtObs";
+            this.txtObs.Size = new System.Drawing.Size(100, 20);
+            this.txtObs.TabIndex = 12;
             // 
-            // removerToolStripMenuItem
+            // label1
             // 
-            this.removerToolStripMenuItem.Name = "removerToolStripMenuItem";
-            this.removerToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.removerToolStripMenuItem.Text = "Remover";
-            this.removerToolStripMenuItem.Click += new System.EventHandler(this.removerToolStripMenuItem_Click);
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(10, 466);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(83, 16);
+            this.label1.TabIndex = 13;
+            this.label1.Text = "Observação";
             // 
-            // contextMenuStrip2
+            // labelqtd
             // 
-            this.contextMenuStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.removerToolStripMenuItem1});
-            this.contextMenuStrip2.Name = "contextMenuStrip2";
-            this.contextMenuStrip2.Size = new System.Drawing.Size(181, 48);
-            // 
-            // removerToolStripMenuItem1
-            // 
-            this.removerToolStripMenuItem1.Name = "removerToolStripMenuItem1";
-            this.removerToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
-            this.removerToolStripMenuItem1.Text = "Remover";
-            this.removerToolStripMenuItem1.Click += new System.EventHandler(this.removerToolStripMenuItem1_Click);
+            this.labelqtd.AutoSize = true;
+            this.labelqtd.Location = new System.Drawing.Point(217, 443);
+            this.labelqtd.Name = "labelqtd";
+            this.labelqtd.Size = new System.Drawing.Size(35, 13);
+            this.labelqtd.TabIndex = 14;
+            this.labelqtd.Text = "label2";
             // 
             // FormEmitir
             // 
@@ -175,6 +204,9 @@ namespace ControladorGRD.Forms
             this.AutoSize = true;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.ClientSize = new System.Drawing.Size(610, 629);
+            this.Controls.Add(this.labelqtd);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.txtObs);
             this.Controls.Add(this.labelResp);
             this.Controls.Add(this.listResp);
             this.Controls.Add(this.comboResp);
@@ -210,5 +242,8 @@ namespace ControladorGRD.Forms
         private System.Windows.Forms.ToolStripMenuItem removerToolStripMenuItem;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip2;
         private System.Windows.Forms.ToolStripMenuItem removerToolStripMenuItem1;
+        private System.Windows.Forms.TextBox txtObs;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label labelqtd;
     }
 }

@@ -10,14 +10,15 @@ namespace ControladorGRD.Forms
         public int? id_contatoSelecionado = null;
         FormCadastroDoc FormCadastroDoc;
         public string numero, rev, os, obs, data;
-
+        TextBox txtRev;
         string[] dados = new string[5];
 
-        public FormProcurar(FormCadastroDoc FormCadastroDoc)
+        public FormProcurar(FormCadastroDoc FormCadastroDoc, TextBox txtRev)
         {
             InitializeComponent();
             this.FormBorderStyle = FormBorderStyle.FixedSingle;
             this.FormCadastroDoc = FormCadastroDoc;
+            this.txtRev = txtRev;
         }
 
         private void btnOK_Click(object sender, EventArgs e)
@@ -37,6 +38,20 @@ namespace ControladorGRD.Forms
                     os = dados[2];
                     obs = dados[3];
                     data = dados[4];
+
+                    ConnectSQL.cmd.CommandText = $"SELECT pend FROM documento WHERE numero='{numero}'";
+                    MySqlDataReader reader = ConnectSQL.cmd.ExecuteReader();
+                    reader.Read();
+                    int pend = Int32.Parse(reader.GetString(0));
+                    reader.Close();
+                    if (pend > 0)
+                    {
+                        txtRev.Enabled = false;
+                    }
+                    else
+                    {
+                        txtRev.Enabled = true;
+                    }
 
                     FormCadastroDoc.Preencher(id_contatoSelecionado, numero, rev, os, obs, data);
 

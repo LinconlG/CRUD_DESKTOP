@@ -31,7 +31,6 @@ namespace ControladorGRD.Forms
             {
                 try
                 {
-
                     carregarGeral();
                 }
                 catch (Exception ex)
@@ -116,7 +115,23 @@ namespace ControladorGRD.Forms
                 DialogResult result = MessageBox.Show("Tem certeza que deseja cancelar?", "Exclusão", MessageBoxButtons.YesNo);
                 if (result == DialogResult.Yes)
                 {
+                    Cursor.Current = Cursors.WaitCursor;
                     ConnectSQL.Connect();
+                    int pend;
+                    MySqlDataReader reader;
+
+                    foreach (ListViewItem resp in listResp.Items)
+                    {
+                        foreach (ListViewItem doc in listDoc.Items)
+                        {
+                            ConnectSQL.cmd.CommandText = $"SELECT pend FROM document WHERE numero='{doc.SubItems[0].Text}'";
+                            reader = ConnectSQL.cmd.ExecuteReader();
+                            reader.Read();
+                            pend = Int32.Parse(reader.GetString(0));
+                            reader.Close();
+                            ConnectSQL.cmd.CommandText = $"UPDATE documento SET pend='{pend - 1}' WHERE numero='{doc.SubItems[0].Text}'";
+                        }
+                    }
 
                     ConnectSQL.cmd.CommandText = $"DELETE FROM grd_dados WHERE grd='{grd}'";
                     ConnectSQL.cmd.Prepare();
@@ -125,6 +140,12 @@ namespace ControladorGRD.Forms
                     ConnectSQL.cmd.CommandText = $"DELETE FROM emissaogrd WHERE idgrd='{grd}'";
                     ConnectSQL.cmd.Prepare();
                     ConnectSQL.cmd.ExecuteNonQuery();
+
+                    ConnectSQL.cmd.CommandText = $"DELETE FROM recebimento WHERE grdId='{grd}'";
+                    ConnectSQL.cmd.Prepare();
+                    ConnectSQL.cmd.ExecuteNonQuery();
+
+                    Cursor.Current = Cursors.Default;
 
                     limpar();
                 }
@@ -152,7 +173,7 @@ namespace ControladorGRD.Forms
         private void listResp_MouseDoubleClick(object sender, MouseEventArgs e)
         {
             ListView.SelectedListViewItemCollection resp_selecionado = listResp.SelectedItems;
-            FormRecebimento receb = new FormRecebimento(resp_selecionado[0].SubItems[0].Text, grd, this);
+            FormRecebimento receb = new FormRecebimento(resp_selecionado[0].SubItems[0].Text, grd, this, listDoc);
             receb.Show();
         }
 
@@ -166,33 +187,40 @@ namespace ControladorGRD.Forms
             string[] responsaveis;
 
             MySqlDataReader reader = ConnectSQL.ExibirRecebimentoDocs(txtGRD.Text);
-            string[] row = new string[3];
-
-            while (reader.Read())
+            if (!reader.HasRows)
             {
-                row[0] = reader.GetString(0);
-                row[1] = reader.GetString(1);
-                row[2] = reader.GetString(2);
+                MessageBox.Show("GRD não encontrada");
             }
-            reader.Close();
-
-            txtData.Text = row[2].Substring(0, 10);
-
-            if (row[0] != null)
+            else
             {
-                row[0] = row[0].Substring(2, row[0].Length - 3).Replace("\"", "").Replace(",", "").Replace(" ", "/");
-                row[1] = row[1].Substring(2, row[1].Length - 3).Replace("\"", "").Replace(",", "").Replace(" ", "/");
+                string[] row = new string[3];
+
+                while (reader.Read())
+                {
+                    row[0] = reader.GetString(0);
+                    row[1] = reader.GetString(1);
+                    row[2] = reader.GetString(2);
+                }
+                reader.Close();
+
+                txtData.Text = row[2].Substring(0, 10);
+
+                if (row[0] != null)
+                {
+                    row[0] = row[0].Substring(2, row[0].Length - 3).Replace("\"", "").Replace(",", "").Replace(" ", "/");
+                    row[1] = row[1].Substring(2, row[1].Length - 3).Replace("\"", "").Replace(",", "").Replace(" ", "/");
+                }
+
+                documentos = row[0].Split('/');
+                responsaveis = row[1].Split('/');
+
+                for (int i = 0; i < documentos.Length; i++)
+                {
+                    carregarListas(documentos[i]);
+                }
+
+                carregarResps(grd);
             }
-
-            documentos = row[0].Split('/');
-            responsaveis = row[1].Split('/');
-
-            for (int i = 0; i < documentos.Length; i++)
-            {
-                carregarListas(documentos[i]);
-            }
-
-            carregarResps(grd);
         }
 
         private void removerDocumentoDaGRDToolStripMenuItem_Click(object sender, EventArgs e)

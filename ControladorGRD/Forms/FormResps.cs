@@ -53,7 +53,15 @@ namespace ControladorGRD.Forms
 
                     if (reader.IsDBNull(1) != true)
                     {
-                        row[1] = reader.GetString(1).Substring(0,10);
+                        if (reader.GetString(1).Substring(0, 10) == "11/11/1111")
+                        {
+                            row[1] = "GRD não recebida";
+                        }
+                        else
+                        {
+                            row[1] = reader.GetString(1).Substring(0, 10);
+                        }
+                        
                     }
                     else
                     {
