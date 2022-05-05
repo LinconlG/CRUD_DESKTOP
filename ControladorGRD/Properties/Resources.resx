@@ -208,4 +208,19 @@
   <data name="pngwinguser" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\pngwinguser.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="GRD" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\GRD.xlsx;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="listaOS" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\listaOS.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="database" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\database.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="documento_de_exemplo_cadastro_multiplo" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\documento de exemplo cadastro multiplo.xlsx;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="Localgrd" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Localgrd.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
 </root>

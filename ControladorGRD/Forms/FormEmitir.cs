@@ -6,6 +6,7 @@ using System.IO;
 using System.Reflection;
 using System.Printing;
 using System.Globalization;
+using System.Resources;
 
 namespace ControladorGRD.Forms
 {
@@ -18,12 +19,12 @@ namespace ControladorGRD.Forms
         public FormEmitir(string user, FormCadastroDoc cadastroDoc)
         {
             InitializeComponent();
-            txtData.Text = DateTime.Now.ToString("dd/MM/yyyy");
+            txtData.Text = $"{DateTime.Now.Day}/{DateTime.Now.Month}/{DateTime.Now.Year}";
             carregarDoc();
             carregarResp();
             carregarCombo(comboResp);
             this.user = user;
-            planilhaPath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + "\\GRD.xlsx";
+            planilhaPath = String.Format("{0}Resources\\GRD.xlsx", Path.GetFullPath(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"..\..\")));
             labelqtd.Text = "0 documento(s) na lista";
         }
 
@@ -253,8 +254,8 @@ namespace ControladorGRD.Forms
         private void ImprimirGRD()
         {
             Cursor.Current = Cursors.WaitCursor;
-            string pathtxt = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)+"\\Localgrd.txt";
-            string local = File.ReadAllText($@"{pathtxt}");
+            string pathtxt = String.Format("{0}Resources\\Localgrd.txt", Path.GetFullPath(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"..\..\")));
+            string local = File.ReadAllText($"{pathtxt}");
             var planilha = new Microsoft.Office.Interop.Excel.Application();
             var pastaTrabalho = planilha.Workbooks.Open($@"{planilhaPath}", ReadOnly: true);
             planilha.DisplayAlerts = false;

@@ -73,7 +73,7 @@ namespace ControladorGRD.Forms
             this.txtNumero.Location = new System.Drawing.Point(13, 108);
             this.txtNumero.Name = "txtNumero";
             this.txtNumero.Size = new System.Drawing.Size(230, 20);
-            this.txtNumero.TabIndex = 2;
+            this.txtNumero.TabIndex = 1;
             this.txtNumero.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtNumero_KeyPress);
             // 
             // labelNumero
@@ -124,7 +124,7 @@ namespace ControladorGRD.Forms
             this.btnEmitir.Location = new System.Drawing.Point(297, 456);
             this.btnEmitir.Name = "btnEmitir";
             this.btnEmitir.Size = new System.Drawing.Size(91, 26);
-            this.btnEmitir.TabIndex = 8;
+            this.btnEmitir.TabIndex = 4;
             this.btnEmitir.Text = "Emitir";
             this.btnEmitir.UseVisualStyleBackColor = true;
             this.btnEmitir.Click += new System.EventHandler(this.btnEmitir_Click);
@@ -135,7 +135,7 @@ namespace ControladorGRD.Forms
             this.comboResp.Location = new System.Drawing.Point(433, 108);
             this.comboResp.Name = "comboResp";
             this.comboResp.Size = new System.Drawing.Size(161, 21);
-            this.comboResp.TabIndex = 9;
+            this.comboResp.TabIndex = 2;
             this.comboResp.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.comboResp_KeyPress);
             // 
             // listResp
@@ -176,7 +176,7 @@ namespace ControladorGRD.Forms
             this.txtObs.Location = new System.Drawing.Point(95, 462);
             this.txtObs.Name = "txtObs";
             this.txtObs.Size = new System.Drawing.Size(100, 20);
-            this.txtObs.TabIndex = 12;
+            this.txtObs.TabIndex = 3;
             // 
             // label1
             // 

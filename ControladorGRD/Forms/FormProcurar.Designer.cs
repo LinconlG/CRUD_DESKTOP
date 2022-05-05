@@ -49,6 +49,7 @@ namespace ControladorGRD.Forms
             this.txtProcurar.Name = "txtProcurar";
             this.txtProcurar.Size = new System.Drawing.Size(268, 20);
             this.txtProcurar.TabIndex = 1;
+            this.txtProcurar.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtProcurar_KeyDown);
             // 
             // btnOK
             // 

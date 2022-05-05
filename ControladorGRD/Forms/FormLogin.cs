@@ -16,15 +16,14 @@ namespace ControladorGRD.Forms
         public bool pass = false;
         MySqlCommand cmd = new MySqlCommand();
         string user;
-        string ownPath, filePath;
+        string filePath;
         public FormLogin()
         {
             InitializeComponent();
             this.FormBorderStyle = FormBorderStyle.FixedSingle;
             try
             {
-                ownPath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
-                filePath = $@"{ownPath}\database.txt";
+                filePath = String.Format("{0}Resources\\database.txt", Path.GetFullPath(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"..\..\")));
                 carregardb(filePath);
                 data_source = $"datasource={txtDS.Text};username={txtUN.Text};password={txtPW.Text};database={txtDB.Text}";
             }

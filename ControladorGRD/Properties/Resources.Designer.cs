@@ -91,6 +91,19 @@ namespace ControladorGRD.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to localhost
+        ///root
+        ///12345
+        ///db_login
+        ///.
+        /// </summary>
+        internal static string database {
+            get {
+                return ResourceManager.GetString("database", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap doc_assinado {
@@ -117,6 +130,49 @@ namespace ControladorGRD.Properties {
             get {
                 object obj = ResourceManager.GetObject("doc assinado21", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] documento_de_exemplo_cadastro_multiplo {
+            get {
+                object obj = ResourceManager.GetObject("documento_de_exemplo_cadastro_multiplo", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] GRD {
+            get {
+                object obj = ResourceManager.GetObject("GRD", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 0541.03.001
+        ///0527.03.001
+        ///0545.03.001
+        ///0604.04.006
+        ///0552.03.001
+        ///.
+        /// </summary>
+        internal static string listaOS {
+            get {
+                return ResourceManager.GetString("listaOS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Downloads.
+        /// </summary>
+        internal static string Localgrd {
+            get {
+                return ResourceManager.GetString("Localgrd", resourceCulture);
             }
         }
         

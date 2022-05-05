@@ -1,0 +1,4 @@
+localhost
+root
+12345
+db_login

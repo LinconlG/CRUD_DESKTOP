@@ -6,6 +6,7 @@ using System.Globalization;
 using System.IO;
 using Excel = Microsoft.Office.Interop.Excel;
 using System.Reflection;
+using System.Text.RegularExpressions;
 
 namespace ControladorGRD.Forms
 {
@@ -18,19 +19,19 @@ namespace ControladorGRD.Forms
         object[,] dados;
         string[] numeros, revisoes, oss, obss;
         int qtdlinhas;
-        string ownPath, filePath;
+        string filePath;
 
         public FormCadastroDoc(string user)
         {
             InitializeComponent();
             txtData.Text = DateTime.Now.ToString("dd/MM/yyyy");
             this.user = user;
-            ownPath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
-            filePath = $@"{ownPath}\listaOS.txt";
+            Assembly asm = Assembly.GetExecutingAssembly();
+            string a = System.AppDomain.CurrentDomain.BaseDirectory;
+            filePath = String.Format("{0}Resources\\listaOS.txt", Path.GetFullPath(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"..\..\")));
             carregarOS(filePath);
+            
         }
-        
-
         private void btnSalvar_Click(object sender, EventArgs e)
         {
             try

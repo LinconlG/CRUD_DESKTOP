@@ -10,6 +10,15 @@ namespace ControladorGRD.Forms
         public int? id_contatoSelecionado = null;
         FormCadastroDoc FormCadastroDoc;
         public string numero, rev, os, obs, data;
+
+        private void txtProcurar_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                btnOK_Click(this, e);
+            }
+        }
+
         TextBox txtRev;
         string[] dados = new string[5];
 

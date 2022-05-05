@@ -5,7 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
+using System.Resources;
 using System.Windows.Forms;
 using MySql.Data.MySqlClient;
 using ControladorGRD.Entities;
@@ -15,7 +15,7 @@ namespace ControladorGRD.Forms
     public partial class FormAlterar : Form
     {
         int grd;
-
+        
         public FormAlterar()
         {
             InitializeComponent();
@@ -124,12 +124,13 @@ namespace ControladorGRD.Forms
                     {
                         foreach (ListViewItem doc in listDoc.Items)
                         {
-                            ConnectSQL.cmd.CommandText = $"SELECT pend FROM document WHERE numero='{doc.SubItems[0].Text}'";
+                            ConnectSQL.cmd.CommandText = $"SELECT pend FROM documento WHERE numero='{doc.SubItems[0].Text}'";
                             reader = ConnectSQL.cmd.ExecuteReader();
                             reader.Read();
                             pend = Int32.Parse(reader.GetString(0));
                             reader.Close();
                             ConnectSQL.cmd.CommandText = $"UPDATE documento SET pend='{pend - 1}' WHERE numero='{doc.SubItems[0].Text}'";
+                            ConnectSQL.cmd.ExecuteNonQuery();
                         }
                     }
 
@@ -248,6 +249,14 @@ namespace ControladorGRD.Forms
                     {
                         if (numeros[i] == doc_selecionado[0].SubItems[0].Text)
                         {
+                            ConnectSQL.cmd.CommandText = $"SELECT pend FROM documento WHERE numero='{numeros[i]}'";
+                            MySqlDataReader reader1 = ConnectSQL.cmd.ExecuteReader();
+                            reader1.Read();
+                            int pend = Int32.Parse(reader1.GetString(0));
+                            reader1.Close();
+                            ConnectSQL.cmd.CommandText = $"UPDATE documento SET pend='{pend - 1}' WHERE numero='{numeros[i]}'";
+                            ConnectSQL.cmd.Prepare();
+                            ConnectSQL.cmd.ExecuteNonQuery();
                             numeros = numeros.Where(val => val != $"{numeros[i]}").ToArray();
                             break;
                         }
@@ -311,7 +320,7 @@ namespace ControladorGRD.Forms
                     }
                 }
 
-                
+
             }
             catch (Exception ex)
             {
@@ -323,6 +332,8 @@ namespace ControladorGRD.Forms
                 ConnectSQL.conexao.Close();
             }
         }
+
+    
 
         private void removerResponsavelDaGRDToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -349,6 +360,17 @@ namespace ControladorGRD.Forms
                     {
                         if (resps[i] == res_selecionado[0].SubItems[0].Text)
                         {
+                            foreach (ListViewItem doc in listDoc.Items)
+                            {
+                                ConnectSQL.cmd.CommandText = $"SELECT pend FROM documento WHERE numero='{doc.SubItems[0].Text}'";
+                                MySqlDataReader reader2 = ConnectSQL.cmd.ExecuteReader();
+                                reader2.Read();
+                                int pend = Int32.Parse(reader2.GetString(0));
+                                reader2.Close();
+                                ConnectSQL.cmd.CommandText = $"UPDATE documento SET pend='{pend - 1}' WHERE numero='{doc.SubItems[0].Text}'";
+                                ConnectSQL.cmd.Prepare();
+                                ConnectSQL.cmd.ExecuteNonQuery();
+                            }
                             resps = resps.Where(val => val != $"{resps[i]}").ToArray();
                             break;
                         }
@@ -406,7 +428,6 @@ namespace ControladorGRD.Forms
                     }
                 }
             }
-
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);

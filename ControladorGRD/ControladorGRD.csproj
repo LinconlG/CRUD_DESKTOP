@@ -232,6 +232,8 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\documento de exemplo cadastro multiplo.xlsx" />
+    <None Include="Resources\GRD.xlsx" />
     <None Include="Resources\varios docs2.png" />
   </ItemGroup>
   <ItemGroup>
@@ -301,6 +303,11 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\pngwinguser.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Resources\database.txt" />
+    <Content Include="Resources\listaOS.txt" />
+    <Content Include="Resources\Localgrd.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
