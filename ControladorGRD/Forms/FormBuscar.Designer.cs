@@ -29,6 +29,7 @@ namespace ControladorGRD.Forms
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.listaGRD = new System.Windows.Forms.ListView();
             this.txtBuscarDocGrd = new System.Windows.Forms.TextBox();
             this.btnBuscarDocGrd = new System.Windows.Forms.Button();
@@ -37,6 +38,9 @@ namespace ControladorGRD.Forms
             this.label2 = new System.Windows.Forms.Label();
             this.checkBox = new System.Windows.Forms.CheckBox();
             this.btnAtualizar = new System.Windows.Forms.Button();
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.salvarGRDToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.contextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // listaGRD
@@ -119,6 +123,20 @@ namespace ControladorGRD.Forms
             this.btnAtualizar.UseVisualStyleBackColor = true;
             this.btnAtualizar.Click += new System.EventHandler(this.btnAtualizar_Click);
             // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.salvarGRDToolStripMenuItem});
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(181, 48);
+            // 
+            // salvarGRDToolStripMenuItem
+            // 
+            this.salvarGRDToolStripMenuItem.Name = "salvarGRDToolStripMenuItem";
+            this.salvarGRDToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.salvarGRDToolStripMenuItem.Text = "Salvar GRD";
+            this.salvarGRDToolStripMenuItem.Click += new System.EventHandler(this.salvarGRDToolStripMenuItem_Click);
+            // 
             // FormBuscar
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -134,6 +152,7 @@ namespace ControladorGRD.Forms
             this.Controls.Add(this.listaGRD);
             this.Name = "FormBuscar";
             this.Text = "FormBuscar";
+            this.contextMenuStrip1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -149,5 +168,7 @@ namespace ControladorGRD.Forms
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.CheckBox checkBox;
         private System.Windows.Forms.Button btnAtualizar;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem salvarGRDToolStripMenuItem;
     }
 }

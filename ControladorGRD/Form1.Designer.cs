@@ -93,6 +93,7 @@ namespace ControladorGRD
             // 
             this.linkLabel1.AutoSize = true;
             this.linkLabel1.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.linkLabel1.LinkColor = System.Drawing.Color.White;
             this.linkLabel1.Location = new System.Drawing.Point(82, 675);
             this.linkLabel1.Name = "linkLabel1";
             this.linkLabel1.Size = new System.Drawing.Size(54, 18);
@@ -155,7 +156,7 @@ namespace ControladorGRD
             this.btnReceber.Padding = new System.Windows.Forms.Padding(12, 0, 0, 0);
             this.btnReceber.Size = new System.Drawing.Size(215, 60);
             this.btnReceber.TabIndex = 3;
-            this.btnReceber.Text = "Receber/Alterar GRD";
+            this.btnReceber.Text = "Gerenciar GRD";
             this.btnReceber.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnReceber.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnReceber.UseVisualStyleBackColor = false;

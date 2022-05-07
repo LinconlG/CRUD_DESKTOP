@@ -109,6 +109,7 @@ namespace ControladorGRD.Forms
         {
             try
             {
+                contextMenuStrip1.Enabled = true;
                 listaGRD.Columns.Clear();
                 listaGRD.View = View.Details;
                 listaGRD.GridLines = true;
@@ -158,6 +159,7 @@ namespace ControladorGRD.Forms
 
         private void carregarDoc()
         {
+            contextMenuStrip1.Enabled = false;
             listaGRD.Columns.Clear();
 
             listaGRD.View = View.Details;
@@ -236,6 +238,11 @@ namespace ControladorGRD.Forms
             {
                 carregarDoc();
             }
+        }
+
+        private void salvarGRDToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

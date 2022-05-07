@@ -42,8 +42,13 @@ namespace ControladorGRD.Forms
             this.label2 = new System.Windows.Forms.Label();
             this.btnCancelar = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
+            this.btnImprimir = new System.Windows.Forms.Button();
+            this.txtObs = new System.Windows.Forms.TextBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.panel1 = new System.Windows.Forms.Panel();
             this.contextMenuStrip1.SuspendLayout();
             this.contextMenuStrip2.SuspendLayout();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // txtGRD
@@ -148,11 +153,48 @@ namespace ControladorGRD.Forms
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
+            // btnImprimir
+            // 
+            this.btnImprimir.Location = new System.Drawing.Point(444, 48);
+            this.btnImprimir.Name = "btnImprimir";
+            this.btnImprimir.Size = new System.Drawing.Size(75, 23);
+            this.btnImprimir.TabIndex = 8;
+            this.btnImprimir.Text = "Salvar GRD";
+            this.btnImprimir.UseVisualStyleBackColor = true;
+            this.btnImprimir.Click += new System.EventHandler(this.btnImprimir_Click);
+            // 
+            // txtObs
+            // 
+            this.txtObs.Location = new System.Drawing.Point(15, 66);
+            this.txtObs.Name = "txtObs";
+            this.txtObs.Size = new System.Drawing.Size(100, 20);
+            this.txtObs.TabIndex = 9;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(12, 50);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(110, 13);
+            this.label3.TabIndex = 10;
+            this.label3.Text = "Observação da GRD:";
+            // 
+            // panel1
+            // 
+            this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel1.Controls.Add(this.label3);
+            this.panel1.Controls.Add(this.txtObs);
+            this.panel1.Location = new System.Drawing.Point(428, 32);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(129, 100);
+            this.panel1.TabIndex = 11;
+            // 
             // FormAlterar
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(569, 629);
+            this.Controls.Add(this.btnImprimir);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.btnCancelar);
             this.Controls.Add(this.label2);
@@ -161,10 +203,13 @@ namespace ControladorGRD.Forms
             this.Controls.Add(this.listResp);
             this.Controls.Add(this.listDoc);
             this.Controls.Add(this.txtGRD);
+            this.Controls.Add(this.panel1);
             this.Name = "FormAlterar";
             this.Text = "FormReceber";
             this.contextMenuStrip1.ResumeLayout(false);
             this.contextMenuStrip2.ResumeLayout(false);
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -184,5 +229,9 @@ namespace ControladorGRD.Forms
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip2;
         private System.Windows.Forms.ToolStripMenuItem removerResponsavelDaGRDToolStripMenuItem;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btnImprimir;
+        private System.Windows.Forms.TextBox txtObs;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Panel panel1;
     }
 }

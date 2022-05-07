@@ -19,7 +19,7 @@ namespace ControladorGRD.Forms
         public FormEmitir(string user, FormCadastroDoc cadastroDoc)
         {
             InitializeComponent();
-            txtData.Text = $"{DateTime.Now.Day}/{DateTime.Now.Month}/{DateTime.Now.Year}";
+            txtData.Text = DateTime.Now.ToString("dd/MM/yyyy");
             carregarDoc();
             carregarResp();
             carregarCombo(comboResp);

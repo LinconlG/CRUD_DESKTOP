@@ -58,7 +58,7 @@ namespace ControladorGRD.Forms
                     pend = Int32.Parse(reader.GetString(0));
                     reader.Close();
                     ConnectSQL.cmd.CommandText = $"UPDATE documento SET pend='{pend - 1}' WHERE numero='{doc.SubItems[0].Text}'";
-                    
+                    ConnectSQL.cmd.ExecuteNonQuery();
                 }
 
             }
