@@ -225,5 +225,17 @@ namespace ControladorGRD.Forms
                 new FormResps(item_selecionado[0].SubItems[1].Text).ShowDialog();
             }
         }
+
+        private void btnAtualizar_Click(object sender, EventArgs e)
+        {
+            if (comboBox.Text == "GRD")
+            {
+                carregarGRD();
+            }
+            else
+            {
+                carregarDoc();
+            }
+        }
     }
 }

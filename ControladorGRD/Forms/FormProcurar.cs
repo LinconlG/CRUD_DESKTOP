@@ -10,7 +10,7 @@ namespace ControladorGRD.Forms
         public int? id_contatoSelecionado = null;
         FormCadastroDoc FormCadastroDoc;
         public string numero, rev, os, obs, data;
-
+        TextBox txtNumero;
         private void txtProcurar_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
@@ -22,12 +22,13 @@ namespace ControladorGRD.Forms
         TextBox txtRev;
         string[] dados = new string[5];
 
-        public FormProcurar(FormCadastroDoc FormCadastroDoc, TextBox txtRev)
+        public FormProcurar(FormCadastroDoc FormCadastroDoc, TextBox txtRev, TextBox txtNumero)
         {
             InitializeComponent();
             this.FormBorderStyle = FormBorderStyle.FixedSingle;
             this.FormCadastroDoc = FormCadastroDoc;
             this.txtRev = txtRev;
+            this.txtNumero = txtNumero;
         }
 
         private void btnOK_Click(object sender, EventArgs e)
@@ -56,10 +57,12 @@ namespace ControladorGRD.Forms
                     if (pend > 0)
                     {
                         txtRev.Enabled = false;
+                        txtNumero.Enabled = false;   
                     }
                     else
                     {
                         txtRev.Enabled = true;
+                        txtNumero.Enabled = true;
                     }
 
                     FormCadastroDoc.Preencher(id_contatoSelecionado, numero, rev, os, obs, data);

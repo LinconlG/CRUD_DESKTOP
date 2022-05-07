@@ -32,15 +32,16 @@ namespace ControladorGRD.Forms
             this.components = new System.ComponentModel.Container();
             this.txtGRD = new System.Windows.Forms.TextBox();
             this.listDoc = new System.Windows.Forms.ListView();
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.removerDocumentoDaGRDToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.listResp = new System.Windows.Forms.ListView();
+            this.contextMenuStrip2 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.removerResponsavelDaGRDToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.txtData = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.btnCancelar = new System.Windows.Forms.Button();
-            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.removerDocumentoDaGRDToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.contextMenuStrip2 = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.removerResponsavelDaGRDToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.button1 = new System.Windows.Forms.Button();
             this.contextMenuStrip1.SuspendLayout();
             this.contextMenuStrip2.SuspendLayout();
             this.SuspendLayout();
@@ -60,8 +61,22 @@ namespace ControladorGRD.Forms
             this.listDoc.Location = new System.Drawing.Point(15, 174);
             this.listDoc.Name = "listDoc";
             this.listDoc.Size = new System.Drawing.Size(337, 229);
-            this.listDoc.TabIndex = 1;
+            this.listDoc.TabIndex = 6;
             this.listDoc.UseCompatibleStateImageBehavior = false;
+            // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.removerDocumentoDaGRDToolStripMenuItem});
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(229, 26);
+            // 
+            // removerDocumentoDaGRDToolStripMenuItem
+            // 
+            this.removerDocumentoDaGRDToolStripMenuItem.Name = "removerDocumentoDaGRDToolStripMenuItem";
+            this.removerDocumentoDaGRDToolStripMenuItem.Size = new System.Drawing.Size(228, 22);
+            this.removerDocumentoDaGRDToolStripMenuItem.Text = "Remover documento da GRD";
+            this.removerDocumentoDaGRDToolStripMenuItem.Click += new System.EventHandler(this.removerDocumentoDaGRDToolStripMenuItem_Click);
             // 
             // listResp
             // 
@@ -73,6 +88,20 @@ namespace ControladorGRD.Forms
             this.listResp.TabIndex = 2;
             this.listResp.UseCompatibleStateImageBehavior = false;
             this.listResp.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.listResp_MouseDoubleClick);
+            // 
+            // contextMenuStrip2
+            // 
+            this.contextMenuStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.removerResponsavelDaGRDToolStripMenuItem});
+            this.contextMenuStrip2.Name = "contextMenuStrip2";
+            this.contextMenuStrip2.Size = new System.Drawing.Size(232, 26);
+            // 
+            // removerResponsavelDaGRDToolStripMenuItem
+            // 
+            this.removerResponsavelDaGRDToolStripMenuItem.Name = "removerResponsavelDaGRDToolStripMenuItem";
+            this.removerResponsavelDaGRDToolStripMenuItem.Size = new System.Drawing.Size(231, 22);
+            this.removerResponsavelDaGRDToolStripMenuItem.Text = "Remover Responsavel da GRD";
+            this.removerResponsavelDaGRDToolStripMenuItem.Click += new System.EventHandler(this.removerResponsavelDaGRDToolStripMenuItem_Click);
             // 
             // txtData
             // 
@@ -104,44 +133,27 @@ namespace ControladorGRD.Forms
             this.btnCancelar.Location = new System.Drawing.Point(474, 443);
             this.btnCancelar.Name = "btnCancelar";
             this.btnCancelar.Size = new System.Drawing.Size(83, 28);
-            this.btnCancelar.TabIndex = 6;
+            this.btnCancelar.TabIndex = 1;
             this.btnCancelar.Text = "Cancelar";
             this.btnCancelar.UseVisualStyleBackColor = true;
             this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
             // 
-            // contextMenuStrip1
+            // button1
             // 
-            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.removerDocumentoDaGRDToolStripMenuItem});
-            this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(229, 26);
-            // 
-            // removerDocumentoDaGRDToolStripMenuItem
-            // 
-            this.removerDocumentoDaGRDToolStripMenuItem.Name = "removerDocumentoDaGRDToolStripMenuItem";
-            this.removerDocumentoDaGRDToolStripMenuItem.Size = new System.Drawing.Size(228, 22);
-            this.removerDocumentoDaGRDToolStripMenuItem.Text = "Remover documento da GRD";
-            this.removerDocumentoDaGRDToolStripMenuItem.Click += new System.EventHandler(this.removerDocumentoDaGRDToolStripMenuItem_Click);
-            // 
-            // contextMenuStrip2
-            // 
-            this.contextMenuStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.removerResponsavelDaGRDToolStripMenuItem});
-            this.contextMenuStrip2.Name = "contextMenuStrip2";
-            this.contextMenuStrip2.Size = new System.Drawing.Size(232, 48);
-            // 
-            // removerResponsavelDaGRDToolStripMenuItem
-            // 
-            this.removerResponsavelDaGRDToolStripMenuItem.Name = "removerResponsavelDaGRDToolStripMenuItem";
-            this.removerResponsavelDaGRDToolStripMenuItem.Size = new System.Drawing.Size(231, 22);
-            this.removerResponsavelDaGRDToolStripMenuItem.Text = "Remover Responsavel da GRD";
-            this.removerResponsavelDaGRDToolStripMenuItem.Click += new System.EventHandler(this.removerResponsavelDaGRDToolStripMenuItem_Click);
+            this.button1.Location = new System.Drawing.Point(15, 447);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 7;
+            this.button1.Text = "Limpar";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // FormAlterar
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(569, 629);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.btnCancelar);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
@@ -171,5 +183,6 @@ namespace ControladorGRD.Forms
         private System.Windows.Forms.ToolStripMenuItem removerDocumentoDaGRDToolStripMenuItem;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip2;
         private System.Windows.Forms.ToolStripMenuItem removerResponsavelDaGRDToolStripMenuItem;
+        private System.Windows.Forms.Button button1;
     }
 }

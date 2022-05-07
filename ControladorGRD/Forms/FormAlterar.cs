@@ -112,43 +112,51 @@ namespace ControladorGRD.Forms
 
             try
             {
-                DialogResult result = MessageBox.Show("Tem certeza que deseja cancelar?", "Exclusão", MessageBoxButtons.YesNo);
-                if (result == DialogResult.Yes)
+                if (listDoc.Items.Count == 0)
                 {
-                    Cursor.Current = Cursors.WaitCursor;
-                    ConnectSQL.Connect();
-                    int pend;
-                    MySqlDataReader reader;
-
-                    foreach (ListViewItem resp in listResp.Items)
+                    MessageBox.Show("Não há GRD selecionada");
+                }
+                else
+                {
+                    DialogResult result = MessageBox.Show("Tem certeza que deseja cancelar?", "Exclusão", MessageBoxButtons.YesNo);
+                    if (result == DialogResult.Yes)
                     {
-                        foreach (ListViewItem doc in listDoc.Items)
+                        Cursor.Current = Cursors.WaitCursor;
+                        ConnectSQL.Connect();
+                        int pend;
+                        MySqlDataReader reader;
+
+                        foreach (ListViewItem resp in listResp.Items)
                         {
-                            ConnectSQL.cmd.CommandText = $"SELECT pend FROM documento WHERE numero='{doc.SubItems[0].Text}'";
-                            reader = ConnectSQL.cmd.ExecuteReader();
-                            reader.Read();
-                            pend = Int32.Parse(reader.GetString(0));
-                            reader.Close();
-                            ConnectSQL.cmd.CommandText = $"UPDATE documento SET pend='{pend - 1}' WHERE numero='{doc.SubItems[0].Text}'";
-                            ConnectSQL.cmd.ExecuteNonQuery();
+                            foreach (ListViewItem doc in listDoc.Items)
+                            {
+                                ConnectSQL.cmd.CommandText = $"SELECT pend FROM documento WHERE numero='{doc.SubItems[0].Text}'";
+                                reader = ConnectSQL.cmd.ExecuteReader();
+                                reader.Read();
+                                pend = Int32.Parse(reader.GetString(0));
+                                reader.Close();
+                                ConnectSQL.cmd.CommandText = $"UPDATE documento SET pend='{pend - 1}' WHERE numero='{doc.SubItems[0].Text}'";
+                                ConnectSQL.cmd.ExecuteNonQuery();
+                            }
                         }
+
+                        ConnectSQL.cmd.CommandText = $"DELETE FROM grd_dados WHERE grd='{grd}'";
+                        ConnectSQL.cmd.Prepare();
+                        ConnectSQL.cmd.ExecuteNonQuery();
+
+                        ConnectSQL.cmd.CommandText = $"DELETE FROM emissaogrd WHERE idgrd='{grd}'";
+                        ConnectSQL.cmd.Prepare();
+                        ConnectSQL.cmd.ExecuteNonQuery();
+
+                        ConnectSQL.cmd.CommandText = $"DELETE FROM recebimento WHERE grdId='{grd}'";
+                        ConnectSQL.cmd.Prepare();
+                        ConnectSQL.cmd.ExecuteNonQuery();
+
+                        Cursor.Current = Cursors.Default;
+
+                        limpar();
+                        txtGRD.Focus();
                     }
-
-                    ConnectSQL.cmd.CommandText = $"DELETE FROM grd_dados WHERE grd='{grd}'";
-                    ConnectSQL.cmd.Prepare();
-                    ConnectSQL.cmd.ExecuteNonQuery();
-
-                    ConnectSQL.cmd.CommandText = $"DELETE FROM emissaogrd WHERE idgrd='{grd}'";
-                    ConnectSQL.cmd.Prepare();
-                    ConnectSQL.cmd.ExecuteNonQuery();
-
-                    ConnectSQL.cmd.CommandText = $"DELETE FROM recebimento WHERE grdId='{grd}'";
-                    ConnectSQL.cmd.Prepare();
-                    ConnectSQL.cmd.ExecuteNonQuery();
-
-                    Cursor.Current = Cursors.Default;
-
-                    limpar();
                 }
             }
             catch (Exception ex)
@@ -437,6 +445,11 @@ namespace ControladorGRD.Forms
             {
                 ConnectSQL.conexao.Close();
             }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            limpar();
         }
     }
 }

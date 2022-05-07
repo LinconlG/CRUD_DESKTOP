@@ -48,7 +48,7 @@ namespace ControladorGRD.Forms
                     {
                         if (id_contatoSelecionado != null)
                         {
-                            ConnectSQL.Update((int)id_contatoSelecionado, txtNumero.Text.ToUpper(), txtRev.Text, comboOS.Text, txtObs.Text.ToUpper(), user);
+                            ConnectSQL.Update((int)id_contatoSelecionado, txtNumero.Text.ToUpper(), txtRev.Text.ToUpper(), comboOS.Text, txtObs.Text.ToUpper(), user);
 
                             MessageBox.Show("Atualizado!");
 
@@ -56,7 +56,7 @@ namespace ControladorGRD.Forms
                         else
                         {
 
-                            ConnectSQL.Insert(txtNumero.Text.ToUpper(), txtRev.Text, comboOS.Text, txtObs.Text.ToUpper(), user);
+                            ConnectSQL.Insert(txtNumero.Text.ToUpper(), txtRev.Text.ToUpper(), comboOS.Text, txtObs.Text.ToUpper(), user);
 
                             MessageBox.Show("Documento cadastrado!");
                         }
@@ -66,23 +66,8 @@ namespace ControladorGRD.Forms
                         if (!checkRev.Checked)
                         {
 
-                            MySqlDataReader reader;
-                            int pend;
-                            foreach (string numero in numeros)
-                            {
-                                ConnectSQL.cmd.CommandText = $"SELECT pend FROM documento WHERE numero='{numero}'";
-                                reader = ConnectSQL.cmd.ExecuteReader();
-                                reader.Read();
-                                pend = Int32.Parse(reader.GetString(0));
-                                reader.Close();
-                                if (pend != 0)
-                                {
-                                    MessageBox.Show("Atenção, há documento(s) pendentes na planilha");
-                                    btnSalvar.Enabled = false;
-                                    break;
-                                }
-                            }
 
+                            MySqlDataReader reader;
                             for (int i = 0; i < qtdlinhas; i++)
                             {
                                 ConnectSQL.cmd.CommandText = $"SELECT numero FROM documento WHERE numero='{numeros[i]}'";
@@ -183,6 +168,22 @@ namespace ControladorGRD.Forms
                         }
                         labelMultiplo.Text = arquivoDialogo.FileName;
 
+                        MySqlDataReader reader;
+                        int pend;
+                        foreach (string numero in numeros)
+                        {
+                            ConnectSQL.cmd.CommandText = $"SELECT pend FROM documento WHERE numero='{numero}'";
+                            reader = ConnectSQL.cmd.ExecuteReader();
+                            reader.Read();
+                            pend = Int32.Parse(reader.GetString(0));
+                            reader.Close();
+                            if (pend != 0)
+                            {
+                                MessageBox.Show("Atenção, há documento(s) pendentes na planilha");
+                                btnSalvar.Enabled = false;
+                                break;
+                            }
+                        }
 
                     }
 
@@ -203,12 +204,20 @@ namespace ControladorGRD.Forms
                     DialogResult result = MessageBox.Show("Tem certeza que deseja excluir?", "Exclusão", MessageBoxButtons.YesNo);
                     if (result == DialogResult.Yes)
                     {
-                        ConnectSQL.Connect();
-                        ConnectSQL.Delete(id_contatoSelecionado);
+                        if (txtRev.Enabled)
+                        {
+                            ConnectSQL.Connect();
+                            ConnectSQL.Delete(id_contatoSelecionado);
 
-                        MessageBox.Show("Cadastro excluído!");
+                            MessageBox.Show("Cadastro excluído!");
 
-                        limpar();
+                            limpar();
+                        }
+                        else
+                        {
+                            MessageBox.Show("Não foi possível excluir, o documento tem emissão pendente");
+                        }
+
                     }
                 }
             }
@@ -224,7 +233,7 @@ namespace ControladorGRD.Forms
 
         private void btnProcurar_Click(object sender, EventArgs e)
         {
-            FormProcurar procurar = new FormProcurar(this, txtRev);
+            FormProcurar procurar = new FormProcurar(this, txtRev, txtNumero);
             procurar.ShowDialog();
         }
 

@@ -16,19 +16,19 @@ namespace ControladorGRD
     {
         private Button currentButton;
         private Form activeForm;
-
+        string user;
         FormCadastroDoc cadastroDoc;
-        FormEmitir emitir;
         //FormBuscar buscar = new FormBuscar();
         FormCadGeral cadGeral = new FormCadGeral();
         FormAlterar receber = new FormAlterar();
+        FormBuscar buscar = new FormBuscar();
 
         public Form1(FormLogin active)
         {
             InitializeComponent();
             labelUser.Text = active.User();
             cadastroDoc = new FormCadastroDoc(active.User());
-            emitir = new FormEmitir(active.User(), cadastroDoc);
+            user = active.User();
         }
 
         private Color SelectThemeColor()
@@ -70,7 +70,7 @@ namespace ControladorGRD
 
             if (activeForm != null)
             {
-                if (activeForm is FormBuscar)
+                if (activeForm is FormEmitir)
                 {
                     activeForm.Close();
                 }
@@ -112,7 +112,7 @@ namespace ControladorGRD
 
         private void btnEmitir_Click(object sender, EventArgs e)
         {
-            OpenChildForm(emitir, sender);
+            OpenChildForm(new FormEmitir(user, cadastroDoc), sender);
         }
 
         private void btnReceber_Click(object sender, EventArgs e)
@@ -122,7 +122,7 @@ namespace ControladorGRD
 
         private void btnBuscar_Click(object sender, EventArgs e)
         {
-            OpenChildForm(new FormBuscar(), sender);
+            OpenChildForm(buscar, sender);
         }
 
         private void btnResp_Click(object sender, EventArgs e)

@@ -31,10 +31,10 @@ namespace ControladorGRD.Entities
                                 " VALUES (@numero, @rev, @os, @obs, @dataRegistro, @usuario)";
 
             cmd.Parameters.Clear();
-            cmd.Parameters.AddWithValue("@numero", txtNumero);
-            cmd.Parameters.AddWithValue("@rev", txtRev);
+            cmd.Parameters.AddWithValue("@numero", txtNumero.ToUpper());
+            cmd.Parameters.AddWithValue("@rev", txtRev.ToUpper());
             cmd.Parameters.AddWithValue("@os", comboOS);
-            cmd.Parameters.AddWithValue("@obs", txtObs);
+            cmd.Parameters.AddWithValue("@obs", txtObs.ToUpper());
             cmd.Parameters.AddWithValue("@dataRegistro", Convert.ToString(DateTime.Now.ToString("yyyy-MM-dd")));
             cmd.Parameters.AddWithValue("@usuario", user);
 

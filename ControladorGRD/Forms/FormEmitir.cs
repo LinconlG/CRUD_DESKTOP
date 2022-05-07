@@ -131,6 +131,7 @@ namespace ControladorGRD.Forms
 
             listDoc.View = View.Details;
             listDoc.GridLines = true;
+            listDoc.FullRowSelect = true;
             
             listDoc.Columns.Add("Numero", 120, HorizontalAlignment.Left);
             listDoc.Columns.Add("Revisão", 60, HorizontalAlignment.Left);
@@ -142,6 +143,7 @@ namespace ControladorGRD.Forms
         {
             listResp.View = View.Details;
             listResp.GridLines = true;
+            listResp.FullRowSelect = true;
             listResp.Columns.Add("Nome", 150, HorizontalAlignment.Left);
         }
 
@@ -247,7 +249,7 @@ namespace ControladorGRD.Forms
         {
             foreach (ListViewItem item in listResp.SelectedItems)
             {
-                listDoc.Items.Remove(item);
+                listResp.Items.Remove(item);
             }
         }
 
@@ -268,8 +270,9 @@ namespace ControladorGRD.Forms
 
                 aba.Cells[4, 3] = grdEmitida;
                 aba.Cells[5, 3] = resp.Text;
-                aba.Cells[5, 10] = $"{DateTime.Now.Day}/{DateTime.Now.Month}/{DateTime.Now.Year}";
+                aba.Cells[5, 10] = DateTime.Now.ToString("dd/MM/yy");
                 aba.Cells[4, 12] = $"Pag {count + 1}/{qtd}";
+
                 int i = 9;
                 foreach (ListViewItem doc in listDoc.Items)
                 {
@@ -293,6 +296,7 @@ namespace ControladorGRD.Forms
                 janela.InitialDirectory = $@"{local}";
                 janela.RestoreDirectory = true;
                 aba = pastaTrabalho.Worksheets[1];
+                janela.FileName = grdEmitida;
 
                 if (janela.ShowDialog() == DialogResult.OK)
                 {
