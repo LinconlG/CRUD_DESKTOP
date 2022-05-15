@@ -201,8 +201,7 @@ namespace ControladorGRD.Forms
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.AutoSize = true;
-            this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.AutoScroll = true;
             this.ClientSize = new System.Drawing.Size(610, 629);
             this.Controls.Add(this.labelqtd);
             this.Controls.Add(this.label1);
@@ -217,6 +216,8 @@ namespace ControladorGRD.Forms
             this.Controls.Add(this.txtNumero);
             this.Controls.Add(this.labelData);
             this.Controls.Add(this.txtData);
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "FormEmitir";
             this.Text = "FormEmitir";
             this.contextMenuStrip1.ResumeLayout(false);

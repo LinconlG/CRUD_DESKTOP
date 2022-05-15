@@ -147,7 +147,7 @@ namespace ControladorGRD.Entities
                     pend = Int32.Parse(reader.GetString(0));
                     reader.Close();
                     cmd.CommandText = "UPDATE documento " +
-                              $"SET pend='{pend+1}' WHERE numero='{doc.SubItems[0].Text}'";
+                              $"SET pend='{pend + 1}' WHERE numero='{doc.SubItems[0].Text}'";
                     cmd.Prepare();
                     cmd.ExecuteNonQuery();
                 }
@@ -170,10 +170,10 @@ namespace ControladorGRD.Entities
                                " WHERE id=@id";
 
             cmd.Parameters.Clear();
-            cmd.Parameters.AddWithValue("@numero", txtNumero);
-            cmd.Parameters.AddWithValue("@rev", txtRev);
+            cmd.Parameters.AddWithValue("@numero", txtNumero.ToUpper());
+            cmd.Parameters.AddWithValue("@rev", txtRev.ToUpper());
             cmd.Parameters.AddWithValue("@os", comboOS);
-            cmd.Parameters.AddWithValue("@obs", txtObs);
+            cmd.Parameters.AddWithValue("@obs", txtObs.ToUpper());
             cmd.Parameters.AddWithValue("@usuario", user);
             cmd.Parameters.AddWithValue("@id", id);
 
@@ -207,7 +207,7 @@ namespace ControladorGRD.Entities
 
         }
 
-        public static string[] Values(int id) 
+        public static string[] Values(int id)
         {
             string[] dados = new string[5];
 
@@ -265,6 +265,15 @@ namespace ControladorGRD.Entities
             cmd.Prepare();
             return cmd.ExecuteReader();
         }
+        public static MySqlDataReader ExibirPend()
+        {
+            cmd.CommandText = "SELECT emissaogrd.dataEmissao, grd_dados.grd, documento.numero, emissaogrd.revDoc, recebimento.nome FROM documento join grd_dados join emissaogrd join recebimento " +
+                        "WHERE emissaogrd.idgrd = grd_dados.grd AND emissaogrd.idDoc = documento.id AND emissaogrd.idgrd = recebimento.grdId AND recebimento.entregue='0'" +
+                        " ORDER BY grd_dados.grd DESC, documento.numero";
+
+            cmd.Prepare();
+            return cmd.ExecuteReader();
+        }
 
         public static MySqlDataReader ExibirDoc()
         {
@@ -302,6 +311,127 @@ namespace ControladorGRD.Entities
             cmd.Prepare();
 
             return cmd.ExecuteReader();
+        }
+
+        public static void CancelarGRD(ListView listResp, ListView listDoc, int grd)
+        {
+
+            int pend;
+            MySqlDataReader reader;
+
+            foreach (ListViewItem resp in listResp.Items)
+            {
+                foreach (ListViewItem doc in listDoc.Items)
+                {
+                    ConnectSQL.cmd.CommandText = $"SELECT pend FROM documento WHERE numero='{doc.SubItems[0].Text}'";
+                    reader = ConnectSQL.cmd.ExecuteReader();
+                    reader.Read();
+                    pend = Int32.Parse(reader.GetString(0));
+                    reader.Close();
+                    ConnectSQL.cmd.CommandText = $"UPDATE documento SET pend='{pend - 1}' WHERE numero='{doc.SubItems[0].Text}'";
+                    ConnectSQL.cmd.ExecuteNonQuery();
+                }
+            }
+
+            ConnectSQL.cmd.CommandText = $"DELETE FROM grd_dados WHERE grd='{grd}'";
+            ConnectSQL.cmd.Prepare();
+            ConnectSQL.cmd.ExecuteNonQuery();
+
+            ConnectSQL.cmd.CommandText = $"DELETE FROM emissaogrd WHERE idgrd='{grd}'";
+            ConnectSQL.cmd.Prepare();
+            ConnectSQL.cmd.ExecuteNonQuery();
+
+            ConnectSQL.cmd.CommandText = $"DELETE FROM recebimento WHERE grdId='{grd}'";
+            ConnectSQL.cmd.Prepare();
+            ConnectSQL.cmd.ExecuteNonQuery();
+        }
+        public static void AtualizarDocGRD(int id, TextBox txtNumero)
+        {
+            int[] grds = new int[0];
+            int i = 0;
+            string linha;
+            MySqlDataReader reader;
+            MySqlDataReader reader2;
+            cmd.CommandText = $"SELECT numero FROM documento WHERE id='{id}'";
+            cmd.Prepare();
+            reader2 = cmd.ExecuteReader();
+            reader2.Read();
+            if (reader2.GetString(0) == txtNumero.Text)
+            {
+                reader2.Close();
+            }
+            else
+            {
+                reader2.Close();
+                cmd.CommandText = $"SELECT idgrd FROM emissaogrd WHERE idDoc='{id}'";
+                cmd.Prepare();
+                reader = cmd.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    Array.Resize<int>(ref grds, grds.Length + 1);
+                    grds[i] = reader.GetInt32(0);
+                    i++;
+                }
+                reader.Close();
+
+                for (i = 0; i < grds.Length; i++)
+                {
+                    cmd.CommandText = $"SELECT docs FROM grd_dados WHERE grd='{grds[i]}'";
+
+                    cmd.Prepare();
+                    reader = cmd.ExecuteReader();
+                    reader.Read();
+                    linha = reader.GetString(0).Substring(2, reader.GetString(0).Length - 3).Replace("\"", "").Replace(",", "").Replace(" ", "/");
+                    reader.Close();
+                    string[] numeros = linha.Split('/');
+
+                    for (int j = 0; j < numeros.Length; j++)
+                    {
+                        cmd.CommandText = $"SELECT id FROM documento WHERE numero='{numeros[j]}'";
+                        cmd.Prepare();
+                        reader2 = cmd.ExecuteReader();
+                        reader2.Read();
+
+                        if (reader2.GetInt32(0) == id)
+                        {
+                            reader2.Close();
+
+                            numeros[j] = txtNumero.Text.ToUpper();
+                            
+                            string docs = "[\"";
+                            int k = 0;
+                            foreach (var item in numeros)
+                            {
+                                if (k == 0)
+                                {
+                                    docs += item;
+                                }
+                                else
+                                {
+                                    docs += "\", \"" + item;
+                                }
+                                k++;
+                            }
+
+                            docs += "\"]";
+
+                            cmd.CommandText = $"UPDATE grd_dados SET docs=@docs WHERE grd='{grds[i]}'";
+
+                            cmd.Parameters.Clear();
+                            cmd.Parameters.AddWithValue("@docs", docs);
+                            cmd.Prepare();
+                            
+                            cmd.ExecuteNonQuery();
+
+                            
+                            break;
+                        }
+                        reader2.Close();
+                    }
+                }
+
+            }
         }
 
     }

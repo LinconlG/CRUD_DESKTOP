@@ -48,6 +48,7 @@ namespace ControladorGRD.Forms
                     {
                         if (id_contatoSelecionado != null)
                         {
+                            ConnectSQL.AtualizarDocGRD((int)id_contatoSelecionado, txtNumero);
                             ConnectSQL.Update((int)id_contatoSelecionado, txtNumero.Text.ToUpper(), txtRev.Text.ToUpper(), comboOS.Text, txtObs.Text.ToUpper(), user);
 
                             MessageBox.Show("Atualizado!");
@@ -66,8 +67,6 @@ namespace ControladorGRD.Forms
                     {
                         if (!checkRev.Checked)
                         {
-
-
                             MySqlDataReader reader;
                             int k = 0;
                             for (int i = 0; i < qtdlinhas; i++)
@@ -104,6 +103,7 @@ namespace ControladorGRD.Forms
                         {
                             for (int i = 0; i < qtdlinhas; i++)
                             {
+                                ConnectSQL.AtualizarDocGRD((int)ConnectSQL.SearchID(numeros[i]), txtNumero);
                                 ConnectSQL.Update((int)ConnectSQL.SearchID(numeros[i]), numeros[i], revisoes[i], oss[i], obss[i], user);
                             }
                             MessageBox.Show("Atualizado(s)!");
@@ -144,7 +144,7 @@ namespace ControladorGRD.Forms
                         multiplos = true;
                         checkRev.Enabled = false;
                         var fileStream = arquivoDialogo.OpenFile();
-
+                        Cursor.Current = Cursors.WaitCursor;
 
                         var planilha = new Excel.Application();
                         var wb = planilha.Workbooks.Open($@"{arquivoDialogo.FileName}", ReadOnly: true);
@@ -188,7 +188,8 @@ namespace ControladorGRD.Forms
                         wb.Close();
                         planilha.Quit();
                         
-                        labelMultiplo.Text = arquivoDialogo.FileName;
+                        labelMultiplo.Text = Path.GetFileName(arquivoDialogo.FileName);
+                        Cursor.Current = Cursors.Default;
 
                         if (checkRev.Checked)
                         {
@@ -206,11 +207,10 @@ namespace ControladorGRD.Forms
                                     MessageBox.Show("Atenção, há documento(s) pendente(s) na planilha");
                                     btnSalvar.Enabled = false;
                                     break;
-                                }
-                                
+                                }   
                             }
-                            
                         }
+                        
                     }
                 }
             }

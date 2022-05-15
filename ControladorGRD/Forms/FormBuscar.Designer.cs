@@ -29,18 +29,15 @@ namespace ControladorGRD.Forms
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             this.listaGRD = new System.Windows.Forms.ListView();
             this.txtBuscarDocGrd = new System.Windows.Forms.TextBox();
             this.btnBuscarDocGrd = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
             this.comboBox = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
             this.checkBox = new System.Windows.Forms.CheckBox();
             this.btnAtualizar = new System.Windows.Forms.Button();
-            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.salvarGRDToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.contextMenuStrip1.SuspendLayout();
+            this.btnRelat = new System.Windows.Forms.Button();
+            this.checkPend = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // listaGRD
@@ -49,7 +46,7 @@ namespace ControladorGRD.Forms
             this.listaGRD.HideSelection = false;
             this.listaGRD.Location = new System.Drawing.Point(12, 189);
             this.listaGRD.Name = "listaGRD";
-            this.listaGRD.Size = new System.Drawing.Size(699, 329);
+            this.listaGRD.Size = new System.Drawing.Size(595, 329);
             this.listaGRD.TabIndex = 0;
             this.listaGRD.UseCompatibleStateImageBehavior = false;
             this.listaGRD.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.listaGRD_MouseDoubleClick);
@@ -71,16 +68,6 @@ namespace ControladorGRD.Forms
             this.btnBuscarDocGrd.Text = "Buscar";
             this.btnBuscarDocGrd.UseVisualStyleBackColor = true;
             this.btnBuscarDocGrd.Click += new System.EventHandler(this.btnBuscarDocGrd_Click);
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(9, 91);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(172, 18);
-            this.label1.TabIndex = 3;
-            this.label1.Text = "Buscar documento/GRD";
             // 
             // comboBox
             // 
@@ -115,7 +102,7 @@ namespace ControladorGRD.Forms
             // 
             // btnAtualizar
             // 
-            this.btnAtualizar.Location = new System.Drawing.Point(605, 160);
+            this.btnAtualizar.Location = new System.Drawing.Point(486, 160);
             this.btnAtualizar.Name = "btnAtualizar";
             this.btnAtualizar.Size = new System.Drawing.Size(75, 23);
             this.btnAtualizar.TabIndex = 7;
@@ -123,36 +110,44 @@ namespace ControladorGRD.Forms
             this.btnAtualizar.UseVisualStyleBackColor = true;
             this.btnAtualizar.Click += new System.EventHandler(this.btnAtualizar_Click);
             // 
-            // contextMenuStrip1
+            // btnRelat
             // 
-            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.salvarGRDToolStripMenuItem});
-            this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(181, 48);
+            this.btnRelat.Location = new System.Drawing.Point(273, 160);
+            this.btnRelat.Name = "btnRelat";
+            this.btnRelat.Size = new System.Drawing.Size(85, 23);
+            this.btnRelat.TabIndex = 8;
+            this.btnRelat.Text = "Salvar relatório";
+            this.btnRelat.UseVisualStyleBackColor = true;
+            this.btnRelat.Click += new System.EventHandler(this.btnRelat_Click);
             // 
-            // salvarGRDToolStripMenuItem
+            // checkPend
             // 
-            this.salvarGRDToolStripMenuItem.Name = "salvarGRDToolStripMenuItem";
-            this.salvarGRDToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.salvarGRDToolStripMenuItem.Text = "Salvar GRD";
-            this.salvarGRDToolStripMenuItem.Click += new System.EventHandler(this.salvarGRDToolStripMenuItem_Click);
+            this.checkPend.AutoSize = true;
+            this.checkPend.Location = new System.Drawing.Point(12, 166);
+            this.checkPend.Name = "checkPend";
+            this.checkPend.Size = new System.Drawing.Size(77, 17);
+            this.checkPend.TabIndex = 9;
+            this.checkPend.Text = "Pendentes";
+            this.checkPend.UseVisualStyleBackColor = true;
+            this.checkPend.CheckedChanged += new System.EventHandler(this.checkPend_CheckedChanged);
             // 
             // FormBuscar
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(723, 629);
+            this.AutoScroll = true;
+            this.ClientSize = new System.Drawing.Size(629, 629);
+            this.Controls.Add(this.checkPend);
+            this.Controls.Add(this.btnRelat);
             this.Controls.Add(this.btnAtualizar);
             this.Controls.Add(this.checkBox);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.comboBox);
-            this.Controls.Add(this.label1);
             this.Controls.Add(this.btnBuscarDocGrd);
             this.Controls.Add(this.txtBuscarDocGrd);
             this.Controls.Add(this.listaGRD);
             this.Name = "FormBuscar";
             this.Text = "FormBuscar";
-            this.contextMenuStrip1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -163,12 +158,11 @@ namespace ControladorGRD.Forms
         private System.Windows.Forms.ListView listaGRD;
         private System.Windows.Forms.TextBox txtBuscarDocGrd;
         private System.Windows.Forms.Button btnBuscarDocGrd;
-        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ComboBox comboBox;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.CheckBox checkBox;
         private System.Windows.Forms.Button btnAtualizar;
-        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
-        private System.Windows.Forms.ToolStripMenuItem salvarGRDToolStripMenuItem;
+        private System.Windows.Forms.Button btnRelat;
+        private System.Windows.Forms.CheckBox checkPend;
     }
 }

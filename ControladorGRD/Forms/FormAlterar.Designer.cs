@@ -63,9 +63,9 @@ namespace ControladorGRD.Forms
             // 
             this.listDoc.ContextMenuStrip = this.contextMenuStrip1;
             this.listDoc.HideSelection = false;
-            this.listDoc.Location = new System.Drawing.Point(15, 174);
+            this.listDoc.Location = new System.Drawing.Point(12, 147);
             this.listDoc.Name = "listDoc";
-            this.listDoc.Size = new System.Drawing.Size(337, 229);
+            this.listDoc.Size = new System.Drawing.Size(545, 179);
             this.listDoc.TabIndex = 6;
             this.listDoc.UseCompatibleStateImageBehavior = false;
             // 
@@ -87,9 +87,9 @@ namespace ControladorGRD.Forms
             // 
             this.listResp.ContextMenuStrip = this.contextMenuStrip2;
             this.listResp.HideSelection = false;
-            this.listResp.Location = new System.Drawing.Point(384, 174);
+            this.listResp.Location = new System.Drawing.Point(15, 332);
             this.listResp.Name = "listResp";
-            this.listResp.Size = new System.Drawing.Size(173, 229);
+            this.listResp.Size = new System.Drawing.Size(159, 93);
             this.listResp.TabIndex = 2;
             this.listResp.UseCompatibleStateImageBehavior = false;
             this.listResp.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.listResp_MouseDoubleClick);
@@ -193,6 +193,7 @@ namespace ControladorGRD.Forms
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScroll = true;
             this.ClientSize = new System.Drawing.Size(569, 629);
             this.Controls.Add(this.btnImprimir);
             this.Controls.Add(this.button1);

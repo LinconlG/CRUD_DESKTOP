@@ -234,6 +234,7 @@
   <ItemGroup>
     <None Include="Resources\documento de exemplo cadastro multiplo.xlsx" />
     <None Include="Resources\GRD.xlsx" />
+    <None Include="Resources\relatorio template.xlsx" />
     <None Include="Resources\varios docs2.png" />
   </ItemGroup>
   <ItemGroup>

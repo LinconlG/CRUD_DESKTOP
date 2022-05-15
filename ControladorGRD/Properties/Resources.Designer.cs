@@ -159,6 +159,7 @@ namespace ControladorGRD.Properties {
         ///0545.03.001
         ///0604.04.006
         ///0552.03.001
+        ///0572.03.001
         ///.
         /// </summary>
         internal static string listaOS {
@@ -303,6 +304,16 @@ namespace ControladorGRD.Properties {
             get {
                 object obj = ResourceManager.GetObject("pngwinguser", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] relatorio_template {
+            get {
+                object obj = ResourceManager.GetObject("relatorio_template", resourceCulture);
+                return ((byte[])(obj));
             }
         }
         

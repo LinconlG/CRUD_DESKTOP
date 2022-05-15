@@ -140,35 +140,7 @@ namespace ControladorGRD.Forms
                     {
                         Cursor.Current = Cursors.WaitCursor;
                         ConnectSQL.Connect();
-                        int pend;
-                        MySqlDataReader reader;
-
-                        foreach (ListViewItem resp in listResp.Items)
-                        {
-                            foreach (ListViewItem doc in listDoc.Items)
-                            {
-                                ConnectSQL.cmd.CommandText = $"SELECT pend FROM documento WHERE numero='{doc.SubItems[0].Text}'";
-                                reader = ConnectSQL.cmd.ExecuteReader();
-                                reader.Read();
-                                pend = Int32.Parse(reader.GetString(0));
-                                reader.Close();
-                                ConnectSQL.cmd.CommandText = $"UPDATE documento SET pend='{pend - 1}' WHERE numero='{doc.SubItems[0].Text}'";
-                                ConnectSQL.cmd.ExecuteNonQuery();
-                            }
-                        }
-
-                        ConnectSQL.cmd.CommandText = $"DELETE FROM grd_dados WHERE grd='{grd}'";
-                        ConnectSQL.cmd.Prepare();
-                        ConnectSQL.cmd.ExecuteNonQuery();
-
-                        ConnectSQL.cmd.CommandText = $"DELETE FROM emissaogrd WHERE idgrd='{grd}'";
-                        ConnectSQL.cmd.Prepare();
-                        ConnectSQL.cmd.ExecuteNonQuery();
-
-                        ConnectSQL.cmd.CommandText = $"DELETE FROM recebimento WHERE grdId='{grd}'";
-                        ConnectSQL.cmd.Prepare();
-                        ConnectSQL.cmd.ExecuteNonQuery();
-
+                        ConnectSQL.CancelarGRD(listResp, listDoc, grd);
                         Cursor.Current = Cursors.Default;
 
                         limpar();
@@ -401,10 +373,14 @@ namespace ControladorGRD.Forms
 
             qtd = nomes.Length;
 
+            Array.Sort(nomes);
+            Array.Reverse(nomes);
+            listResp.Sorting = SortOrder.Ascending;
+
             foreach (string resp in nomes)
             {
-
                 aba.Cells[4, 3] = grd.ToString();
+                aba.Cells[39, 11] = grd.ToString();
                 aba.Cells[5, 3] = resp;
                 aba.Cells[5, 10] = DateTime.Now.ToString("dd/MM/yy");
                 aba.Cells[4, 12] = $"Pag {qtd-count}/{qtd}";

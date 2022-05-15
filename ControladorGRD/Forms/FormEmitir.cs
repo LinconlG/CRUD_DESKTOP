@@ -110,7 +110,7 @@ namespace ControladorGRD.Forms
 
                     ImprimirGRD();
 
-                    MessageBox.Show("Emitido");
+                    MessageBox.Show("GRD emitida com sucesso!");
                     listDoc.Items.Clear();
                     listResp.Items.Clear();
                 }
@@ -206,8 +206,6 @@ namespace ControladorGRD.Forms
             }
         }
 
-        //excluir docs e resp com botao direito
-
         private void carregarCombo(ComboBox combo)
         {
             try
@@ -265,28 +263,35 @@ namespace ControladorGRD.Forms
             int qtd = listResp.Items.Count;
             int count = 0;
 
+            listDoc.Sorting = SortOrder.Ascending;
+            listResp.Sorting = SortOrder.Descending;
+
+            aba.Cells[4, 3] = grdEmitida;
+            aba.Cells[39, 11] = grdEmitida;
+            aba.Cells[5, 10] = DateTime.Now.ToString("dd/MM/yy");
+            aba.Cells[32, 3] = txtObs.Text;
+
+
+            int i = 9;
+            foreach (ListViewItem doc in listDoc.Items)
+            {
+                aba.Cells[i, 1] = doc.SubItems[0].Text;
+                aba.Cells[i, 5] = doc.SubItems[1].Text;
+                aba.Cells[i, 6] = doc.SubItems[3].Text;
+                aba.Cells[i, 11] = doc.SubItems[2].Text;
+                i++;
+            }
+
             foreach (ListViewItem resp in listResp.Items)
             {
-
-                aba.Cells[4, 3] = grdEmitida;
                 aba.Cells[5, 3] = resp.Text;
-                aba.Cells[5, 10] = DateTime.Now.ToString("dd/MM/yy");
-                aba.Cells[4, 12] = $"Pag {count + 1}/{qtd}";
 
-                int i = 9;
-                foreach (ListViewItem doc in listDoc.Items)
-                {
-                    aba.Cells[i, 1] = doc.SubItems[0].Text;
-                    aba.Cells[i, 5] = doc.SubItems[1].Text;
-                    aba.Cells[i, 6] = doc.SubItems[3].Text;
-                    aba.Cells[i, 11] = doc.SubItems[2].Text ;
-                    i++;
-                }
-                aba.Cells[32, 3] = txtObs.Text;
+                aba.Cells[4, 12] = $"Pag {qtd-count}/{qtd}";
+
                 count++;
                 if (count < qtd)
                 {
-                    aba.Copy(pastaTrabalho.Sheets[planilha.Sheets.Count]);
+                    aba.Copy(pastaTrabalho.Sheets[1]);
                     aba = pastaTrabalho.Sheets[1];
                 }
             }
