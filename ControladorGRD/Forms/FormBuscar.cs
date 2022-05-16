@@ -277,6 +277,7 @@ namespace ControladorGRD.Forms
         {
             if (comboBox.Text == "GRD")
             {
+                checkPend.Checked = false;
                 carregarGRD();
             }
             else
