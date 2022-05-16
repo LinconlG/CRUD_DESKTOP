@@ -1,4 +1,4 @@
-localhost
-root
-12345
+192.168.1.111
+teste
+Password123$
 db_login

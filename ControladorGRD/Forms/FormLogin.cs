@@ -6,15 +6,14 @@ using System.Reflection;
 using System.IO;
 using System.Text;
 using System.Security.Cryptography;
+using ControladorGRD.Entities;
 
 namespace ControladorGRD.Forms
 {
     public partial class FormLogin : Form
     {
-        private MySqlConnection conexao;
-        private string data_source;
+        
         public bool pass = false;
-        MySqlCommand cmd = new MySqlCommand();
         string user;
         string filePath;
         public FormLogin()
@@ -25,7 +24,7 @@ namespace ControladorGRD.Forms
             {
                 filePath = String.Format("{0}Resources\\database.txt", Path.GetFullPath(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"..\..\")));
                 carregardb(filePath);
-                data_source = $"datasource={txtDS.Text};username={txtUN.Text};password={txtPW.Text};database={txtDB.Text}";
+                
             }
             catch (Exception ex)
             {
@@ -37,22 +36,23 @@ namespace ControladorGRD.Forms
         {
             try
             {
+                ConnectSQL.login(txtDS.Text, txtUN.Text, txtPW.Text, txtDB.Text);
                 user = txtUsuario.Text;
-                conexao = new MySqlConnection(data_source);
-                conexao.Open();
+                
+                //conexao = new MySqlConnection(data_source);
+                //conexao.Open();
 
-                cmd.Connection = conexao;
-                cmd.CommandText = $"SELECT * FROM login WHERE usuario=@usuario AND senha=@senha";
-                cmd.Parameters.AddWithValue("@usuario", $"{txtUsuario.Text}");
-                cmd.Parameters.AddWithValue("@senha", $"{sha256_hash(txtSenha.Text)}");
-                cmd.Prepare();
+                ConnectSQL.cmd.CommandText = $"SELECT * FROM login WHERE usuario=@usuario AND senha=@senha";
+                ConnectSQL.cmd.Parameters.AddWithValue("@usuario", $"{txtUsuario.Text}");
+                ConnectSQL.cmd.Parameters.AddWithValue("@senha", $"{sha256_hash(txtSenha.Text)}");
+                ConnectSQL.cmd.Prepare();
 
-                MySqlDataAdapter sda = new MySqlDataAdapter(cmd);
+                MySqlDataAdapter sda = new MySqlDataAdapter(ConnectSQL.cmd);
                 DataTable dt = new DataTable();
                 sda.Fill(dt);
 
-                
-                cmd.ExecuteNonQuery();
+
+                ConnectSQL.cmd.ExecuteNonQuery();
 
                 if (dt.Rows.Count > 0)
                 {
@@ -61,7 +61,7 @@ namespace ControladorGRD.Forms
                 }
                 else
                 {
-                    cmd.Parameters.Clear();
+                    ConnectSQL.cmd.Parameters.Clear();
                     MessageBox.Show("Usuário/senha incorreta. Tente novamente.");
                 }
 
@@ -72,7 +72,7 @@ namespace ControladorGRD.Forms
             }
             finally
             {
-                conexao.Close();
+                ConnectSQL.conexao.Close();
                 
             }
 

@@ -13,12 +13,25 @@ namespace ControladorGRD.Entities
     {
         public static MySqlConnection conexao { get; set; }
         public static MySqlCommand cmd = new MySqlCommand();
+        public static string ds, us, ps, db;
+        public static void login(string a, string b, string p, string d)
+        {
+            ds = a;
+            us = b;
+            ps = p;
+            db = d;
 
-        private static string data_source = "datasource=localhost;username=root;password=12345;database=db_documentos";
+            conexao = new MySqlConnection($"datasource={ds};username={us};password={ps};database={db}");
+            conexao.Open();
+
+
+            cmd.Connection = conexao;
+        }
+        
 
         public static void Connect()
         {
-            conexao = new MySqlConnection(data_source);
+            conexao = new MySqlConnection($"datasource={ds};username={us};password={ps};database=db_documentos");
             conexao.Open();
 
 
