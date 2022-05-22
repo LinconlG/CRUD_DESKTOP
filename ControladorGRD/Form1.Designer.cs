@@ -66,14 +66,14 @@ namespace ControladorGRD
             this.panelMenu.Dock = System.Windows.Forms.DockStyle.Left;
             this.panelMenu.Location = new System.Drawing.Point(0, 0);
             this.panelMenu.Name = "panelMenu";
-            this.panelMenu.Size = new System.Drawing.Size(220, 728);
+            this.panelMenu.Size = new System.Drawing.Size(200, 728);
             this.panelMenu.TabIndex = 0;
             // 
             // pictureBox1
             // 
             this.pictureBox1.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.pictureBox1.Image = global::ControladorGRD.Properties.Resources.pngwinguser;
-            this.pictureBox1.Location = new System.Drawing.Point(65, 555);
+            this.pictureBox1.Location = new System.Drawing.Point(55, 555);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(89, 88);
             this.pictureBox1.TabIndex = 6;
@@ -94,7 +94,7 @@ namespace ControladorGRD
             this.linkLabel1.AutoSize = true;
             this.linkLabel1.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.linkLabel1.LinkColor = System.Drawing.Color.White;
-            this.linkLabel1.Location = new System.Drawing.Point(82, 675);
+            this.linkLabel1.Location = new System.Drawing.Point(65, 668);
             this.linkLabel1.Name = "linkLabel1";
             this.linkLabel1.Size = new System.Drawing.Size(54, 18);
             this.linkLabel1.TabIndex = 8;
@@ -114,7 +114,7 @@ namespace ControladorGRD
             this.btnResp.Location = new System.Drawing.Point(0, 454);
             this.btnResp.Name = "btnResp";
             this.btnResp.Padding = new System.Windows.Forms.Padding(12, 0, 0, 0);
-            this.btnResp.Size = new System.Drawing.Size(215, 60);
+            this.btnResp.Size = new System.Drawing.Size(195, 60);
             this.btnResp.TabIndex = 5;
             this.btnResp.Text = "Cadastrar Responsável";
             this.btnResp.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -134,7 +134,7 @@ namespace ControladorGRD
             this.btnEmitir.Location = new System.Drawing.Point(0, 256);
             this.btnEmitir.Name = "btnEmitir";
             this.btnEmitir.Padding = new System.Windows.Forms.Padding(12, 0, 0, 0);
-            this.btnEmitir.Size = new System.Drawing.Size(215, 60);
+            this.btnEmitir.Size = new System.Drawing.Size(195, 60);
             this.btnEmitir.TabIndex = 4;
             this.btnEmitir.Text = "Emitir GRD";
             this.btnEmitir.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -154,7 +154,7 @@ namespace ControladorGRD
             this.btnReceber.Location = new System.Drawing.Point(0, 322);
             this.btnReceber.Name = "btnReceber";
             this.btnReceber.Padding = new System.Windows.Forms.Padding(12, 0, 0, 0);
-            this.btnReceber.Size = new System.Drawing.Size(215, 60);
+            this.btnReceber.Size = new System.Drawing.Size(195, 60);
             this.btnReceber.TabIndex = 3;
             this.btnReceber.Text = "Gerenciar GRD";
             this.btnReceber.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -174,7 +174,7 @@ namespace ControladorGRD
             this.btnBuscar.Location = new System.Drawing.Point(0, 388);
             this.btnBuscar.Name = "btnBuscar";
             this.btnBuscar.Padding = new System.Windows.Forms.Padding(12, 0, 0, 0);
-            this.btnBuscar.Size = new System.Drawing.Size(215, 60);
+            this.btnBuscar.Size = new System.Drawing.Size(195, 60);
             this.btnBuscar.TabIndex = 2;
             this.btnBuscar.Text = "Buscar";
             this.btnBuscar.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -194,7 +194,7 @@ namespace ControladorGRD
             this.btnDoc.Location = new System.Drawing.Point(3, 190);
             this.btnDoc.Name = "btnDoc";
             this.btnDoc.Padding = new System.Windows.Forms.Padding(12, 0, 0, 0);
-            this.btnDoc.Size = new System.Drawing.Size(215, 60);
+            this.btnDoc.Size = new System.Drawing.Size(195, 60);
             this.btnDoc.TabIndex = 1;
             this.btnDoc.Text = "Cadastrar Documento";
             this.btnDoc.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -209,7 +209,7 @@ namespace ControladorGRD
             this.panelLogo.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelLogo.Location = new System.Drawing.Point(0, 0);
             this.panelLogo.Name = "panelLogo";
-            this.panelLogo.Size = new System.Drawing.Size(220, 90);
+            this.panelLogo.Size = new System.Drawing.Size(200, 90);
             this.panelLogo.TabIndex = 0;
             // 
             // Logo
@@ -219,7 +219,7 @@ namespace ControladorGRD
             this.Logo.Image = global::ControladorGRD.Properties.Resources.Picture4;
             this.Logo.Location = new System.Drawing.Point(0, 0);
             this.Logo.Name = "Logo";
-            this.Logo.Size = new System.Drawing.Size(220, 90);
+            this.Logo.Size = new System.Drawing.Size(200, 90);
             this.Logo.TabIndex = 0;
             this.Logo.UseVisualStyleBackColor = true;
             this.Logo.Click += new System.EventHandler(this.button1_Click);
@@ -229,9 +229,9 @@ namespace ControladorGRD
             this.panelTitulo.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(211)))), ((int)(((byte)(214)))), ((int)(((byte)(219)))));
             this.panelTitulo.Controls.Add(this.labelTitulo);
             this.panelTitulo.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panelTitulo.Location = new System.Drawing.Point(220, 0);
+            this.panelTitulo.Location = new System.Drawing.Point(200, 0);
             this.panelTitulo.Name = "panelTitulo";
-            this.panelTitulo.Size = new System.Drawing.Size(763, 90);
+            this.panelTitulo.Size = new System.Drawing.Size(783, 90);
             this.panelTitulo.TabIndex = 1;
             // 
             // labelTitulo
@@ -240,7 +240,7 @@ namespace ControladorGRD
             this.labelTitulo.AutoSize = true;
             this.labelTitulo.Font = new System.Drawing.Font("PF Square Sans Pro", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelTitulo.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(92)))), ((int)(((byte)(99)))), ((int)(((byte)(104)))));
-            this.labelTitulo.Location = new System.Drawing.Point(191, 35);
+            this.labelTitulo.Location = new System.Drawing.Point(201, 35);
             this.labelTitulo.Name = "labelTitulo";
             this.labelTitulo.Size = new System.Drawing.Size(343, 25);
             this.labelTitulo.TabIndex = 0;
@@ -249,9 +249,9 @@ namespace ControladorGRD
             // panelDesktop
             // 
             this.panelDesktop.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelDesktop.Location = new System.Drawing.Point(220, 90);
+            this.panelDesktop.Location = new System.Drawing.Point(200, 90);
             this.panelDesktop.Name = "panelDesktop";
-            this.panelDesktop.Size = new System.Drawing.Size(763, 638);
+            this.panelDesktop.Size = new System.Drawing.Size(783, 638);
             this.panelDesktop.TabIndex = 2;
             // 
             // Form1

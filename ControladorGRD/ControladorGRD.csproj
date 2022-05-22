@@ -309,6 +309,13 @@
     <Content Include="Resources\database.txt" />
     <Content Include="Resources\listaOS.txt" />
     <Content Include="Resources\Localgrd.txt" />
+    <None Include="Resources\Picture5611.png" />
+    <None Include="Resources\Picture562.png" />
+    <None Include="Resources\Picture51.png" />
+    <None Include="Resources\Picture211.png" />
+    <None Include="Resources\seta1 - Copy.png" />
+    <None Include="Resources\seta11.png" />
+    <None Include="Resources\seta1.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

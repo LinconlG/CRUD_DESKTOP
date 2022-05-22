@@ -30,13 +30,13 @@ namespace ControladorGRD.Forms
             string a = System.AppDomain.CurrentDomain.BaseDirectory;
             filePath = String.Format("{0}Resources\\listaOS.txt", Path.GetFullPath(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"..\..\")));
             carregarOS(filePath);
-            
+
         }
         private void btnSalvar_Click(object sender, EventArgs e)
         {
             try
             {
-
+                Cursor.Current = Cursors.WaitCursor;
                 if ((txtNumero.Text == "" || txtRev.Text == "" || comboOS.Text == "") && (multiplos == false))
                 {
                     MessageBox.Show("Campo vazio");
@@ -50,7 +50,7 @@ namespace ControladorGRD.Forms
                         {
                             ConnectSQL.AtualizarDocGRD((int)id_contatoSelecionado, txtNumero);
                             ConnectSQL.Update((int)id_contatoSelecionado, txtNumero.Text.ToUpper(), txtRev.Text.ToUpper(), comboOS.Text, txtObs.Text.ToUpper(), user);
-
+                            Cursor.Current = Cursors.Default;
                             MessageBox.Show("Atualizado!");
                             limpar();
                         }
@@ -58,7 +58,7 @@ namespace ControladorGRD.Forms
                         {
 
                             ConnectSQL.Insert(txtNumero.Text.ToUpper(), txtRev.Text.ToUpper(), comboOS.Text, txtObs.Text.ToUpper(), user);
-
+                            Cursor.Current = Cursors.Default;
                             MessageBox.Show("Documento cadastrado!");
                             limpar();
                         }
@@ -85,17 +85,19 @@ namespace ControladorGRD.Forms
                                     ConnectSQL.Insert(numeros[i], revisoes[i], oss[i], obss[i], user);
                                     k++;
                                 }
-                                
+
                             }
-                            if (k>0)
+                            if (k > 0)
                             {
+                                Cursor.Current = Cursors.Default;
                                 MessageBox.Show("Documento(s) cadastrado(s)!");
                             }
                             else
                             {
+                                Cursor.Current = Cursors.Default;
                                 MessageBox.Show("Nenhum documento cadastrado");
                             }
-                            
+
                             limpar();
 
                         }
@@ -106,12 +108,13 @@ namespace ControladorGRD.Forms
                                 ConnectSQL.AtualizarDocGRD((int)ConnectSQL.SearchID(numeros[i]), txtNumero);
                                 ConnectSQL.Update((int)ConnectSQL.SearchID(numeros[i]), numeros[i], revisoes[i], oss[i], obss[i], user);
                             }
+                            Cursor.Current = Cursors.Default;
                             MessageBox.Show("Atualizado(s)!");
                             limpar();
                         }
 
                     }
-
+                    Cursor.Current = Cursors.Default;
                     limpar();
                 }
             }
@@ -131,7 +134,7 @@ namespace ControladorGRD.Forms
             {
                 ConnectSQL.Connect();
 
-                
+
                 using (OpenFileDialog arquivoDialogo = new OpenFileDialog())
                 {
                     arquivoDialogo.InitialDirectory = "Downloads";
@@ -187,7 +190,7 @@ namespace ControladorGRD.Forms
                         }
                         wb.Close();
                         planilha.Quit();
-                        
+
                         labelMultiplo.Text = Path.GetFileName(arquivoDialogo.FileName);
                         Cursor.Current = Cursors.Default;
 
@@ -207,10 +210,10 @@ namespace ControladorGRD.Forms
                                     MessageBox.Show("Atenção, há documento(s) pendente(s) na planilha");
                                     btnSalvar.Enabled = false;
                                     break;
-                                }   
+                                }
                             }
                         }
-                        
+
                     }
                 }
             }
@@ -291,7 +294,7 @@ namespace ControladorGRD.Forms
                 if (txtNovaOS.Text == "")
                 {
                     MessageBox.Show("Campo vazio");
-                    
+
                 }
                 else
                 {
@@ -308,7 +311,6 @@ namespace ControladorGRD.Forms
             }
 
         }
-
         private void limpar()
         {
             id_contatoSelecionado = null;

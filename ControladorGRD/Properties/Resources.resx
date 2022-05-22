@@ -118,112 +118,43 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="Picture3" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Picture3.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="pngwing.com2" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\pngwing.com2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="certificado2" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\certificado2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Picture" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Picture.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="doc assinado21" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\doc assinado21.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="varios docs1" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\varios docs1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Picture1" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Picture1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="doc assinado" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\doc assinado.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="varios docs checados" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\varios docs checados.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="varios docs21" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\varios docs21.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="pngwing1" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\pngwing.com21.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="varios docs2" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\varios docs2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Picture5" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Picture5.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Picture21" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Picture21.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="varios docs3" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\varios docs3.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="varios docs checados2" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\varios docs checados2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="varios docs41" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\varios docs41.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Picture56" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Picture56.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="pngwing.com" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\pngwing.com.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="varios docs" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\varios docs.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="varios docs4" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\varios docs4.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="certificado21" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\certificado21.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Picture4" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Picture4.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Picture2" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Picture2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="doc assinado2" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\doc assinado2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="certificado" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\certificado.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="varios docs checados21" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\varios docs checados21.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Picture561" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Picture561.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="varios docs31" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\varios docs31.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="Localgrd" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Localgrd.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
   </data>
   <data name="pngwinguser" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\pngwinguser.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="GRD" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\GRD.xlsx;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <data name="listaOS" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\listaOS.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="varios docs checados2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\varios docs checados2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="relatorio_template" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\relatorio template.xlsx;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="varios docs4" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\varios docs4.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="database" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\database.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
   </data>
+  <data name="Picture4" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Picture4.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="doc assinado2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\doc assinado2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="documento_de_exemplo_cadastro_multiplo" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\documento de exemplo cadastro multiplo.xlsx;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="Localgrd" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Localgrd.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
-  </data>
-  <data name="relatorio_template" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\relatorio template.xlsx;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="GRD" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\GRD.xlsx;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
 </root>

@@ -304,7 +304,7 @@ namespace ControladorGRD.Forms
                     listaGRD.Columns.Add("GRD", 60, HorizontalAlignment.Left);
                     listaGRD.Columns.Add("Numero", 200, HorizontalAlignment.Left);
                     listaGRD.Columns.Add("Revisão", 60, HorizontalAlignment.Left);
-                    listaGRD.Columns.Add("Responsável", 200, HorizontalAlignment.Left);
+                    listaGRD.Columns.Add("Responsável Pendente", 200, HorizontalAlignment.Left);
 
                     ConnectSQL.Connect();
                     MySqlDataReader reader = ConnectSQL.ExibirPend();

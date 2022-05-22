@@ -296,7 +296,14 @@ namespace ControladorGRD.Entities
             cmd.Prepare();
             return cmd.ExecuteReader();
         }
+        public static MySqlDataReader ExibirCadastro()
+        {
+            ConnectSQL.cmd.CommandText = "SELECT id, dataRegistro, numero, rev, os, obs " +
+                        "from documento ORDER BY id DESC";
 
+            cmd.Prepare();
+            return cmd.ExecuteReader();
+        }
         public static MySqlDataReader AddDoc(string numero)
         {
             ConnectSQL.cmd.CommandText = $"SELECT numero, rev, os, obs" +

@@ -63,29 +63,9 @@ namespace ControladorGRD.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap certificado {
-            get {
-                object obj = ResourceManager.GetObject("certificado", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
         internal static System.Drawing.Bitmap certificado2 {
             get {
                 object obj = ResourceManager.GetObject("certificado2", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap certificado21 {
-            get {
-                object obj = ResourceManager.GetObject("certificado21", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -106,29 +86,9 @@ namespace ControladorGRD.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap doc_assinado {
-            get {
-                object obj = ResourceManager.GetObject("doc assinado", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
         internal static System.Drawing.Bitmap doc_assinado2 {
             get {
                 object obj = ResourceManager.GetObject("doc assinado2", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap doc_assinado21 {
-            get {
-                object obj = ResourceManager.GetObject("doc assinado21", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -180,56 +140,6 @@ namespace ControladorGRD.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Picture {
-            get {
-                object obj = ResourceManager.GetObject("Picture", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap Picture1 {
-            get {
-                object obj = ResourceManager.GetObject("Picture1", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap Picture2 {
-            get {
-                object obj = ResourceManager.GetObject("Picture2", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap Picture21 {
-            get {
-                object obj = ResourceManager.GetObject("Picture21", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap Picture3 {
-            get {
-                object obj = ResourceManager.GetObject("Picture3", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
         internal static System.Drawing.Bitmap Picture4 {
             get {
                 object obj = ResourceManager.GetObject("Picture4", resourceCulture);
@@ -240,59 +150,9 @@ namespace ControladorGRD.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Picture5 {
-            get {
-                object obj = ResourceManager.GetObject("Picture5", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap Picture56 {
-            get {
-                object obj = ResourceManager.GetObject("Picture56", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap Picture561 {
-            get {
-                object obj = ResourceManager.GetObject("Picture561", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap pngwing_com {
-            get {
-                object obj = ResourceManager.GetObject("pngwing.com", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
         internal static System.Drawing.Bitmap pngwing_com2 {
             get {
                 object obj = ResourceManager.GetObject("pngwing.com2", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap pngwing1 {
-            get {
-                object obj = ResourceManager.GetObject("pngwing1", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -320,26 +180,6 @@ namespace ControladorGRD.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap varios_docs {
-            get {
-                object obj = ResourceManager.GetObject("varios docs", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap varios_docs_checados {
-            get {
-                object obj = ResourceManager.GetObject("varios docs checados", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
         internal static System.Drawing.Bitmap varios_docs_checados2 {
             get {
                 object obj = ResourceManager.GetObject("varios docs checados2", resourceCulture);
@@ -350,79 +190,9 @@ namespace ControladorGRD.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap varios_docs_checados21 {
-            get {
-                object obj = ResourceManager.GetObject("varios docs checados21", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap varios_docs1 {
-            get {
-                object obj = ResourceManager.GetObject("varios docs1", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap varios_docs2 {
-            get {
-                object obj = ResourceManager.GetObject("varios docs2", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap varios_docs21 {
-            get {
-                object obj = ResourceManager.GetObject("varios docs21", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap varios_docs3 {
-            get {
-                object obj = ResourceManager.GetObject("varios docs3", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap varios_docs31 {
-            get {
-                object obj = ResourceManager.GetObject("varios docs31", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
         internal static System.Drawing.Bitmap varios_docs4 {
             get {
                 object obj = ResourceManager.GetObject("varios docs4", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap varios_docs41 {
-            get {
-                object obj = ResourceManager.GetObject("varios docs41", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
