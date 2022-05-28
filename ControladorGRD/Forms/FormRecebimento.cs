@@ -17,7 +17,8 @@ namespace ControladorGRD.Forms
         int grd;
         ListView listdoc = new ListView();
         FormAlterar alterar;
-        public FormRecebimento(string resp, int grd, FormAlterar alterar, ListView listdoc)
+        TextBox txt;
+        public FormRecebimento(string resp, int grd, FormAlterar alterar, ListView listdoc, ref TextBox txtGrd)
         {
             InitializeComponent();
             txtData.Text = DateTime.Now.ToString("dd/MM/yyyy");
@@ -25,6 +26,7 @@ namespace ControladorGRD.Forms
             this.grd = grd;
             this.alterar = alterar;
             this.listdoc = listdoc;
+            txt = txtGrd;
         }
 
 
@@ -71,12 +73,16 @@ namespace ControladorGRD.Forms
                 
                 alterar.carregarResps(grd);
                 ConnectSQL.conexao.Close();
+                txt.Focus();
+                txt.SelectAll();
                 this.Close();
             }
         }
 
         private void btnNao_Click(object sender, EventArgs e)
         {
+            txt.Focus();
+            txt.SelectAll();
             this.Close();
         }
     }

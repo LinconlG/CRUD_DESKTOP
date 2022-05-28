@@ -36,8 +36,18 @@ namespace ControladorGRD.Forms
             try
             {
                 ConnectSQL.Connect();
+                string numero = txtProcurar.Text;
 
-                id_contatoSelecionado = ConnectSQL.SearchID(txtProcurar.Text.ToUpper());
+                while (numero.StartsWith(" "))
+                {
+                    numero = numero.Substring(1, numero.Length - 1);
+                }
+                while (numero.EndsWith(" "))
+                {
+                    numero = numero.Substring(0, numero.Length - 1);
+                }
+
+                id_contatoSelecionado = ConnectSQL.SearchID(numero.ToUpper());
 
 
                 if (id_contatoSelecionado != null)

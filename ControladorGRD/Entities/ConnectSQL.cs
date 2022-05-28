@@ -28,7 +28,6 @@ namespace ControladorGRD.Entities
             cmd.Connection = conexao;
         }
         
-
         public static void Connect()
         {
             conexao = new MySqlConnection($"datasource={ds};username={us};password={ps};database=db_documentos");
@@ -37,7 +36,6 @@ namespace ControladorGRD.Entities
 
             cmd.Connection = conexao;
         }
-
         public static void Insert(string txtNumero, string txtRev, string comboOS, string txtObs, string user)
         {
             cmd.CommandText = "INSERT INTO documento (numero, rev, os, obs, dataRegistro, usuario)" +
@@ -54,7 +52,6 @@ namespace ControladorGRD.Entities
             cmd.Prepare();
             cmd.ExecuteNonQuery();
         }
-
         public static void InsertGRD(ListView listaDoc, ListView listaResp, string user)
         {
             cmd.CommandText = "INSERT INTO grd_dados (datagrd, docs, resps, usuariogrd)" +
@@ -111,7 +108,6 @@ namespace ControladorGRD.Entities
 
 
         }
-
         public static string InsertEmissao(ListView listaDocs)
         {
             cmd.CommandText = "SELECT grd from grd_dados ORDER BY grd desc limit 1";
@@ -141,7 +137,6 @@ namespace ControladorGRD.Entities
 
             return id;
         }
-
         public static void InsertRec(ListView listaResp, ListView listadoc)
         {
             cmd.CommandText = "SELECT grd from grd_dados ORDER BY grd desc limit 1";
@@ -219,7 +214,6 @@ namespace ControladorGRD.Entities
             }
 
         }
-
         public static string[] Values(int id)
         {
             string[] dados = new string[5];
@@ -247,7 +241,6 @@ namespace ControladorGRD.Entities
 
             return dados;
         }
-
         public static void InsertResp(string responsavel)
         {
             cmd.CommandText = "INSERT INTO responsavel (nome)" +
@@ -259,80 +252,6 @@ namespace ControladorGRD.Entities
             cmd.Prepare();
             cmd.ExecuteNonQuery();
         }
-
-        public static MySqlDataReader ExbirResp()
-        {
-            cmd.CommandText = "SELECT * FROM responsavel ORDER BY nome";
-
-            cmd.Prepare();
-            return cmd.ExecuteReader();
-        }
-
-        public static MySqlDataReader ExibirGRD()
-        {
-            cmd.CommandText = "select dataEmissao, grd_dados.grd, documento.numero , emissaogrd.revDoc, grd_dados.resps, grd_dados.usuariogrd " +
-                "from documento join grd_dados join emissaogrd " +
-                "on emissaogrd.idGrd = grd_dados.grd AND emissaogrd.idDoc = documento.id" +
-                " ORDER BY grd_dados.grd DESC, documento.numero";
-
-            cmd.Prepare();
-            return cmd.ExecuteReader();
-        }
-        public static MySqlDataReader ExibirPend()
-        {
-            cmd.CommandText = "SELECT emissaogrd.dataEmissao, grd_dados.grd, documento.numero, emissaogrd.revDoc, recebimento.nome FROM documento join grd_dados join emissaogrd join recebimento " +
-                        "WHERE emissaogrd.idgrd = grd_dados.grd AND emissaogrd.idDoc = documento.id AND emissaogrd.idgrd = recebimento.grdId AND recebimento.entregue='0'" +
-                        " ORDER BY grd_dados.grd DESC, documento.numero";
-
-            cmd.Prepare();
-            return cmd.ExecuteReader();
-        }
-
-        public static MySqlDataReader ExibirDoc()
-        {
-            ConnectSQL.cmd.CommandText = "SELECT dataRegistro, numero, rev, os, obs, usuario " +
-                        "from documento ORDER BY id DESC";
-
-            cmd.Prepare();
-            return cmd.ExecuteReader();
-        }
-        public static MySqlDataReader ExibirCadastro()
-        {
-            ConnectSQL.cmd.CommandText = "SELECT id, dataRegistro, numero, rev, os, obs " +
-                        "from documento ORDER BY id DESC";
-
-            cmd.Prepare();
-            return cmd.ExecuteReader();
-        }
-        public static MySqlDataReader AddDoc(string numero)
-        {
-            ConnectSQL.cmd.CommandText = $"SELECT numero, rev, os, obs" +
-            $" FROM documento WHERE numero='{numero}'";
-
-            cmd.Prepare();
-            return cmd.ExecuteReader();
-
-        }
-
-        public static MySqlDataReader AddResp(string nome)
-        {
-            ConnectSQL.cmd.CommandText = $"SELECT nome" +
-            $" FROM responsavel WHERE nome='{nome}'";
-
-            cmd.Prepare();
-            return cmd.ExecuteReader();
-
-        }
-
-        public static MySqlDataReader ExibirRecebimentoDocs(string grd)
-        {
-            cmd.CommandText = $"SELECT docs, resps, datagrd from grd_dados WHERE grd_dados.grd='{grd}'";
-
-            cmd.Prepare();
-
-            return cmd.ExecuteReader();
-        }
-
         public static void CancelarGRD(ListView listResp, ListView listDoc, int grd)
         {
 
@@ -418,7 +337,7 @@ namespace ControladorGRD.Entities
                             reader2.Close();
 
                             numeros[j] = txtNumero.Text.ToUpper();
-                            
+
                             string docs = "[\"";
                             int k = 0;
                             foreach (var item in numeros)
@@ -441,10 +360,10 @@ namespace ControladorGRD.Entities
                             cmd.Parameters.Clear();
                             cmd.Parameters.AddWithValue("@docs", docs);
                             cmd.Prepare();
-                            
+
                             cmd.ExecuteNonQuery();
 
-                            
+
                             break;
                         }
                         reader2.Close();
@@ -453,6 +372,76 @@ namespace ControladorGRD.Entities
 
             }
         }
+
+        public static MySqlDataReader ExbirResp()
+        {
+            cmd.CommandText = "SELECT * FROM responsavel ORDER BY nome";
+
+            cmd.Prepare();
+            return cmd.ExecuteReader();
+        }
+        public static MySqlDataReader ExibirGRD()
+        {
+            cmd.CommandText = "select dataEmissao, grd_dados.grd, documento.numero , emissaogrd.revDoc, grd_dados.resps, grd_dados.usuariogrd " +
+                "from documento join grd_dados join emissaogrd " +
+                "on emissaogrd.idGrd = grd_dados.grd AND emissaogrd.idDoc = documento.id" +
+                " ORDER BY grd_dados.grd DESC, documento.numero";
+
+            cmd.Prepare();
+            return cmd.ExecuteReader();
+        }
+        public static MySqlDataReader ExibirPend()
+        {
+            cmd.CommandText = "SELECT emissaogrd.dataEmissao, grd_dados.grd, documento.numero, emissaogrd.revDoc, recebimento.nome FROM documento join grd_dados join emissaogrd join recebimento " +
+                        "WHERE emissaogrd.idgrd = grd_dados.grd AND emissaogrd.idDoc = documento.id AND emissaogrd.idgrd = recebimento.grdId AND recebimento.entregue='0'" +
+                        " ORDER BY grd_dados.grd DESC, documento.numero";
+
+            cmd.Prepare();
+            return cmd.ExecuteReader();
+        }
+        public static MySqlDataReader ExibirDoc()
+        {
+            ConnectSQL.cmd.CommandText = "SELECT dataRegistro, numero, rev, os, obs, usuario " +
+                        "from documento ORDER BY id DESC";
+
+            cmd.Prepare();
+            return cmd.ExecuteReader();
+        }
+        public static MySqlDataReader ExibirCadastro()
+        {
+            ConnectSQL.cmd.CommandText = "SELECT id, dataRegistro, numero, rev, os, obs " +
+                        "from documento ORDER BY id DESC";
+
+            cmd.Prepare();
+            return cmd.ExecuteReader();
+        }
+        public static MySqlDataReader AddDoc(string numero)
+        {
+            ConnectSQL.cmd.CommandText = $"SELECT numero, rev, os, obs" +
+            $" FROM documento WHERE numero='{numero}'";
+
+            cmd.Prepare();
+            return cmd.ExecuteReader();
+
+        }
+        public static MySqlDataReader AddResp(string nome)
+        {
+            ConnectSQL.cmd.CommandText = $"SELECT nome" +
+            $" FROM responsavel WHERE nome='{nome}'";
+
+            cmd.Prepare();
+            return cmd.ExecuteReader();
+
+        }
+        public static MySqlDataReader ExibirRecebimentoDocs(string grd)
+        {
+            cmd.CommandText = $"SELECT docs, resps, datagrd from grd_dados WHERE grd_dados.grd='{grd}'";
+
+            cmd.Prepare();
+
+            return cmd.ExecuteReader();
+        }
+
 
     }
 }

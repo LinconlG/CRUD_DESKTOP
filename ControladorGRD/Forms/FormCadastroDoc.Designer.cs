@@ -29,7 +29,6 @@ namespace ControladorGRD.Forms
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             this.txtNumero = new System.Windows.Forms.TextBox();
             this.txtRev = new System.Windows.Forms.TextBox();
             this.txtData = new System.Windows.Forms.TextBox();
@@ -49,14 +48,9 @@ namespace ControladorGRD.Forms
             this.labelMultiplo = new System.Windows.Forms.Label();
             this.checkRev = new System.Windows.Forms.CheckBox();
             this.btnExcluir = new System.Windows.Forms.Button();
-            this.db_documentosDataSet = new ControladorGRD.db_documentosDataSet();
-            this.osBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.osTableAdapter = new ControladorGRD.db_documentosDataSetTableAdapters.osTableAdapter();
             this.txtNovaOS = new System.Windows.Forms.TextBox();
             this.labelOS2 = new System.Windows.Forms.Label();
             this.btnRegistrarOS = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.db_documentosDataSet)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.osBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // txtNumero
@@ -228,20 +222,6 @@ namespace ControladorGRD.Forms
             this.btnExcluir.UseVisualStyleBackColor = true;
             this.btnExcluir.Click += new System.EventHandler(this.btnExcluir_Click);
             // 
-            // db_documentosDataSet
-            // 
-            this.db_documentosDataSet.DataSetName = "db_documentosDataSet";
-            this.db_documentosDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
-            // 
-            // osBindingSource
-            // 
-            this.osBindingSource.DataMember = "os";
-            this.osBindingSource.DataSource = this.db_documentosDataSet;
-            // 
-            // osTableAdapter
-            // 
-            this.osTableAdapter.ClearBeforeFill = true;
-            // 
             // txtNovaOS
             // 
             this.txtNovaOS.Location = new System.Drawing.Point(13, 501);
@@ -300,8 +280,6 @@ namespace ControladorGRD.Forms
             this.MinimizeBox = false;
             this.Name = "FormCadastroDoc";
             this.Text = "FormCadastroDoc";
-            ((System.ComponentModel.ISupportInitialize)(this.db_documentosDataSet)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.osBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -328,9 +306,6 @@ namespace ControladorGRD.Forms
         private System.Windows.Forms.Label labelMultiplo;
         private System.Windows.Forms.CheckBox checkRev;
         private System.Windows.Forms.Button btnExcluir;
-        private db_documentosDataSet db_documentosDataSet;
-        private System.Windows.Forms.BindingSource osBindingSource;
-        private db_documentosDataSetTableAdapters.osTableAdapter osTableAdapter;
         private System.Windows.Forms.TextBox txtNovaOS;
         private System.Windows.Forms.Label labelOS2;
         private System.Windows.Forms.Button btnRegistrarOS;

@@ -4,19 +4,27 @@ using MySql.Data.MySqlClient;
 using ControladorGRD.Entities;
 using System.Printing;
 using System.IO;
+using System.Data;
 
 namespace ControladorGRD.Forms
 {
     public partial class FormBuscar : Form
     {
+        DataTable dt;
+
         public FormBuscar()
         {
             InitializeComponent();
-            listaGRD.MultiSelect = false;
+            lista.MultiSelect = false;
+
+            ClassPage.NRPP = 30;
+            ClassPage.Page = 1;
+
             comboBox.Text = "GRD";
-            carregarGRD();
+
             btnRelat.Enabled = false;
         }
+
 
         private void btnBuscarDocGrd_Click(object sender, EventArgs e)
         {
@@ -38,7 +46,7 @@ namespace ControladorGRD.Forms
 
                         MySqlDataReader reader1 = ConnectSQL.cmd.ExecuteReader();
 
-                        listaGRD.Items.Clear();
+                        lista.Items.Clear();
 
                         while (reader1.Read())
                         {
@@ -52,7 +60,7 @@ namespace ControladorGRD.Forms
                              };
 
                             var linha_listview = new ListViewItem(row);
-                            listaGRD.Items.Add(linha_listview);
+                            lista.Items.Add(linha_listview);
                         }
                         reader1.Close();
 
@@ -83,7 +91,7 @@ namespace ControladorGRD.Forms
 
                         MySqlDataReader reader = ConnectSQL.cmd.ExecuteReader();
 
-                        listaGRD.Items.Clear();
+                        lista.Items.Clear();
 
                         while (reader.Read())
                         {
@@ -100,7 +108,7 @@ namespace ControladorGRD.Forms
                             };
 
                             var linha_listview = new ListViewItem(row);
-                            listaGRD.Items.Add(linha_listview);
+                            lista.Items.Add(linha_listview);
                         }
                     }
                 }
@@ -116,7 +124,7 @@ namespace ControladorGRD.Forms
 
                     MySqlDataReader reader = ConnectSQL.cmd.ExecuteReader();
 
-                    listaGRD.Items.Clear();
+                    lista.Items.Clear();
 
                     while (reader.Read())
                     {
@@ -131,7 +139,7 @@ namespace ControladorGRD.Forms
                         };
 
                         var linha_listview = new ListViewItem(row);
-                        listaGRD.Items.Add(linha_listview);
+                        lista.Items.Add(linha_listview);
                     }
                 }
 
@@ -151,40 +159,33 @@ namespace ControladorGRD.Forms
         {
             try
             {
-                listaGRD.Columns.Clear();
-                listaGRD.View = View.Details;
-                listaGRD.GridLines = true;
-                listaGRD.FullRowSelect = true;
+                lista.Columns.Clear();
+                lista.View = View.Details;
+                lista.GridLines = true;
+                lista.FullRowSelect = true;
 
-                listaGRD.Columns.Add("Data", 70, HorizontalAlignment.Left);
-                listaGRD.Columns.Add("GRD", 60, HorizontalAlignment.Left);
-                listaGRD.Columns.Add("Numero", 200, HorizontalAlignment.Left);
-                listaGRD.Columns.Add("Revisão", 60, HorizontalAlignment.Left);
-                listaGRD.Columns.Add("Responsável", 200, HorizontalAlignment.Left);
-                listaGRD.Columns.Add("Usuário", 100, HorizontalAlignment.Left);
+                lista.Columns.Add("Data", 90, HorizontalAlignment.Left);
+                lista.Columns.Add("Numero", 140, HorizontalAlignment.Left);
+                lista.Columns.Add("Revisão", 60, HorizontalAlignment.Left);
+                lista.Columns.Add("OS", 100, HorizontalAlignment.Left);
+                lista.Columns.Add("OBS/Legenda", 220, HorizontalAlignment.Left);
+                lista.Columns.Add("Usuario", 100, HorizontalAlignment.Left);
 
-                ConnectSQL.Connect();
+                lista.Items.Clear();
 
+                ConnectSQL.cmd.CommandText = "select dataEmissao, grd_dados.grd, documento.numero , emissaogrd.revDoc, grd_dados.resps, grd_dados.usuariogrd " +
+                                    "from documento join grd_dados join emissaogrd " +
+                                    "on emissaogrd.idGrd = grd_dados.grd AND emissaogrd.idDoc = documento.id" +
+                                    " ORDER BY grd_dados.grd DESC, documento.numero";
 
-                MySqlDataReader reader = ConnectSQL.ExibirGRD();
+                ConnectSQL.cmd.CommandType = CommandType.Text;
 
-                listaGRD.Items.Clear();
+                MySqlDataAdapter x = new MySqlDataAdapter(ConnectSQL.cmd);
+                dt = new DataTable();
+                x.Fill(dt);
 
-                while (reader.Read())
-                {
-                    string[] row = {
-
-                        reader.GetString(0).Substring(0,10),
-                        reader.GetString(1),
-                        reader.GetString(2),
-                        reader.GetString(3),
-                        reader.GetString(4).Replace("[", "").Replace("]", "").Replace("\"", ""),
-                        reader.GetString(5)
-                    };
-
-                    var linha_listview = new ListViewItem(row);
-                    listaGRD.Items.Add(linha_listview);
-                }
+                ClassPage.DadosListView(dt, lista);
+                Pagina(ClassPage.Page, ClassPage.TotalPages);
 
             }
             catch (Exception ex)
@@ -197,44 +198,32 @@ namespace ControladorGRD.Forms
                 ConnectSQL.conexao.Close();
             }
         }
-
         private void carregarDoc()
         {
-            listaGRD.Columns.Clear();
+            lista.Columns.Clear();
+            lista.View = View.Details;
+            lista.GridLines = true;
+            lista.FullRowSelect = true;
 
-            listaGRD.View = View.Details;
-            listaGRD.GridLines = true;
-            listaGRD.FullRowSelect = true;
+            lista.Columns.Add("Data", 90, HorizontalAlignment.Left);
+            lista.Columns.Add("Numero", 140, HorizontalAlignment.Left);
+            lista.Columns.Add("Revisão", 60, HorizontalAlignment.Left);
+            lista.Columns.Add("OS", 100, HorizontalAlignment.Left);
+            lista.Columns.Add("OBS/Legenda", 220, HorizontalAlignment.Left);
+            lista.Columns.Add("Usuario", 100, HorizontalAlignment.Left);
 
-            listaGRD.Columns.Add("Data", 90, HorizontalAlignment.Left);
-            listaGRD.Columns.Add("Numero", 140, HorizontalAlignment.Left);
-            listaGRD.Columns.Add("Revisão", 60, HorizontalAlignment.Left);
-            listaGRD.Columns.Add("OS", 100, HorizontalAlignment.Left);
-            listaGRD.Columns.Add("OBS/Legenda", 220, HorizontalAlignment.Left);
-            listaGRD.Columns.Add("Usuario", 100, HorizontalAlignment.Left);
+            lista.Items.Clear();
 
-            ConnectSQL.Connect();
+            ConnectSQL.cmd.CommandText = $"SELECT dataRegistro, numero, rev, os, obs, usuario FROM documento ORDER BY id DESC";
+            ConnectSQL.cmd.CommandType = CommandType.Text;
 
+            MySqlDataAdapter x = new MySqlDataAdapter(ConnectSQL.cmd);
+            dt = new DataTable();
+            x.Fill(dt);
 
-            MySqlDataReader reader = ConnectSQL.ExibirDoc();
+            ClassPage.DadosListView(dt, lista);
+            Pagina(ClassPage.Page, ClassPage.TotalPages);
 
-            listaGRD.Items.Clear();
-
-            while (reader.Read())
-            {
-                string[] row = {
-
-                    reader.GetString(0).Substring(0,10),
-                    reader.GetString(1),
-                    reader.GetString(2),
-                    reader.GetString(3),
-                    reader.GetString(4),
-                    reader.GetString(5)
-                };
-
-                var linha_listview = new ListViewItem(row);
-                listaGRD.Items.Add(linha_listview);
-            }
         }
 
         private void txtBuscarDocGrd_KeyDown(object sender, KeyEventArgs e)
@@ -249,7 +238,6 @@ namespace ControladorGRD.Forms
         {
             if (comboBox.Text == "Documentos")
             {
-
                 carregarDoc();
                 checkPend.Hide();
                 checkBox.Hide();
@@ -268,7 +256,7 @@ namespace ControladorGRD.Forms
         {
             if (comboBox.Text == "GRD")
             {
-                ListView.SelectedListViewItemCollection item_selecionado = listaGRD.SelectedItems;
+                ListView.SelectedListViewItemCollection item_selecionado = lista.SelectedItems;
                 new FormResps(item_selecionado[0].SubItems[1].Text).ShowDialog();
             }
         }
@@ -295,21 +283,21 @@ namespace ControladorGRD.Forms
                     checkBox.Checked = true;
                     checkBox.Enabled = false;
                     btnRelat.Enabled = true;
-                    listaGRD.Columns.Clear();
-                    listaGRD.View = View.Details;
-                    listaGRD.GridLines = true;
-                    listaGRD.FullRowSelect = true;
+                    lista.Columns.Clear();
+                    lista.View = View.Details;
+                    lista.GridLines = true;
+                    lista.FullRowSelect = true;
 
-                    listaGRD.Columns.Add("Data", 70, HorizontalAlignment.Left);
-                    listaGRD.Columns.Add("GRD", 60, HorizontalAlignment.Left);
-                    listaGRD.Columns.Add("Numero", 200, HorizontalAlignment.Left);
-                    listaGRD.Columns.Add("Revisão", 60, HorizontalAlignment.Left);
-                    listaGRD.Columns.Add("Responsável Pendente", 200, HorizontalAlignment.Left);
+                    lista.Columns.Add("Data", 70, HorizontalAlignment.Left);
+                    lista.Columns.Add("GRD", 60, HorizontalAlignment.Left);
+                    lista.Columns.Add("Numero", 200, HorizontalAlignment.Left);
+                    lista.Columns.Add("Revisão", 60, HorizontalAlignment.Left);
+                    lista.Columns.Add("Responsável Pendente", 200, HorizontalAlignment.Left);
 
                     ConnectSQL.Connect();
                     MySqlDataReader reader = ConnectSQL.ExibirPend();
 
-                    listaGRD.Items.Clear();
+                    lista.Items.Clear();
 
                     while (reader.Read())
                     {
@@ -323,7 +311,7 @@ namespace ControladorGRD.Forms
                         };
 
                         var linha_listview = new ListViewItem(row);
-                        listaGRD.Items.Add(linha_listview);
+                        lista.Items.Add(linha_listview);
                     }
                 }
                 else
@@ -361,7 +349,7 @@ namespace ControladorGRD.Forms
                 planilha.DisplayAlerts = false;
 
                 int i = 2;
-                foreach (ListViewItem doc in listaGRD.Items)
+                foreach (ListViewItem doc in lista.Items)
                 {
                     aba.Cells[i, 1] = doc.SubItems[0].Text;
                     aba.Cells[i, 2] = doc.SubItems[1].Text;
@@ -390,6 +378,64 @@ namespace ControladorGRD.Forms
             {
                 MessageBox.Show(ex.Message);
 
+            }
+        }
+
+        private void btnProx_Click(object sender, EventArgs e)
+        {
+            if (ClassPage.Page < ClassPage.TotalPages)
+            {
+                ClassPage.Page++;
+                if (comboBox.Text == "GRD")
+                {
+                    carregarGRD();
+                }
+                else
+                {
+                    carregarDoc();
+                }
+            }
+        }
+        private void Pagina(int pag1, int pag2)
+        {
+            labelPage.Text = $"Página {pag1} de {pag2}";
+        }
+
+        private void btnAnterior_Click(object sender, EventArgs e)
+        {
+            if (ClassPage.Page > 1)
+            {
+                ClassPage.Page--;
+                if (comboBox.Text == "GRD")
+                {
+                    carregarGRD();
+                }
+                else
+                {
+                    carregarDoc();
+                }
+            }
+        }
+
+        private void txtPag_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == ((char)Keys.Enter))
+            {
+                if ((System.Text.RegularExpressions.Regex.IsMatch(txtPag.Text, "^[0-9]+$")))
+                {
+                    if (int.Parse(txtPag.Text) <= ClassPage.TotalPages && int.Parse(txtPag.Text) > 0)
+                    {
+                        ClassPage.Page = int.Parse(txtPag.Text);
+                        if (comboBox.Text == "GRD")
+                        {
+                            carregarGRD();
+                        }
+                        else
+                        {
+                            carregarDoc();
+                        }
+                    }
+                }
             }
         }
     }

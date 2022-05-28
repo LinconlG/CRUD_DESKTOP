@@ -83,7 +83,7 @@ namespace ControladorGRD
             // 
             this.labelUser.AutoSize = true;
             this.labelUser.Font = new System.Drawing.Font("PF Square Sans Pro", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelUser.Location = new System.Drawing.Point(65, 650);
+            this.labelUser.Location = new System.Drawing.Point(52, 650);
             this.labelUser.Name = "labelUser";
             this.labelUser.Size = new System.Drawing.Size(37, 18);
             this.labelUser.TabIndex = 9;
@@ -94,7 +94,7 @@ namespace ControladorGRD
             this.linkLabel1.AutoSize = true;
             this.linkLabel1.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.linkLabel1.LinkColor = System.Drawing.Color.White;
-            this.linkLabel1.Location = new System.Drawing.Point(65, 668);
+            this.linkLabel1.Location = new System.Drawing.Point(67, 668);
             this.linkLabel1.Name = "linkLabel1";
             this.linkLabel1.Size = new System.Drawing.Size(54, 18);
             this.linkLabel1.TabIndex = 8;
@@ -263,6 +263,7 @@ namespace ControladorGRD
             this.Controls.Add(this.panelTitulo);
             this.Controls.Add(this.panelMenu);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximizeBox = false;
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Controlador de GRD";

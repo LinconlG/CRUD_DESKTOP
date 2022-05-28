@@ -29,7 +29,7 @@ namespace ControladorGRD.Forms
         /// </summary>
         private void InitializeComponent()
         {
-            this.listaGRD = new System.Windows.Forms.ListView();
+            this.lista = new System.Windows.Forms.ListView();
             this.txtBuscarDocGrd = new System.Windows.Forms.TextBox();
             this.btnBuscarDocGrd = new System.Windows.Forms.Button();
             this.comboBox = new System.Windows.Forms.ComboBox();
@@ -38,18 +38,23 @@ namespace ControladorGRD.Forms
             this.btnAtualizar = new System.Windows.Forms.Button();
             this.btnRelat = new System.Windows.Forms.Button();
             this.checkPend = new System.Windows.Forms.CheckBox();
+            this.labelPage = new System.Windows.Forms.Label();
+            this.btnProx = new System.Windows.Forms.Button();
+            this.btnAnterior = new System.Windows.Forms.Button();
+            this.txtPag = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
-            // listaGRD
+            // lista
             // 
-            this.listaGRD.Cursor = System.Windows.Forms.Cursors.Arrow;
-            this.listaGRD.HideSelection = false;
-            this.listaGRD.Location = new System.Drawing.Point(12, 189);
-            this.listaGRD.Name = "listaGRD";
-            this.listaGRD.Size = new System.Drawing.Size(595, 329);
-            this.listaGRD.TabIndex = 0;
-            this.listaGRD.UseCompatibleStateImageBehavior = false;
-            this.listaGRD.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.listaGRD_MouseDoubleClick);
+            this.lista.Cursor = System.Windows.Forms.Cursors.Arrow;
+            this.lista.HideSelection = false;
+            this.lista.Location = new System.Drawing.Point(12, 189);
+            this.lista.Name = "lista";
+            this.lista.Size = new System.Drawing.Size(595, 329);
+            this.lista.TabIndex = 0;
+            this.lista.UseCompatibleStateImageBehavior = false;
+            this.lista.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.listaGRD_MouseDoubleClick);
             // 
             // txtBuscarDocGrd
             // 
@@ -131,12 +136,65 @@ namespace ControladorGRD.Forms
             this.checkPend.UseVisualStyleBackColor = true;
             this.checkPend.CheckedChanged += new System.EventHandler(this.checkPend_CheckedChanged);
             // 
+            // labelPage
+            // 
+            this.labelPage.AutoSize = true;
+            this.labelPage.Location = new System.Drawing.Point(12, 524);
+            this.labelPage.Name = "labelPage";
+            this.labelPage.Size = new System.Drawing.Size(39, 13);
+            this.labelPage.TabIndex = 10;
+            this.labelPage.Text = "pagina";
+            // 
+            // btnProx
+            // 
+            this.btnProx.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnProx.Image = global::ControladorGRD.Properties.Resources.direita_seta;
+            this.btnProx.Location = new System.Drawing.Point(525, 524);
+            this.btnProx.Name = "btnProx";
+            this.btnProx.Size = new System.Drawing.Size(75, 23);
+            this.btnProx.TabIndex = 11;
+            this.btnProx.UseVisualStyleBackColor = true;
+            this.btnProx.Click += new System.EventHandler(this.btnProx_Click);
+            // 
+            // btnAnterior
+            // 
+            this.btnAnterior.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnAnterior.Image = global::ControladorGRD.Properties.Resources.esquerda_seta;
+            this.btnAnterior.Location = new System.Drawing.Point(444, 524);
+            this.btnAnterior.Name = "btnAnterior";
+            this.btnAnterior.Size = new System.Drawing.Size(75, 23);
+            this.btnAnterior.TabIndex = 12;
+            this.btnAnterior.UseVisualStyleBackColor = true;
+            this.btnAnterior.Click += new System.EventHandler(this.btnAnterior_Click);
+            // 
+            // txtPag
+            // 
+            this.txtPag.Location = new System.Drawing.Point(530, 569);
+            this.txtPag.Name = "txtPag";
+            this.txtPag.Size = new System.Drawing.Size(70, 20);
+            this.txtPag.TabIndex = 13;
+            this.txtPag.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtPag_KeyPress);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(425, 572);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(102, 13);
+            this.label1.TabIndex = 14;
+            this.label1.Text = "Selecione a Página:";
+            // 
             // FormBuscar
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
             this.ClientSize = new System.Drawing.Size(629, 629);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.txtPag);
+            this.Controls.Add(this.btnAnterior);
+            this.Controls.Add(this.btnProx);
+            this.Controls.Add(this.labelPage);
             this.Controls.Add(this.checkPend);
             this.Controls.Add(this.btnRelat);
             this.Controls.Add(this.btnAtualizar);
@@ -145,7 +203,7 @@ namespace ControladorGRD.Forms
             this.Controls.Add(this.comboBox);
             this.Controls.Add(this.btnBuscarDocGrd);
             this.Controls.Add(this.txtBuscarDocGrd);
-            this.Controls.Add(this.listaGRD);
+            this.Controls.Add(this.lista);
             this.Name = "FormBuscar";
             this.Text = "FormBuscar";
             this.ResumeLayout(false);
@@ -155,7 +213,7 @@ namespace ControladorGRD.Forms
 
         #endregion
 
-        private System.Windows.Forms.ListView listaGRD;
+        private System.Windows.Forms.ListView lista;
         private System.Windows.Forms.TextBox txtBuscarDocGrd;
         private System.Windows.Forms.Button btnBuscarDocGrd;
         private System.Windows.Forms.ComboBox comboBox;
@@ -164,5 +222,10 @@ namespace ControladorGRD.Forms
         private System.Windows.Forms.Button btnAtualizar;
         private System.Windows.Forms.Button btnRelat;
         private System.Windows.Forms.CheckBox checkPend;
+        private System.Windows.Forms.Label labelPage;
+        private System.Windows.Forms.Button btnProx;
+        private System.Windows.Forms.Button btnAnterior;
+        private System.Windows.Forms.TextBox txtPag;
+        private System.Windows.Forms.Label label1;
     }
 }

@@ -86,6 +86,16 @@ namespace ControladorGRD.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap direita_seta {
+            get {
+                object obj = ResourceManager.GetObject("direita seta", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap doc_assinado2 {
             get {
                 object obj = ResourceManager.GetObject("doc assinado2", resourceCulture);
@@ -100,6 +110,16 @@ namespace ControladorGRD.Properties {
             get {
                 object obj = ResourceManager.GetObject("documento_de_exemplo_cadastro_multiplo", resourceCulture);
                 return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap esquerda_seta {
+            get {
+                object obj = ResourceManager.GetObject("esquerda seta", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
             }
         }
         

@@ -37,7 +37,7 @@ namespace ControladorGRD.Forms
             try
             {
                 Cursor.Current = Cursors.WaitCursor;
-                if ((txtNumero.Text == "" || txtRev.Text == "" || comboOS.Text == "") && (multiplos == false))
+                if ((txtNumero.Text == "" || txtRev.Text == "" || comboOS.Text == "" || txtNumero.Text == " " || txtRev.Text == " " || comboOS.Text == " ") && (multiplos == false))
                 {
                     MessageBox.Show("Campo vazio");
                 }
@@ -48,6 +48,15 @@ namespace ControladorGRD.Forms
                     {
                         if (id_contatoSelecionado != null)
                         {
+                            while (txtNumero.Text.StartsWith(" "))
+                            {
+                                txtNumero.Text = txtNumero.Text.Substring(1, txtNumero.Text.Length);
+                            }
+                            while (txtNumero.Text.EndsWith(" "))
+                            {
+                                txtNumero.Text = txtNumero.Text.Substring(0, txtNumero.Text.Length - 1);
+                            }
+
                             ConnectSQL.AtualizarDocGRD((int)id_contatoSelecionado, txtNumero);
                             ConnectSQL.Update((int)id_contatoSelecionado, txtNumero.Text.ToUpper(), txtRev.Text.ToUpper(), comboOS.Text, txtObs.Text.ToUpper(), user);
                             Cursor.Current = Cursors.Default;
@@ -56,6 +65,14 @@ namespace ControladorGRD.Forms
                         }
                         else
                         {
+                            while (txtNumero.Text.StartsWith(" "))
+                            {
+                                txtNumero.Text = txtNumero.Text.Substring(1, txtNumero.Text.Length-1);
+                            }
+                            while (txtNumero.Text.EndsWith(" "))
+                            {
+                                txtNumero.Text = txtNumero.Text.Substring(0, txtNumero.Text.Length - 1);
+                            }
 
                             ConnectSQL.Insert(txtNumero.Text.ToUpper(), txtRev.Text.ToUpper(), comboOS.Text, txtObs.Text.ToUpper(), user);
                             Cursor.Current = Cursors.Default;

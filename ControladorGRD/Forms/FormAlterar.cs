@@ -38,6 +38,7 @@ namespace ControladorGRD.Forms
                     contextMenuStrip1.Enabled = true;
                     contextMenuStrip2.Enabled = true;
                     carregarGeral();
+                    
                 }
                 catch (Exception ex)
                 {
@@ -47,7 +48,10 @@ namespace ControladorGRD.Forms
                 finally
                 {
                     ConnectSQL.conexao.Close();
+                    
                 }
+                txtGRD.Focus();
+                txtGRD.SelectAll();
             }
         }
         private void carregarListas(string numero)
@@ -169,17 +173,20 @@ namespace ControladorGRD.Forms
             txtGRD.Text = String.Empty;
             listDoc.Clear();
             listResp.Clear();
+            txtGRD.Focus();
         }
 
         private void listResp_MouseDoubleClick(object sender, MouseEventArgs e)
         {
             ListView.SelectedListViewItemCollection resp_selecionado = listResp.SelectedItems;
-            FormRecebimento receb = new FormRecebimento(resp_selecionado[0].SubItems[0].Text, grd, this, listDoc);
+            FormRecebimento receb = new FormRecebimento(resp_selecionado[0].SubItems[0].Text, grd, this, listDoc, ref txtGRD);
             receb.Show();
+            
         }
 
         private void carregarGeral()
         {
+            txtGRD.Focus();
             grd = Convert.ToInt32(txtGRD.Text);
             listDoc.Clear();
             listResp.Clear();
@@ -194,6 +201,8 @@ namespace ControladorGRD.Forms
                 btnImprimir.Enabled = false;
                 btnCancelar.Enabled = false;
                 txtObs.Enabled = false;
+                txtGRD.Focus();
+                txtGRD.SelectAll();
             }
             else
             {
@@ -224,6 +233,7 @@ namespace ControladorGRD.Forms
                 }
 
                 carregarResps(grd);
+                txtGRD.Focus();
             }
         }
 
@@ -321,7 +331,7 @@ namespace ControladorGRD.Forms
                             MessageBox.Show("Documento removido com sucesso!");
 
                             carregarGeral();
-
+                            txtGRD.Focus();
                         }
                     }
                 }
@@ -517,6 +527,7 @@ namespace ControladorGRD.Forms
                             MessageBox.Show("Responsável removido com sucesso!");
 
                             carregarGeral();
+                            txtGRD.Focus();
                         }
                     }
                 }
@@ -540,6 +551,7 @@ namespace ControladorGRD.Forms
         private void button1_Click(object sender, EventArgs e)
         {
             limpar();
+            txtGRD.Focus();
         }
 
         private void btnImprimir_Click(object sender, EventArgs e)

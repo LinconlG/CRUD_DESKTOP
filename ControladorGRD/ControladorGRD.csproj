@@ -94,11 +94,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="db_documentosDataSet.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>db_documentosDataSet.xsd</DependentUpon>
-    </Compile>
+    <Compile Include="Entities\ClassPage.cs" />
     <Compile Include="Entities\ConnectSQL.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
@@ -206,17 +202,6 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <None Include="db_documentosDataSet.xsc">
-      <DependentUpon>db_documentosDataSet.xsd</DependentUpon>
-    </None>
-    <None Include="db_documentosDataSet.xsd">
-      <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>db_documentosDataSet.Designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="db_documentosDataSet.xss">
-      <DependentUpon>db_documentosDataSet.xsd</DependentUpon>
-    </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -235,13 +220,6 @@
     <None Include="Resources\documento de exemplo cadastro multiplo.xlsx" />
     <None Include="Resources\GRD.xlsx" />
     <None Include="Resources\relatorio template.xlsx" />
-    <None Include="Resources\varios docs2.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\varios docs3.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\varios docs4.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\doc assinado2.png" />
@@ -254,39 +232,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\pngwing.com2.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\pngwing.com21.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\varios docs checados21.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\certificado21.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\doc assinado21.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\varios docs41.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\varios docs31.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\varios docs21.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\Picture5.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\Picture56.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\Picture561.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\Picture.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Picture4.png" />
@@ -303,19 +248,13 @@
     </COMReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\pngwinguser.png" />
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="Resources\database.txt" />
+    <None Include="Resources\direita seta.png" />
+    <None Include="Resources\esquerda seta.png" />
     <Content Include="Resources\listaOS.txt" />
     <Content Include="Resources\Localgrd.txt" />
-    <None Include="Resources\Picture5611.png" />
-    <None Include="Resources\Picture562.png" />
-    <None Include="Resources\Picture51.png" />
-    <None Include="Resources\Picture211.png" />
-    <None Include="Resources\seta1 - Copy.png" />
-    <None Include="Resources\seta11.png" />
-    <None Include="Resources\seta1.png" />
+    <Content Include="Resources\pngwinguser.png" />
+    <Content Include="Resources\varios docs4.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
