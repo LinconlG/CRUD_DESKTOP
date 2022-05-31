@@ -144,6 +144,5 @@ namespace ControladorGRD.Forms
                 btnPesquisar_Click(this, e);
             }
         }
-
     }
 }

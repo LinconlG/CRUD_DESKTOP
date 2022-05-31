@@ -51,10 +51,10 @@ namespace ControladorGRD.Forms
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("PF Square Sans Pro", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(9, 67);
+            this.label1.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(9, 81);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(204, 18);
+            this.label1.Size = new System.Drawing.Size(207, 17);
             this.label1.TabIndex = 2;
             this.label1.Text = "Insira o nome do responsável :";
             // 
@@ -88,9 +88,10 @@ namespace ControladorGRD.Forms
             // labelListaResp
             // 
             this.labelListaResp.AutoSize = true;
-            this.labelListaResp.Location = new System.Drawing.Point(61, 229);
+            this.labelListaResp.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelListaResp.Location = new System.Drawing.Point(58, 227);
             this.labelListaResp.Name = "labelListaResp";
-            this.labelListaResp.Size = new System.Drawing.Size(135, 13);
+            this.labelListaResp.Size = new System.Drawing.Size(186, 17);
             this.labelListaResp.TabIndex = 6;
             this.labelListaResp.Text = "Responsaveis cadastrados";
             // 

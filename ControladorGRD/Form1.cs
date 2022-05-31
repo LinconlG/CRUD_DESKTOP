@@ -18,7 +18,6 @@ namespace ControladorGRD
         private Form activeForm;
         string user;
         FormCadastroDoc cadastroDoc;
-        //FormBuscar buscar = new FormBuscar();
         FormCadGeral cadGeral = new FormCadGeral();
         FormAlterar receber = new FormAlterar();
         FormBuscar buscar = new FormBuscar();
@@ -26,6 +25,19 @@ namespace ControladorGRD
         public Form1(FormLogin active)
         {
             InitializeComponent();
+            if (DateTime.Now < DateTime.Parse("12:00:00"))
+            {
+                label1.Text = "Ótimo dia";
+            }
+            else if (DateTime.Now >= DateTime.Parse("12:00:00") && DateTime.Now < DateTime.Parse("18:00:00"))
+            {
+                label1.Text = "Ótima tarde";
+            }
+            else if (DateTime.Now >= DateTime.Parse("18:00:00"))
+            {
+                label1.Text = "Ótima noite";
+            }
+            
             labelUser.Text = active.User();
             cadastroDoc = new FormCadastroDoc(active.User());
             user = active.User();
