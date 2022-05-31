@@ -18,7 +18,7 @@ namespace ControladorGRD.Entities
         public static int RecStart; //Variable for Getting Every Page Starting Record Index
         public static int RecEnd; //Variable for Getting Every Page End Record Index
 
-        public static void DadosListView(DataTable dt, ListView lista)
+        public static void DadosListView(DataTable dt, ListView lista, string tipo)
         {
 
             int l, k;
@@ -64,6 +64,21 @@ namespace ControladorGRD.Entities
                     break;
                 }
 
+                if (tipo == "GRD")
+                {
+                    string[] row = {
+                        dt.Rows[l].ItemArray[0].ToString().Substring(0, 10),
+                        dt.Rows[l].ItemArray[1].ToString(),
+                        dt.Rows[l].ItemArray[2].ToString(),
+                        dt.Rows[l].ItemArray[3].ToString(),
+                        dt.Rows[l].ItemArray[4].ToString().Replace("[", "").Replace("]", "").Replace("\"", ""),
+                        dt.Rows[l].ItemArray[5].ToString()
+                    };
+                    var linha_list = new ListViewItem(row);
+                    lista.Items.Add(linha_list);
+                }
+                else
+                {
                     string[] row = {
                         dt.Rows[l].ItemArray[0].ToString().Substring(0, 10),
                         dt.Rows[l].ItemArray[1].ToString(),
@@ -74,7 +89,7 @@ namespace ControladorGRD.Entities
                     };
                     var linha_list = new ListViewItem(row);
                     lista.Items.Add(linha_list);
-               
+                }            
             }
         }
     }

@@ -30,86 +30,50 @@ namespace ControladorGRD.Forms
         {
             try
             {
+                ClassPage.Page = 1;
                 if (comboBox.Text == "GRD")
                 {
                     ConnectSQL.Connect();
 
                     if (checkPend.Checked)
                     {
-                        ConnectSQL.cmd.CommandText = "SELECT emissaogrd.dataEmissao, grd_dados.grd, documento.numero, emissaogrd.revDoc, recebimento.nome FROM documento join grd_dados join emissaogrd join recebimento " +
+                        
+                        ConnectSQL.cmd.CommandText = $"SELECT emissaogrd.dataEmissao, grd_dados.grd, documento.numero, emissaogrd.revDoc, recebimento.nome FROM documento join grd_dados join emissaogrd join recebimento " +
                         "WHERE emissaogrd.idgrd = grd_dados.grd AND emissaogrd.idDoc = documento.id AND emissaogrd.idgrd = recebimento.grdId AND recebimento.entregue='0'" +
-                        " AND documento.numero LIKE @g ORDER BY grd_dados.grd DESC, documento.numero";
+                        $" AND documento.numero LIKE '%{txtBuscarDocGrd.Text}%' ORDER BY grd_dados.grd DESC, documento.numero";
 
-                        ConnectSQL.cmd.Parameters.Clear();
-                        ConnectSQL.cmd.Parameters.AddWithValue("@g", $"%{txtBuscarDocGrd.Text}%");
+                        ConnectSQL.cmd.CommandType = CommandType.Text;
 
+                        MySqlDataAdapter x = new MySqlDataAdapter(ConnectSQL.cmd);
+                        dt = new DataTable();
+                        x.Fill(dt);
 
-                        MySqlDataReader reader1 = ConnectSQL.cmd.ExecuteReader();
-
-                        lista.Items.Clear();
-
-                        while (reader1.Read())
-                        {
-                            string[] row = {
-
-                                reader1.GetString(0).Substring(0,10),
-                                reader1.GetString(1),
-                                reader1.GetString(2),
-                                reader1.GetString(3),
-                                reader1.GetString(4)
-                             };
-
-                            var linha_listview = new ListViewItem(row);
-                            lista.Items.Add(linha_listview);
-                        }
-                        reader1.Close();
-
+                        ClassPage.DadosListView(dt, lista, comboBox.Text);
+                        Pagina(ClassPage.Page, ClassPage.TotalPages);
                     }
                     else
                     {
-
-
-
                         if (checkBox.Checked)
                         {
                             ConnectSQL.cmd.CommandText = $"select emissaogrd.dataEmissao, grd_dados.grd, documento.numero , emissaogrd.revDoc, grd_dados.resps, grd_dados.usuariogrd " +
                             $"from documento join grd_dados join emissaogrd on emissaogrd.idGrd = grd_dados.grd AND emissaogrd.idDoc = documento.id " +
-                            $"WHERE documento.numero LIKE @g ORDER BY grd_dados.grd DESC";
+                            $"WHERE documento.numero LIKE '%{txtBuscarDocGrd.Text}%' ORDER BY grd_dados.grd DESC";
                         }
                         else
                         {
-
-
                             ConnectSQL.cmd.CommandText = $"select emissaogrd.dataEmissao, grd_dados.grd, documento.numero , emissaogrd.revDoc, grd_dados.resps, grd_dados.usuariogrd " +
                             $"from documento join grd_dados join emissaogrd on emissaogrd.idGrd = grd_dados.grd AND emissaogrd.idDoc = documento.id " +
-                            $"WHERE grd_dados.grd LIKE @g ORDER BY grd_dados.grd DESC";
+                            $"WHERE grd_dados.grd LIKE '%{txtBuscarDocGrd.Text}%' ORDER BY grd_dados.grd DESC";
                         }
 
-                        ConnectSQL.cmd.Parameters.Clear();
-                        ConnectSQL.cmd.Parameters.AddWithValue("@g", $"%{txtBuscarDocGrd.Text}%");
+                        ConnectSQL.cmd.CommandType = CommandType.Text;
 
+                        MySqlDataAdapter x = new MySqlDataAdapter(ConnectSQL.cmd);
+                        dt = new DataTable();
+                        x.Fill(dt);
 
-                        MySqlDataReader reader = ConnectSQL.cmd.ExecuteReader();
-
-                        lista.Items.Clear();
-
-                        while (reader.Read())
-                        {
-                            string[] row = {
-
-
-
-                            reader.GetString(0).Substring(0,10),
-                            reader.GetString(1),
-                            reader.GetString(2),
-                            reader.GetString(3),
-                            reader.GetString(4).Replace("[", "").Replace("]", "").Replace("\"", ""),
-                            reader.GetString(5)
-                            };
-
-                            var linha_listview = new ListViewItem(row);
-                            lista.Items.Add(linha_listview);
-                        }
+                        ClassPage.DadosListView(dt, lista, comboBox.Text);
+                        Pagina(ClassPage.Page, ClassPage.TotalPages);
                     }
                 }
                 else
@@ -117,30 +81,16 @@ namespace ControladorGRD.Forms
                     ConnectSQL.Connect();
 
                     ConnectSQL.cmd.CommandText = "SELECT dataRegistro, numero, rev, os, obs, usuario " +
-                        "from documento WHERE numero LIKE @g OR os LIKE @g OR obs LIKE @g";
+                        $"FROM documento WHERE numero LIKE '%{txtBuscarDocGrd.Text}%' OR os LIKE '%{txtBuscarDocGrd.Text}%' OR obs LIKE '%{txtBuscarDocGrd.Text}%'";
 
-                    ConnectSQL.cmd.Parameters.Clear();
-                    ConnectSQL.cmd.Parameters.AddWithValue("@g", $"%{txtBuscarDocGrd.Text}%");
+                    ConnectSQL.cmd.CommandType = CommandType.Text;
 
-                    MySqlDataReader reader = ConnectSQL.cmd.ExecuteReader();
+                    MySqlDataAdapter x = new MySqlDataAdapter(ConnectSQL.cmd);
+                    dt = new DataTable();
+                    x.Fill(dt);
 
-                    lista.Items.Clear();
-
-                    while (reader.Read())
-                    {
-                        string[] row = {
-
-                            reader.GetString(0).Substring(0,10),
-                            reader.GetString(1),
-                            reader.GetString(2),
-                            reader.GetString(3),
-                            reader.GetString(4),
-                            reader.GetString(5)
-                        };
-
-                        var linha_listview = new ListViewItem(row);
-                        lista.Items.Add(linha_listview);
-                    }
+                    ClassPage.DadosListView(dt, lista, comboBox.Text);
+                    Pagina(ClassPage.Page, ClassPage.TotalPages);
                 }
 
             }
@@ -165,15 +115,13 @@ namespace ControladorGRD.Forms
                 lista.FullRowSelect = true;
 
                 lista.Columns.Add("Data", 90, HorizontalAlignment.Left);
+                lista.Columns.Add("GRD", 60, HorizontalAlignment.Left);
                 lista.Columns.Add("Numero", 140, HorizontalAlignment.Left);
                 lista.Columns.Add("Revisão", 60, HorizontalAlignment.Left);
-                lista.Columns.Add("OS", 100, HorizontalAlignment.Left);
-                lista.Columns.Add("OBS/Legenda", 220, HorizontalAlignment.Left);
+                lista.Columns.Add("Responsaveis", 220, HorizontalAlignment.Left);
                 lista.Columns.Add("Usuario", 100, HorizontalAlignment.Left);
 
-                lista.Items.Clear();
-
-                ConnectSQL.cmd.CommandText = "select dataEmissao, grd_dados.grd, documento.numero , emissaogrd.revDoc, grd_dados.resps, grd_dados.usuariogrd " +
+                ConnectSQL.cmd.CommandText = "select dataEmissao, grd_dados.grd, documento.numero, emissaogrd.revDoc, grd_dados.resps, grd_dados.usuariogrd " +
                                     "from documento join grd_dados join emissaogrd " +
                                     "on emissaogrd.idGrd = grd_dados.grd AND emissaogrd.idDoc = documento.id" +
                                     " ORDER BY grd_dados.grd DESC, documento.numero";
@@ -184,7 +132,7 @@ namespace ControladorGRD.Forms
                 dt = new DataTable();
                 x.Fill(dt);
 
-                ClassPage.DadosListView(dt, lista);
+                ClassPage.DadosListView(dt, lista, comboBox.Text);
                 Pagina(ClassPage.Page, ClassPage.TotalPages);
 
             }
@@ -212,8 +160,6 @@ namespace ControladorGRD.Forms
             lista.Columns.Add("OBS/Legenda", 220, HorizontalAlignment.Left);
             lista.Columns.Add("Usuario", 100, HorizontalAlignment.Left);
 
-            lista.Items.Clear();
-
             ConnectSQL.cmd.CommandText = $"SELECT dataRegistro, numero, rev, os, obs, usuario FROM documento ORDER BY id DESC";
             ConnectSQL.cmd.CommandType = CommandType.Text;
 
@@ -221,7 +167,7 @@ namespace ControladorGRD.Forms
             dt = new DataTable();
             x.Fill(dt);
 
-            ClassPage.DadosListView(dt, lista);
+            ClassPage.DadosListView(dt, lista, comboBox.Text);
             Pagina(ClassPage.Page, ClassPage.TotalPages);
 
         }
@@ -293,26 +239,19 @@ namespace ControladorGRD.Forms
                     lista.Columns.Add("Numero", 200, HorizontalAlignment.Left);
                     lista.Columns.Add("Revisão", 60, HorizontalAlignment.Left);
                     lista.Columns.Add("Responsável Pendente", 200, HorizontalAlignment.Left);
+                    lista.Columns.Add("Usuario", 100, HorizontalAlignment.Left);
 
-                    ConnectSQL.Connect();
-                    MySqlDataReader reader = ConnectSQL.ExibirPend();
+                    ConnectSQL.cmd.CommandText = "SELECT emissaogrd.dataEmissao, grd_dados.grd, documento.numero, emissaogrd.revDoc, recebimento.nome, grd_dados.usuariogrd FROM documento join grd_dados join emissaogrd join recebimento " +
+                        "WHERE emissaogrd.idgrd = grd_dados.grd AND emissaogrd.idDoc = documento.id AND emissaogrd.idgrd = recebimento.grdId AND recebimento.entregue='0'" +
+                        " ORDER BY grd_dados.grd DESC, documento.numero";
 
-                    lista.Items.Clear();
+                    ConnectSQL.cmd.CommandType = CommandType.Text;
+                    MySqlDataAdapter x = new MySqlDataAdapter(ConnectSQL.cmd);
+                    dt = new DataTable();
+                    x.Fill(dt);
 
-                    while (reader.Read())
-                    {
-                        string[] row = {
-
-                            reader.GetString(0).Substring(0,10),
-                            reader.GetString(1),
-                            reader.GetString(2),
-                            reader.GetString(3),
-                            reader.GetString(4)
-                        };
-
-                        var linha_listview = new ListViewItem(row);
-                        lista.Items.Add(linha_listview);
-                    }
+                    ClassPage.DadosListView(dt, lista, comboBox.Text);
+                    Pagina(ClassPage.Page, ClassPage.TotalPages);
                 }
                 else
                 {
@@ -349,15 +288,24 @@ namespace ControladorGRD.Forms
                 planilha.DisplayAlerts = false;
 
                 int i = 2;
-                foreach (ListViewItem doc in lista.Items)
+
+                ClassPage.Page = 1;
+
+                for (int n = 0; n < ClassPage.TotalPages; n++)
                 {
-                    aba.Cells[i, 1] = doc.SubItems[0].Text;
-                    aba.Cells[i, 2] = doc.SubItems[1].Text;
-                    aba.Cells[i, 3] = doc.SubItems[2].Text;
-                    aba.Cells[i, 4] = doc.SubItems[3].Text;
-                    aba.Cells[i, 5] = doc.SubItems[4].Text;
-                    i++;
+                    foreach (ListViewItem doc in lista.Items)
+                    {
+                        aba.Cells[i, 1] = doc.SubItems[0].Text;
+                        aba.Cells[i, 2] = doc.SubItems[1].Text;
+                        aba.Cells[i, 3] = doc.SubItems[2].Text;
+                        aba.Cells[i, 4] = doc.SubItems[3].Text;
+                        aba.Cells[i, 5] = doc.SubItems[4].Text;
+                        i++;
+                    }
+
+                    btnProx_Click(this, e);
                 }
+
                 Cursor.Current = Cursors.Default;
                 using (SaveFileDialog janela = new SaveFileDialog() { Filter = "xlsx file|*.xlsx", ValidateNames = true })
                 {
@@ -377,9 +325,8 @@ namespace ControladorGRD.Forms
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
-
             }
-        }
+        }//classpage = 1
 
         private void btnProx_Click(object sender, EventArgs e)
         {
