@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
-using MySql.Data.MySqlClient;
+//using System.Data.SqlClient;
+using System.Data.SqlClient;
 using System.Data;
 using System.Reflection;
 using System.IO;
@@ -42,12 +43,13 @@ namespace ControladorGRD.Forms
                 //conexao = new MySqlConnection(data_source);
                 //conexao.Open();
 
-                ConnectSQL.cmd.CommandText = $"SELECT * FROM login WHERE usuario=@usuario AND senha=@senha";
-                ConnectSQL.cmd.Parameters.AddWithValue("@usuario", $"{txtUsuario.Text}");
-                ConnectSQL.cmd.Parameters.AddWithValue("@senha", $"{sha256_hash(txtSenha.Text)}");
-                ConnectSQL.cmd.Prepare();
+                ConnectSQL.cmd.CommandText = $"SELECT * FROM tb_login WHERE usuario=@usuario AND senha=@senha";
+                ConnectSQL.cmd.Parameters.Clear();
+                ConnectSQL.cmd.Parameters.AddWithValue("@usuario", SqlDbType.VarChar).Value = $"{txtUsuario.Text}";
+                ConnectSQL.cmd.Parameters.AddWithValue("@senha", SqlDbType.VarChar).Value = $"{sha256_hash(txtSenha.Text)}";
+                ////ConnectSQL.//cmd.Prepare();
 
-                MySqlDataAdapter sda = new MySqlDataAdapter(ConnectSQL.cmd);
+                SqlDataAdapter sda = new SqlDataAdapter(ConnectSQL.cmd);
                 DataTable dt = new DataTable();
                 sda.Fill(dt);
 

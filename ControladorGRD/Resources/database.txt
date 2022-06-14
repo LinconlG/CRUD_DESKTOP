@@ -1,4 +1,4 @@
-localhost
+PC-LINCONL\SQLEXPRESS
 root
 12345
 db_login

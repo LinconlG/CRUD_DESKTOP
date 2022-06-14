@@ -7,7 +7,7 @@ using System.Linq;
 using System.IO;
 using System.Printing;
 using System.Windows.Forms;
-using MySql.Data.MySqlClient;
+using System.Data.SqlClient;
 using ControladorGRD.Entities;
 
 namespace ControladorGRD.Forms
@@ -38,7 +38,7 @@ namespace ControladorGRD.Forms
                     contextMenuStrip1.Enabled = true;
                     contextMenuStrip2.Enabled = true;
                     carregarGeral();
-                    
+
                 }
                 catch (Exception ex)
                 {
@@ -48,7 +48,7 @@ namespace ControladorGRD.Forms
                 finally
                 {
                     ConnectSQL.conexao.Close();
-                    
+
                 }
                 txtGRD.Focus();
                 txtGRD.SelectAll();
@@ -68,10 +68,10 @@ namespace ControladorGRD.Forms
             listDoc.Columns.Add("Revisão", 60, HorizontalAlignment.Left);
             listDoc.Columns.Add("OS", 90, HorizontalAlignment.Left);
             listDoc.Columns.Add("OBS/Legenda", 250, HorizontalAlignment.Left);
-            
+
             ConnectSQL.cmd.CommandText = $"SELECT numero, rev, os, obs FROM documento WHERE numero='{numero}'";
 
-            MySqlDataReader reader = ConnectSQL.cmd.ExecuteReader();
+            SqlDataReader reader = ConnectSQL.cmd.ExecuteReader();
 
             while (reader.Read())
             {
@@ -91,7 +91,7 @@ namespace ControladorGRD.Forms
 
         public void carregarResps(int id)
         {
-            
+
             listResp.Clear();
             listResp.Columns.Clear();
             listResp.View = View.Details;
@@ -102,7 +102,7 @@ namespace ControladorGRD.Forms
 
             ConnectSQL.cmd.CommandText = $"SELECT nome FROM recebimento WHERE grdId='{id}' AND entregue='0'";
 
-            MySqlDataReader reader = ConnectSQL.cmd.ExecuteReader();
+            SqlDataReader reader = ConnectSQL.cmd.ExecuteReader();
 
             if (reader.HasRows)
             {
@@ -181,7 +181,7 @@ namespace ControladorGRD.Forms
             ListView.SelectedListViewItemCollection resp_selecionado = listResp.SelectedItems;
             FormRecebimento receb = new FormRecebimento(resp_selecionado[0].SubItems[0].Text, grd, this, listDoc, ref txtGRD);
             receb.Show();
-            
+
         }
 
         private void carregarGeral()
@@ -194,7 +194,7 @@ namespace ControladorGRD.Forms
             string[] documentos;
             string[] responsaveis;
 
-            MySqlDataReader reader = ConnectSQL.ExibirRecebimentoDocs(txtGRD.Text);
+            SqlDataReader reader = ConnectSQL.ExibirRecebimentoDocs(txtGRD.Text);
             if (!reader.HasRows)
             {
                 MessageBox.Show("GRD não encontrada");
@@ -212,7 +212,7 @@ namespace ControladorGRD.Forms
                 {
                     row[0] = reader.GetString(0);
                     row[1] = reader.GetString(1);
-                    row[2] = reader.GetString(2);
+                    row[2] = reader.GetDateTime(2).ToString().Substring(0, 10);
                 }
                 reader.Close();
 
@@ -253,8 +253,8 @@ namespace ControladorGRD.Forms
 
                         ConnectSQL.cmd.CommandText = $"SELECT docs FROM grd_dados WHERE grd='{grd}'";
 
-                        ConnectSQL.cmd.Prepare();
-                        MySqlDataReader reader = ConnectSQL.cmd.ExecuteReader();
+                        //ConnectSQL.//cmd.Prepare();
+                        SqlDataReader reader = ConnectSQL.cmd.ExecuteReader();
                         reader.Read();
                         string linha = reader.GetString(0).Substring(2, reader.GetString(0).Length - 3).Replace("\"", "").Replace(",", "").Replace(" ", "/");
                         reader.Close();
@@ -265,13 +265,17 @@ namespace ControladorGRD.Forms
                             if (numeros[i] == doc_selecionado[0].SubItems[0].Text)
                             {
                                 ConnectSQL.cmd.CommandText = $"SELECT pend FROM documento WHERE numero='{numeros[i]}'";
-                                MySqlDataReader reader1 = ConnectSQL.cmd.ExecuteReader();
+                                SqlDataReader reader1 = ConnectSQL.cmd.ExecuteReader();
                                 reader1.Read();
-                                int pend = Int32.Parse(reader1.GetString(0));
+                                int pend = reader1.GetInt32(0);
                                 reader1.Close();
-                                ConnectSQL.cmd.CommandText = $"UPDATE documento SET pend='{pend - 1}' WHERE numero='{numeros[i]}'";
-                                ConnectSQL.cmd.Prepare();
+
+                                ConnectSQL.cmd.CommandText = $"UPDATE documento SET pend='{pend - listResp.Items.Count}' WHERE numero='{numeros[i]}'";
                                 ConnectSQL.cmd.ExecuteNonQuery();
+
+
+                                //ConnectSQL.//cmd.Prepare();
+
                                 numeros = numeros.Where(val => val != $"{numeros[i]}").ToArray();
                                 break;
                             }
@@ -279,15 +283,15 @@ namespace ControladorGRD.Forms
                         if (numeros.Length == 0)
                         {
                             ConnectSQL.cmd.CommandText = $"DELETE FROM grd_dados WHERE grd='{grd}'";
-                            ConnectSQL.cmd.Prepare();
+                            //ConnectSQL.//cmd.Prepare();
                             ConnectSQL.cmd.ExecuteNonQuery();
 
                             ConnectSQL.cmd.CommandText = $"DELETE FROM emissaogrd WHERE idgrd='{grd}'";
-                            ConnectSQL.cmd.Prepare();
+                            //ConnectSQL.//cmd.Prepare();
                             ConnectSQL.cmd.ExecuteNonQuery();
 
                             ConnectSQL.cmd.CommandText = $"DELETE FROM recebimento WHERE grdId='{grd}'";
-                            ConnectSQL.cmd.Prepare();
+                            //ConnectSQL.//cmd.Prepare();
                             ConnectSQL.cmd.ExecuteNonQuery();
 
                             MessageBox.Show("Documento removido, GRD cancelada!");
@@ -315,17 +319,17 @@ namespace ControladorGRD.Forms
                             }
                             docs += "\"]";
 
-                            ConnectSQL.cmd.Parameters.AddWithValue("@docs", docs);
-                            ConnectSQL.cmd.Prepare();
+                            ConnectSQL.cmd.Parameters.AddWithValue("@docs", SqlDbType.VarChar).Value = docs;
+                            //ConnectSQL.//cmd.Prepare();
                             ConnectSQL.cmd.ExecuteNonQuery();
 
                             ConnectSQL.cmd.CommandText = $"SELECT id FROM documento WHERE numero='{doc_selecionado[0].SubItems[0].Text}'";
-                            ConnectSQL.cmd.Prepare();
-                            MySqlDataReader id = ConnectSQL.cmd.ExecuteReader();
+                            //ConnectSQL.//cmd.Prepare();
+                            SqlDataReader id = ConnectSQL.cmd.ExecuteReader();
                             id.Read();
-                            ConnectSQL.cmd.CommandText = $"DELETE FROM emissaogrd WHERE idgrd='{grd}' AND idDoc='{id.GetString(0)}'";
+                            ConnectSQL.cmd.CommandText = $"DELETE FROM emissaogrd WHERE idgrd='{grd}' AND idDoc='{id.GetInt32(0)}'";
                             id.Close();
-                            ConnectSQL.cmd.Prepare();
+                            //ConnectSQL.//cmd.Prepare();
                             ConnectSQL.cmd.ExecuteNonQuery();
 
                             MessageBox.Show("Documento removido com sucesso!");
@@ -361,18 +365,18 @@ namespace ControladorGRD.Forms
             var aba = pastaTrabalho.Worksheets[1];
             int qtd;
             int count = 0;
-            
+
 
             ConnectSQL.Connect();
             ConnectSQL.cmd.CommandText = $"Select count(nome) from recebimento where grdId='{grd}'";
-            ConnectSQL.cmd.Prepare();
-            MySqlDataReader reader = ConnectSQL.cmd.ExecuteReader();
+            //ConnectSQL.//cmd.Prepare();
+            SqlDataReader reader = ConnectSQL.cmd.ExecuteReader();
             reader.Read();
             string[] nomes = new string[reader.GetInt32(0)];
             reader.Close();
 
             ConnectSQL.cmd.CommandText = $"SELECT nome FROM recebimento WHERE grdId='{grd}'";
-            ConnectSQL.cmd.Prepare();
+            //ConnectSQL.//cmd.Prepare();
             reader = ConnectSQL.cmd.ExecuteReader();
             int i = 0;
             while (reader.Read())
@@ -385,7 +389,7 @@ namespace ControladorGRD.Forms
 
             Array.Sort(nomes);
             Array.Reverse(nomes);
-            listResp.Sorting = SortOrder.Ascending;
+            listResp.Sorting = System.Windows.Forms.SortOrder.Ascending;
 
             foreach (string resp in nomes)
             {
@@ -393,7 +397,7 @@ namespace ControladorGRD.Forms
                 aba.Cells[39, 11] = grd.ToString();
                 aba.Cells[5, 3] = resp;
                 aba.Cells[5, 10] = DateTime.Now.ToString("dd/MM/yy");
-                aba.Cells[4, 12] = $"Pag {qtd-count}/{qtd}";
+                aba.Cells[4, 12] = $"Pag {qtd - count}/{qtd}";
 
                 i = 9;
                 foreach (ListViewItem doc in listDoc.Items)
@@ -451,8 +455,8 @@ namespace ControladorGRD.Forms
 
                         ConnectSQL.cmd.CommandText = $"SELECT resps FROM grd_dados WHERE grd='{grd}'";
 
-                        ConnectSQL.cmd.Prepare();
-                        MySqlDataReader reader = ConnectSQL.cmd.ExecuteReader();
+                        //ConnectSQL.//cmd.Prepare();
+                        SqlDataReader reader = ConnectSQL.cmd.ExecuteReader();
                         reader.Read();
                         string linha = reader.GetString(0).Substring(2, reader.GetString(0).Length - 3).Replace("\"", "").Replace(",", "").Replace(" ", "/");
                         reader.Close();
@@ -465,12 +469,12 @@ namespace ControladorGRD.Forms
                                 foreach (ListViewItem doc in listDoc.Items)
                                 {
                                     ConnectSQL.cmd.CommandText = $"SELECT pend FROM documento WHERE numero='{doc.SubItems[0].Text}'";
-                                    MySqlDataReader reader2 = ConnectSQL.cmd.ExecuteReader();
+                                    SqlDataReader reader2 = ConnectSQL.cmd.ExecuteReader();
                                     reader2.Read();
-                                    int pend = Int32.Parse(reader2.GetString(0));
+                                    int pend = reader2.GetInt32(0);
                                     reader2.Close();
                                     ConnectSQL.cmd.CommandText = $"UPDATE documento SET pend='{pend - 1}' WHERE numero='{doc.SubItems[0].Text}'";
-                                    ConnectSQL.cmd.Prepare();
+                                    //ConnectSQL.//cmd.Prepare();
                                     ConnectSQL.cmd.ExecuteNonQuery();
                                 }
                                 resps = resps.Where(val => val != $"{resps[i]}").ToArray();
@@ -480,15 +484,15 @@ namespace ControladorGRD.Forms
                         if (resps.Length == 0)
                         {
                             ConnectSQL.cmd.CommandText = $"DELETE FROM grd_dados WHERE grd='{grd}'";
-                            ConnectSQL.cmd.Prepare();
+                            //ConnectSQL.//cmd.Prepare();
                             ConnectSQL.cmd.ExecuteNonQuery();
 
                             ConnectSQL.cmd.CommandText = $"DELETE FROM emissaogrd WHERE idgrd='{grd}'";
-                            ConnectSQL.cmd.Prepare();
+                            //ConnectSQL.//cmd.Prepare();
                             ConnectSQL.cmd.ExecuteNonQuery();
 
                             ConnectSQL.cmd.CommandText = $"DELETE FROM recebimento WHERE grdId='{grd}'";
-                            ConnectSQL.cmd.Prepare();
+                            //ConnectSQL.//cmd.Prepare();
                             ConnectSQL.cmd.ExecuteNonQuery();
 
                             MessageBox.Show("Responsável removido, GRD cancelada!");
@@ -516,12 +520,12 @@ namespace ControladorGRD.Forms
                             }
                             respos += "\"]";
 
-                            ConnectSQL.cmd.Parameters.AddWithValue("@resps", respos);
-                            ConnectSQL.cmd.Prepare();
+                            ConnectSQL.cmd.Parameters.AddWithValue("@resps", SqlDbType.VarChar).Value = respos;
+                            //ConnectSQL.//cmd.Prepare();
                             ConnectSQL.cmd.ExecuteNonQuery();
 
                             ConnectSQL.cmd.CommandText = $"DELETE FROM recebimento WHERE grdId='{grd}' AND nome='{res_selecionado[0].SubItems[0].Text}'";
-                            ConnectSQL.cmd.Prepare();
+                            //ConnectSQL.//cmd.Prepare();
                             ConnectSQL.cmd.ExecuteNonQuery();
 
                             MessageBox.Show("Responsável removido com sucesso!");
@@ -535,7 +539,7 @@ namespace ControladorGRD.Forms
                 {
                     MessageBox.Show("Selecione um item");
                 }
-                
+
             }
             catch (Exception ex)
             {

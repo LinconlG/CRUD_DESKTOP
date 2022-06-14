@@ -1,5 +1,5 @@
 ﻿using System;
-using MySql.Data.MySqlClient;
+using System.Data.SqlClient;
 using System.Windows.Forms;
 using ControladorGRD.Entities;
 
@@ -60,9 +60,9 @@ namespace ControladorGRD.Forms
                     data = dados[4];
 
                     ConnectSQL.cmd.CommandText = $"SELECT pend FROM documento WHERE numero='{numero}'";
-                    MySqlDataReader reader = ConnectSQL.cmd.ExecuteReader();
+                    SqlDataReader reader = ConnectSQL.cmd.ExecuteReader();
                     reader.Read();
-                    int pend = Int32.Parse(reader.GetString(0));
+                    int pend = reader.GetInt32(0);
                     reader.Close();
                     if (pend > 0)
                     {

@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using MySql.Data.MySqlClient;
+using System.Data.SqlClient;
 using ControladorGRD.Entities;
 
 namespace ControladorGRD.Forms
@@ -40,17 +40,17 @@ namespace ControladorGRD.Forms
                 ConnectSQL.cmd.Parameters.Clear();
                 if (checkBox.Checked)
                 {
-                    ConnectSQL.cmd.Parameters.AddWithValue("@data", "1111-11-11");
+                    ConnectSQL.cmd.Parameters.AddWithValue("@data", SqlDbType.Date).Value = "1111-11-11";
                 }
                 else
                 {
-                    ConnectSQL.cmd.Parameters.AddWithValue("@data", DateTime.Now.ToString("yyyy-MM-dd"));
+                    ConnectSQL.cmd.Parameters.AddWithValue("@data", SqlDbType.Date).Value = DateTime.Now.ToString("yyyy-MM-dd");
                 }
-                ConnectSQL.cmd.Prepare();
+                //ConnectSQL.//cmd.Prepare();
                 ConnectSQL.cmd.ExecuteNonQuery();
 
                 int pend;
-                MySqlDataReader reader;
+                SqlDataReader reader;
 
                 foreach (ListViewItem doc in listdoc.Items)
                 {

@@ -1,5 +1,5 @@
 ﻿using System;
-using MySql.Data.MySqlClient;
+using System.Data.SqlClient;
 using System.Windows.Forms;
 using ControladorGRD.Entities;
 using System.Globalization;
@@ -84,7 +84,7 @@ namespace ControladorGRD.Forms
                     {
                         if (!checkRev.Checked)
                         {
-                            MySqlDataReader reader;
+                            SqlDataReader reader;
                             int k = 0;
                             for (int i = 0; i < qtdlinhas; i++)
                             {
@@ -213,7 +213,7 @@ namespace ControladorGRD.Forms
 
                         if (checkRev.Checked)
                         {
-                            MySqlDataReader reader;
+                            SqlDataReader reader;
                             int pend;
                             foreach (string numero in numeros)
                             {

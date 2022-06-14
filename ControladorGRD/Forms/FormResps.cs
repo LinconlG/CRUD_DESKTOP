@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using MySql.Data.MySqlClient;
+using System.Data.SqlClient;
 using ControladorGRD.Entities;
 
 namespace ControladorGRD.Forms
@@ -43,8 +43,8 @@ namespace ControladorGRD.Forms
 
                 ConnectSQL.cmd.CommandText = $"SELECT nome, dataEntrega FROM recebimento WHERE grdId='{id}'";
 
-                ConnectSQL.cmd.Prepare();
-                MySqlDataReader reader = ConnectSQL.cmd.ExecuteReader();
+                //ConnectSQL.//cmd.Prepare();
+                SqlDataReader reader = ConnectSQL.cmd.ExecuteReader();
                 string[] row = new string[2];
                 while (reader.Read())
                 {

@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Windows.Forms;
-using MySql.Data.MySqlClient;
+using System.Data.SqlClient;
 using ControladorGRD.Entities;
 using System.Printing;
 using System.IO;
@@ -38,13 +38,14 @@ namespace ControladorGRD.Forms
                     if (checkPend.Checked)
                     {
                         
-                        ConnectSQL.cmd.CommandText = $"SELECT emissaogrd.dataEmissao, grd_dados.grd, documento.numero, emissaogrd.revDoc, recebimento.nome FROM documento join grd_dados join emissaogrd join recebimento " +
-                        "WHERE emissaogrd.idgrd = grd_dados.grd AND emissaogrd.idDoc = documento.id AND emissaogrd.idgrd = recebimento.grdId AND recebimento.entregue='0'" +
+                        ConnectSQL.cmd.CommandText = $"SELECT emissaogrd.dataEmissao, grd_dados.grd, documento.numero, emissaogrd.revDoc, recebimento.nome " +
+                            $"FROM documento join emissaogrd on emissaogrd.idDoc = documento.id join grd_dados on emissaogrd.idgrd = grd_dados.grd join recebimento on emissaogrd.idgrd = recebimento.grdId " +
+                        "WHERE recebimento.entregue='0'" +
                         $" AND documento.numero LIKE '%{txtBuscarDocGrd.Text}%' ORDER BY grd_dados.grd DESC, documento.numero";
 
                         ConnectSQL.cmd.CommandType = CommandType.Text;
 
-                        MySqlDataAdapter x = new MySqlDataAdapter(ConnectSQL.cmd);
+                        SqlDataAdapter x = new SqlDataAdapter(ConnectSQL.cmd);
                         dt = new DataTable();
                         x.Fill(dt);
 
@@ -68,7 +69,7 @@ namespace ControladorGRD.Forms
 
                         ConnectSQL.cmd.CommandType = CommandType.Text;
 
-                        MySqlDataAdapter x = new MySqlDataAdapter(ConnectSQL.cmd);
+                        SqlDataAdapter x = new SqlDataAdapter(ConnectSQL.cmd);
                         dt = new DataTable();
                         x.Fill(dt);
 
@@ -85,7 +86,7 @@ namespace ControladorGRD.Forms
 
                     ConnectSQL.cmd.CommandType = CommandType.Text;
 
-                    MySqlDataAdapter x = new MySqlDataAdapter(ConnectSQL.cmd);
+                    SqlDataAdapter x = new SqlDataAdapter(ConnectSQL.cmd);
                     dt = new DataTable();
                     x.Fill(dt);
 
@@ -123,12 +124,12 @@ namespace ControladorGRD.Forms
 
                 ConnectSQL.cmd.CommandText = "select dataEmissao, grd_dados.grd, documento.numero, emissaogrd.revDoc, grd_dados.resps, grd_dados.usuariogrd " +
                                     "from documento join grd_dados join emissaogrd " +
-                                    "on emissaogrd.idGrd = grd_dados.grd AND emissaogrd.idDoc = documento.id" +
+                                    "on emissaogrd.idGrd = grd_dados.grd on emissaogrd.idDoc = documento.id" +
                                     " ORDER BY grd_dados.grd DESC, documento.numero";
 
                 ConnectSQL.cmd.CommandType = CommandType.Text;
 
-                MySqlDataAdapter x = new MySqlDataAdapter(ConnectSQL.cmd);
+                SqlDataAdapter x = new SqlDataAdapter(ConnectSQL.cmd);
                 dt = new DataTable();
                 x.Fill(dt);
 
@@ -163,7 +164,7 @@ namespace ControladorGRD.Forms
             ConnectSQL.cmd.CommandText = $"SELECT dataRegistro, numero, rev, os, obs, usuario FROM documento ORDER BY id DESC";
             ConnectSQL.cmd.CommandType = CommandType.Text;
 
-            MySqlDataAdapter x = new MySqlDataAdapter(ConnectSQL.cmd);
+            SqlDataAdapter x = new SqlDataAdapter(ConnectSQL.cmd);
             dt = new DataTable();
             x.Fill(dt);
 
@@ -241,12 +242,13 @@ namespace ControladorGRD.Forms
                     lista.Columns.Add("Responsável Pendente", 200, HorizontalAlignment.Left);
                     lista.Columns.Add("Usuario", 100, HorizontalAlignment.Left);
 
-                    ConnectSQL.cmd.CommandText = "SELECT emissaogrd.dataEmissao, grd_dados.grd, documento.numero, emissaogrd.revDoc, recebimento.nome, grd_dados.usuariogrd FROM documento join grd_dados join emissaogrd join recebimento " +
-                        "WHERE emissaogrd.idgrd = grd_dados.grd AND emissaogrd.idDoc = documento.id AND emissaogrd.idgrd = recebimento.grdId AND recebimento.entregue='0'" +
+                    ConnectSQL.cmd.CommandText = "SELECT emissaogrd.dataEmissao, grd_dados.grd, documento.numero, emissaogrd.revDoc, recebimento.nome, grd_dados.usuariogrd " +
+                        "FROM documento JOIN emissaogrd on emissaogrd.idDoc = documento.id JOIN grd_dados on emissaogrd.idgrd = grd_dados.grd JOIN recebimento on emissaogrd.idgrd = recebimento.grdId " +
+                        "WHERE recebimento.entregue='0'" +
                         " ORDER BY grd_dados.grd DESC, documento.numero";
 
                     ConnectSQL.cmd.CommandType = CommandType.Text;
-                    MySqlDataAdapter x = new MySqlDataAdapter(ConnectSQL.cmd);
+                    SqlDataAdapter x = new SqlDataAdapter(ConnectSQL.cmd);
                     dt = new DataTable();
                     x.Fill(dt);
 

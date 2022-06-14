@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Windows.Forms;
 using ControladorGRD.Entities;
-using MySql.Data.MySqlClient;
+using System.Data.SqlClient;
 using System.IO;
 using System.Reflection;
 using System.Printing;
 using System.Globalization;
 using System.Resources;
+using SortOrder = System.Windows.Forms.SortOrder;
 
 namespace ControladorGRD.Forms
 {
@@ -37,7 +38,7 @@ namespace ControladorGRD.Forms
                     ConnectSQL.Connect();
                     ListViewItem linha_listview = new ListViewItem();
 
-                    MySqlDataReader reader = ConnectSQL.AddDoc(txtNumero.Text);
+                    SqlDataReader reader = ConnectSQL.AddDoc(txtNumero.Text);
                     if (reader.HasRows == false)
                     {
                         MessageBox.Show("Documento não cadastrado");
@@ -156,7 +157,7 @@ namespace ControladorGRD.Forms
                     ConnectSQL.Connect();
                     ListViewItem linha_listview = new ListViewItem();
 
-                    MySqlDataReader reader = ConnectSQL.AddResp(comboResp.Text);
+                    SqlDataReader reader = ConnectSQL.AddResp(comboResp.Text);
                     if (reader.HasRows == false)
                     {
                         MessageBox.Show("Responsavel não cadastrado");
@@ -212,7 +213,7 @@ namespace ControladorGRD.Forms
             {
                 ConnectSQL.Connect();
 
-                MySqlDataReader reader = ConnectSQL.ExbirResp();
+                SqlDataReader reader = ConnectSQL.ExbirResp();
 
                 while (reader.Read())
                 {
@@ -263,8 +264,8 @@ namespace ControladorGRD.Forms
             int qtd = listResp.Items.Count;
             int count = 0;
 
-            listDoc.Sorting = SortOrder.Ascending;
-            listResp.Sorting = SortOrder.Descending;
+            listDoc.Sorting = System.Windows.Forms.SortOrder.Ascending;
+            listResp.Sorting = System.Windows.Forms.SortOrder.Descending;
 
             aba.Cells[4, 3] = grdEmitida;
             aba.Cells[39, 11] = grdEmitida;

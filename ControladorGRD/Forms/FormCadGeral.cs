@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using ControladorGRD.Entities;
-using MySql.Data.MySqlClient;
+using System.Data.SqlClient;
 
 namespace ControladorGRD.Forms
 {
@@ -67,7 +67,7 @@ namespace ControladorGRD.Forms
                 ConnectSQL.Connect();
 
 
-                MySqlDataReader reader = ConnectSQL.ExbirResp();
+                SqlDataReader reader = ConnectSQL.ExbirResp();
 
                 listViewResp.Items.Clear();
 
@@ -101,9 +101,9 @@ namespace ControladorGRD.Forms
                 ConnectSQL.Connect();
                 ConnectSQL.cmd.CommandText = $"SELECT * FROM responsavel WHERE nome LIKE @q";
                 ConnectSQL.cmd.Parameters.Clear();
-                ConnectSQL.cmd.Parameters.AddWithValue("@q", $"%{txtPesquisarResp.Text}%");
+                ConnectSQL.cmd.Parameters.AddWithValue("@q", SqlDbType.VarChar).Value = $"%{txtPesquisarResp.Text}%";
 
-                MySqlDataReader reader = ConnectSQL.cmd.ExecuteReader();
+                SqlDataReader reader = ConnectSQL.cmd.ExecuteReader();
 
                 listViewResp.Items.Clear();
 
