@@ -56,7 +56,7 @@ namespace ControladorGRD.Forms
             this.txtGRD.Location = new System.Drawing.Point(12, 72);
             this.txtGRD.Name = "txtGRD";
             this.txtGRD.Size = new System.Drawing.Size(116, 20);
-            this.txtGRD.TabIndex = 0;
+            this.txtGRD.TabIndex = 1;
             this.txtGRD.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtGRD_KeyDown);
             // 
             // listDoc
@@ -66,7 +66,7 @@ namespace ControladorGRD.Forms
             this.listDoc.Location = new System.Drawing.Point(12, 147);
             this.listDoc.Name = "listDoc";
             this.listDoc.Size = new System.Drawing.Size(545, 179);
-            this.listDoc.TabIndex = 6;
+            this.listDoc.TabIndex = 11;
             this.listDoc.UseCompatibleStateImageBehavior = false;
             // 
             // contextMenuStrip1
@@ -90,7 +90,7 @@ namespace ControladorGRD.Forms
             this.listResp.Location = new System.Drawing.Point(15, 332);
             this.listResp.Name = "listResp";
             this.listResp.Size = new System.Drawing.Size(159, 93);
-            this.listResp.TabIndex = 2;
+            this.listResp.TabIndex = 10;
             this.listResp.UseCompatibleStateImageBehavior = false;
             this.listResp.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.listResp_MouseDoubleClick);
             // 
@@ -113,7 +113,7 @@ namespace ControladorGRD.Forms
             this.txtData.Location = new System.Drawing.Point(215, 72);
             this.txtData.Name = "txtData";
             this.txtData.Size = new System.Drawing.Size(100, 20);
-            this.txtData.TabIndex = 3;
+            this.txtData.TabIndex = 15;
             // 
             // label1
             // 
@@ -121,7 +121,7 @@ namespace ControladorGRD.Forms
             this.label1.Location = new System.Drawing.Point(12, 53);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(31, 13);
-            this.label1.TabIndex = 4;
+            this.label1.TabIndex = 19;
             this.label1.Text = "GRD";
             // 
             // label2
@@ -130,7 +130,7 @@ namespace ControladorGRD.Forms
             this.label2.Location = new System.Drawing.Point(212, 53);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(49, 13);
-            this.label2.TabIndex = 5;
+            this.label2.TabIndex = 18;
             this.label2.Text = "Emissão:";
             // 
             // btnCancelar
@@ -138,7 +138,7 @@ namespace ControladorGRD.Forms
             this.btnCancelar.Location = new System.Drawing.Point(474, 443);
             this.btnCancelar.Name = "btnCancelar";
             this.btnCancelar.Size = new System.Drawing.Size(83, 28);
-            this.btnCancelar.TabIndex = 1;
+            this.btnCancelar.TabIndex = 5;
             this.btnCancelar.Text = "Cancelar";
             this.btnCancelar.UseVisualStyleBackColor = true;
             this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
@@ -148,7 +148,7 @@ namespace ControladorGRD.Forms
             this.button1.Location = new System.Drawing.Point(15, 447);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 7;
+            this.button1.TabIndex = 20;
             this.button1.Text = "Limpar";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
@@ -158,7 +158,7 @@ namespace ControladorGRD.Forms
             this.btnImprimir.Location = new System.Drawing.Point(444, 48);
             this.btnImprimir.Name = "btnImprimir";
             this.btnImprimir.Size = new System.Drawing.Size(75, 23);
-            this.btnImprimir.TabIndex = 8;
+            this.btnImprimir.TabIndex = 3;
             this.btnImprimir.Text = "Salvar GRD";
             this.btnImprimir.UseVisualStyleBackColor = true;
             this.btnImprimir.Click += new System.EventHandler(this.btnImprimir_Click);
@@ -168,7 +168,7 @@ namespace ControladorGRD.Forms
             this.txtObs.Location = new System.Drawing.Point(15, 66);
             this.txtObs.Name = "txtObs";
             this.txtObs.Size = new System.Drawing.Size(100, 20);
-            this.txtObs.TabIndex = 9;
+            this.txtObs.TabIndex = 2;
             // 
             // label3
             // 

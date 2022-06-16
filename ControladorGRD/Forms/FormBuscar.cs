@@ -57,13 +57,13 @@ namespace ControladorGRD.Forms
                         if (checkBox.Checked)
                         {
                             ConnectSQL.cmd.CommandText = $"select emissaogrd.dataEmissao, grd_dados.grd, documento.numero , emissaogrd.revDoc, grd_dados.resps, grd_dados.usuariogrd " +
-                            $"from documento join grd_dados join emissaogrd on emissaogrd.idGrd = grd_dados.grd AND emissaogrd.idDoc = documento.id " +
+                            $"from grd_dados join emissaogrd on emissaogrd.idGrd = grd_dados.grd JOIN documento ON emissaogrd.idDoc = documento.id " +
                             $"WHERE documento.numero LIKE '%{txtBuscarDocGrd.Text}%' ORDER BY grd_dados.grd DESC";
                         }
                         else
                         {
                             ConnectSQL.cmd.CommandText = $"select emissaogrd.dataEmissao, grd_dados.grd, documento.numero , emissaogrd.revDoc, grd_dados.resps, grd_dados.usuariogrd " +
-                            $"from documento join grd_dados join emissaogrd on emissaogrd.idGrd = grd_dados.grd AND emissaogrd.idDoc = documento.id " +
+                            $"from grd_dados join emissaogrd on emissaogrd.idGrd = grd_dados.grd JOIN documento ON emissaogrd.idDoc = documento.id " +
                             $"WHERE grd_dados.grd LIKE '%{txtBuscarDocGrd.Text}%' ORDER BY grd_dados.grd DESC";
                         }
 

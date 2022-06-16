@@ -121,7 +121,7 @@ namespace ControladorGRD.Forms
             // 
             // btnEmitir
             // 
-            this.btnEmitir.Location = new System.Drawing.Point(297, 456);
+            this.btnEmitir.Location = new System.Drawing.Point(297, 458);
             this.btnEmitir.Name = "btnEmitir";
             this.btnEmitir.Size = new System.Drawing.Size(91, 26);
             this.btnEmitir.TabIndex = 4;

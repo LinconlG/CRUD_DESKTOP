@@ -8,6 +8,7 @@ using System.Printing;
 using System.Globalization;
 using System.Resources;
 using SortOrder = System.Windows.Forms.SortOrder;
+using Microsoft.Office.Interop.Excel;
 
 namespace ControladorGRD.Forms
 {
@@ -272,10 +273,18 @@ namespace ControladorGRD.Forms
             aba.Cells[5, 10] = DateTime.Now.ToString("dd/MM/yy");
             aba.Cells[32, 3] = txtObs.Text;
 
+            Range rng = aba.Range("A9", "N9");
 
             int i = 9;
             foreach (ListViewItem doc in listDoc.Items)
             {
+                if (i > 9)
+                {
+                    rng.Copy();
+                    rng.Insert(XlInsertShiftDirection.xlShiftDown, XlInsertFormatOrigin.xlFormatFromLeftOrAbove);
+                    aba.Range($"A{i + 1}", $"N{i + 1}").Delete(XlDeleteShiftDirection.xlShiftUp);
+                }
+
                 aba.Cells[i, 1] = doc.SubItems[0].Text;
                 aba.Cells[i, 5] = doc.SubItems[1].Text;
                 aba.Cells[i, 6] = doc.SubItems[3].Text;
